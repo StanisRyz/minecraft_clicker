@@ -2366,18 +2366,18 @@ func choose_enemy_for_current_level() -> void:
 		current_enemy_zone_index = current_zone_index
 		return
 
-	current_enemy_zone_index = EnemyPoolConfig.get_pool_zone_index_for_level(current_level)
+	current_enemy_zone_index = EnemyPoolConfig.SHARED_ENEMY_ASSET_ZONE_INDEX
 
 	if rng.randf() < get_current_elite_spawn_chance():
 		is_elite_enemy = true
-		var elite_candidate: Dictionary = EnemyPoolConfig.get_random_elite_candidate(current_level, rng)
+		var elite_candidate: Dictionary = EnemyPoolConfig.get_random_elite_candidate(rng)
 		enemy_name = String(elite_candidate.get("name", "Элитный враг"))
 		enemy_name_key = String(elite_candidate.get("name_key", ""))
 		current_enemy_slot = String(elite_candidate.get("slot", "elite_01"))
 		return
 
 	is_elite_enemy = false
-	var normal_candidate: Dictionary = EnemyPoolConfig.get_random_normal_candidate(current_level, rng)
+	var normal_candidate: Dictionary = EnemyPoolConfig.get_random_normal_candidate(rng)
 	enemy_name = String(normal_candidate.get("name", "Враг"))
 	enemy_name_key = String(normal_candidate.get("name_key", ""))
 	current_enemy_slot = String(normal_candidate.get("slot", "enemy_01"))

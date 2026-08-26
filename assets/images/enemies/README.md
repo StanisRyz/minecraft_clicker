@@ -24,15 +24,15 @@ enemies/
 
 ## Non-boss enemy pool mapping
 
-Non-boss normal/elite enemies use three shared pool folders. Bosses are unique per gameplay zone.
+All levels use one global normal pool. The active normal slots and temporary
+elite pool share `zone_01`; bosses remain unique per gameplay zone.
 
-| Pool folder | Gameplay zones | Normal slots      | Elite slots       |
-|-------------|----------------|-------------------|-------------------|
-| zone_01     | 1–10           | enemy_01–enemy_15 | elite_01–elite_04 |
-| zone_11     | 11–16          | enemy_01–enemy_15 | elite_01–elite_05 |
-| zone_17     | 17–21          | enemy_01–enemy_09 | elite_01–elite_03 |
+| Pool folder | Normal slots       | Elite slots       |
+|-------------|--------------------|-------------------|
+| zone_01     | enemy_01–enemy_15  | elite_01–elite_04 |
 
-Zone 21 contains only `boss_01/` — it is not a normal/elite pool.
+Normal selection is independent of level and zone. Non-boss files under
+`zone_11` and `zone_17` are inactive legacy assets.
 
 Empty folders use `.gitkeep` until real PNG assets are added.
 
@@ -40,8 +40,8 @@ Empty folders use `.gitkeep` until real PNG assets are added.
 
 | Folder   | Type                                  |
 |----------|---------------------------------------|
-| enemy_## | Normal enemy slot (pool-relative)     |
-| elite_## | Elite enemy slot (pool-relative)      |
+| enemy_## | Global normal enemy slot              |
+| elite_## | Temporary elite-pool slot             |
 | boss_01  | Boss — unique per gameplay zone       |
 
 ## Required state files per enemy folder

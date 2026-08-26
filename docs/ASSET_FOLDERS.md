@@ -12,13 +12,12 @@ Path: `assets/images/enemies/zone_##/slot/state.png`
 
 ### Non-boss enemy pools
 
-Non-boss enemies use shared pools. Only three zone folders contain normal/elite enemy slots.
+All levels use the same global normal enemy pool. The active normal slots and
+temporary elite pool share one folder.
 
-| Pool folder | Used by gameplay zones | Normal slots       | Elite slots        |
-|-------------|------------------------|--------------------|---------------------|
-| zone_01     | 1–10                   | enemy_01–enemy_15  | elite_01–elite_04  |
-| zone_11     | 11–16                  | enemy_01–enemy_15  | elite_01–elite_05  |
-| zone_17     | 17–21                  | enemy_01–enemy_09  | elite_01–elite_03  |
+| Pool folder | Normal slots        | Elite slots         |
+|-------------|---------------------|---------------------|
+| zone_01     | enemy_01–enemy_15   | elite_01–elite_04   |
 
 Each slot folder needs four files:
 - `healthy.png`
@@ -28,7 +27,8 @@ Each slot folder needs four files:
 
 Empty future enemy folders use `.gitkeep` until real PNG assets are added.
 
-Zone 21 is no longer a normal/elite pool. `zone_21/` contains only `boss_01/`.
+Normal selection does not depend on gameplay zone, level, or visual cycle.
+Non-boss files under `zone_11` and `zone_17` are inactive legacy assets.
 
 Old non-boss source folders (zone_03, zone_05, zone_08, zone_10, zone_16, zone_20 enemy/elite slots) are obsolete. Empty obsolete folders have been removed. Any that contained real assets were preserved.
 

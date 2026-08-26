@@ -4,11 +4,9 @@ extends SceneTree
 
 const STATES: Array[String] = ["healthy.png", "hit.png", "wounded.png", "defeated.png"]
 
-const NON_BOSS_POOLS: Dictionary = {
-	"zone_01": {"enemy": 15, "elite": 4},
-	"zone_11": {"enemy": 15, "elite": 5},
-	"zone_17": {"enemy": 9,  "elite": 3},
-}
+const SHARED_ENEMY_FOLDER: String = "zone_01"
+const NORMAL_ENEMY_COUNT: int = 15
+const ELITE_ENEMY_COUNT: int = 4
 
 const BOSS_ZONE_COUNT: int = ZoneConfig.ZONE_COUNT
 
@@ -18,19 +16,17 @@ func _init() -> void:
 	var slots_checked: int = 0
 	var pngs_checked: int = 0
 
-	# --- Non-boss pool slots ---
-	for zone_folder: String in NON_BOSS_POOLS:
-		var pool: Dictionary = NON_BOSS_POOLS[zone_folder]
-		for i in range(1, pool["enemy"] + 1):
-			var slot: String = "enemy_%02d" % i
-			_check_slot("assets/images/enemies/%s/%s" % [zone_folder, slot], errors, warnings)
-			slots_checked += 1
-			pngs_checked += STATES.size()
-		for i in range(1, pool["elite"] + 1):
-			var slot: String = "elite_%02d" % i
-			_check_slot("assets/images/enemies/%s/%s" % [zone_folder, slot], errors, warnings)
-			slots_checked += 1
-			pngs_checked += STATES.size()
+	# --- Shared non-boss slots ---
+	for i in range(1, NORMAL_ENEMY_COUNT + 1):
+		var slot: String = "enemy_%02d" % i
+		_check_slot("assets/images/enemies/%s/%s" % [SHARED_ENEMY_FOLDER, slot], errors, warnings)
+		slots_checked += 1
+		pngs_checked += STATES.size()
+	for i in range(1, ELITE_ENEMY_COUNT + 1):
+		var slot: String = "elite_%02d" % i
+		_check_slot("assets/images/enemies/%s/%s" % [SHARED_ENEMY_FOLDER, slot], errors, warnings)
+		slots_checked += 1
+		pngs_checked += STATES.size()
 
 	# --- Boss slots (one per gameplay zone) ---
 	for zone_num in range(1, BOSS_ZONE_COUNT + 1):
@@ -61,8 +57,10 @@ func _init() -> void:
 		print("")
 
 	print("--- Summary ---")
-	print("Slots checked:      %d / 61" % slots_checked)
-	print("PNG files checked:  %d / 244" % pngs_checked)
+	var expected_slots: int = NORMAL_ENEMY_COUNT + ELITE_ENEMY_COUNT + BOSS_ZONE_COUNT
+	var expected_pngs: int = expected_slots * STATES.size()
+	print("Slots checked:      %d / %d" % [slots_checked, expected_slots])
+	print("PNG files checked:  %d / %d" % [pngs_checked, expected_pngs])
 	print("Errors:             %d" % errors.size())
 	print("Warnings:           %d" % warnings.size())
 	print("")

@@ -27,14 +27,16 @@ These keys work only when `BuildConfig.IS_DEBUG_BUILD = true`. Nothing is saved 
 
 ## Enemy pools
 
-T1 keeps the existing non-boss pool implementation unchanged. The active
-10-zone cycle currently routes normal and elite enemies through `zone_01`;
-the `zone_11` and `zone_17` pool definitions/assets remain for the separate T2
-enemy-pool simplification. Bosses remain unique per active gameplay zone.
+All levels select normal enemies from one global 15-enemy pool. Selection does
+not depend on the level, gameplay zone, or visual cycle. The shared sprites stay
+in `zone_01` so existing image imports remain stable. Elites temporarily use a
+separate four-enemy list and the same shared folder until T3. Bosses remain
+unique per active gameplay zone.
 
-| Gameplay Zones | Enemy Pool Folder  | Normal Count | Elite Count |
-|----------------|--------------------|--------------|-------------|
-| 1–10           | enemies/zone_01    | 15           | 4           |
+| Enemy type | Enemy Pool Folder | Count |
+|------------|-------------------|-------|
+| Normal     | enemies/zone_01   | 15    |
+| Elite      | enemies/zone_01   | 4     |
 
 **Active slot names:**
 
@@ -101,7 +103,7 @@ The current active cycle uses this normal/elite enemy pool folder:
 - `assets/images/enemies/zone_01/` — `enemy_01`–`enemy_15`, `elite_01`–`elite_04`
 
 Each slot folder needs four states: `healthy.png`, `hit.png`, `wounded.png`, `defeated.png`.
-The old `zone_11` and `zone_17` pool data/assets are retained only as T2 cleanup dependencies.
+The old `zone_11` and `zone_17` non-boss assets are inactive legacy files.
 
 ### Boss folders
 

@@ -19,10 +19,11 @@ func _init() -> void:
 			_check_key("zone.%02d.name" % zone_num, csv_keys, errors, warnings)
 			_check_key("zone.%02d.boss" % zone_num, csv_keys, errors, warnings)
 
-		# --- Check normal/elite enemy keys from pool data ---
-		_check_pool(1,  15, 4,  csv_keys, errors, warnings)
-		_check_pool(11, 15, 5,  csv_keys, errors, warnings)
-		_check_pool(17, 9,  3,  csv_keys, errors, warnings)
+		# --- Check global normal and temporary elite enemy keys ---
+		for i in range(1, 16):
+			_check_key("enemy.common.enemy_%02d.name" % i, csv_keys, errors, warnings)
+		for i in range(1, 5):
+			_check_key("enemy.pool_01.elite_%02d.name" % i, csv_keys, errors, warnings)
 
 	# --- Report ---
 	print("")
@@ -129,15 +130,6 @@ func _split_csv_line(line: String) -> Array:
 		i += 1
 	result.append(field)
 	return result
-
-
-func _check_pool(pool_num: int, enemy_count: int, elite_count: int,
-		csv_keys: Dictionary, errors: Array[String], warnings: Array[String]) -> void:
-	var pool_tag: String = "pool_%02d" % pool_num
-	for i in range(1, enemy_count + 1):
-		_check_key("enemy.%s.enemy_%02d.name" % [pool_tag, i], csv_keys, errors, warnings)
-	for i in range(1, elite_count + 1):
-		_check_key("enemy.%s.elite_%02d.name" % [pool_tag, i], csv_keys, errors, warnings)
 
 
 func _check_key(key: String, csv_keys: Dictionary,
