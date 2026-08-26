@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/PrestigePanel.gd" id="1_ppanel"]
+
+[node name="PrestigePanel" type="VBoxContainer"]
+theme_override_constants/separation = 12
+script = ExtResource("1_ppanel")
+
+[node name="ActionContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TalentsContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10

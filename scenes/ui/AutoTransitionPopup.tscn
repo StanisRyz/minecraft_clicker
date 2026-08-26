@@ -1,0 +1,78 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/AutoTransitionPopup.gd" id="1_atp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.14, 0.14, 0.14, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4, 0.4, 0.4, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="AutoTransitionPopup" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_atp")
+visible = false
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 340.0
+offset_bottom = 220.0
+custom_minimum_size = Vector2(340, 220)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+clip_contents = true
+mouse_filter = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 31
+theme_override_constants/margin_top = 17
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TitleRow" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/TitleRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = ""
+
+[node name="DescriptionLine1Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = ""
+
+[node name="DescriptionLine2Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = ""
+
+[node name="DescriptionLine3Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = ""
+
+[node name="DescriptionLine4Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = ""
+
+[node name="StatusLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = ""

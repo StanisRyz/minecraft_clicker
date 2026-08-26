@@ -1,0 +1,50 @@
+Balance Playtest Report
+============================================================
+  Source:                 balance_tests/balance_playtest.csv
+  Generated:              2026-05-31 10:46:10
+  Total CSV rows:         523
+
+SESSION
+----------------------------------------
+  Duration:               7m 34s  (454.9 s)
+  Highest level:          40
+  Max unlocked:           41
+
+ENEMIES
+----------------------------------------
+  Total killed:           404
+  Bosses killed:          43
+  Boss fails:             0
+  Avg enemy TTK:          0.711 s
+  Median enemy TTK:       0.542 s
+  Avg boss TTK:           4.310 s
+  Median boss TTK:        3.301 s
+
+FRICTION MILESTONES
+----------------------------------------
+  First boss fail:        none
+  TTK first hit 3 s:      5s
+  TTK first hit 8 s:      not reached
+  Boss TTK hit 20 s:      not reached
+
+GOLD ECONOMY
+----------------------------------------
+  Kill rewards:                199,131  (86%)
+  Task rewards:                 31,352  (13%)
+  Shop rewards:                      0  (0%)  (gold packs only)
+  Gold spent:                  216,642
+
+PLAYER ACTIONS
+----------------------------------------
+  Purchases (ok):         61
+  Tasks claimed:          14
+  Abilities used:         3
+  Purchases <10m:         61
+
+TUNING HINTS
+----------------------------------------
+  • No boss fails across 43 bosses. If the game feels too easy, consider
+    raising BOSS_HP_MULTIPLIER.
+  • Player reached level 40 in 7.6 min (5.3 levels/min — fast). Consider
+    raising ENEMY_HP_GROWTH or HERO_COST_GROWTH_EARLY.
+

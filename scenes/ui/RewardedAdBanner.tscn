@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/RewardedAdBanner.gd" id="1_banner"]
+[ext_resource type="Script" uid="uid://chiw5g6nystq4" path="res://scripts/ui/ImageSlot.gd" id="2_slot"]
+
+[node name="RewardedAdBanner" type="Control"]
+custom_minimum_size = Vector2(240, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -264.0
+offset_top = -59.0
+offset_right = -24.0
+offset_bottom = 41.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_banner")
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(240, 100)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+flat = false
+
+[node name="ImageHolder" type="ColorRect" parent="Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+script = ExtResource("2_slot")
+
+[node name="Label" type="Label" parent="Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+visible = false
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3

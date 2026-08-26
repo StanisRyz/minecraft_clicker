@@ -1,0 +1,468 @@
+﻿key,en,ru,context,notes
+ui.common.close,Close,Закрыть,Buttons,
+ui.common.buy,Buy,Купить,Buttons,
+ui.common.cost,Cost,Цена,Economy label,
+ui.common.reward,Reward,Награда,Economy label,
+ui.common.level,Level,Уровень,Stats label,
+ui.common.cleared,Cleared,Пройдено,Level cleared state,
+ui.common.on,ON,Вкл,Settings toggles,
+ui.common.off,OFF,Выкл,Settings toggles,
+ui.common.max,Max,Макс,Buy mode,
+ui.common.purchased,Purchased,Куплено,Ability unlock state,
+ui.common.in_progress,In Progress,В Процессе,Task state,
+ui.common.claim,Claim,Получить,Task ready to claim,
+ui.common.claimed,Claimed,Получено,Task after clicking Claim,
+ui.common.cancel,Cancel,Отмена,Dialogs,
+ui.common.yes,Yes,Да,Dialogs,
+ui.common.no,No,Нет,Dialogs,
+fullscreen_ad.warning_countdown,AD IN: {seconds} sec,РЕКЛАМА ЧЕРЕЗ: {seconds} сек,Fullscreen interstitial countdown,{seconds} is integer
+ui.tab.upgrades,Upgrades,Улучшения,Bottom navigation,
+ui.tab.partners,Partners,Команда,Bottom navigation,
+ui.tab.settlement,Village,Деревня,Bottom navigation,
+ui.tab.prestige,Prestige,Престиж,Bottom navigation,
+ui.tab.shop,Shop,Магазин,Bottom navigation,
+ui.progress.boss_time,Boss Time: {time}s,Таймер Босса: {time}с,ProgressInfoPanel boss timer,{time} = seconds remaining as float string
+ui.progress.enemies_count,Enemies {current} / {required},Врагов {current} / {required},ProgressInfoPanel enemy counter,{current} and {required} are integers
+ui.progress.hp_bar_value,{current} / {max},{current} / {max},ProgressInfoPanel HP bar text,{current} and {max} are compact-formatted HP values
+status.enemy_defeated_gold,Enemy defeated! +{gold} gold,Враг побеждён! +{gold} золота,Gameplay status,{gold} is compact number
+status.new_zone,New zone: {zone},Новая зона: {zone},Gameplay status,{zone} is localized zone name
+status.boss_defeated_level,Boss defeated! +{gold} gold. Level {level},Босс побеждён! +{gold} золота. Уровень {level},Gameplay status,{gold} is compact number; {level} is integer
+status.level_up,Level up! Level {level},Уровень повышен! Уровень {level},Gameplay status,{level} is integer
+status.boss_defeated_farming,Boss defeated! +{gold} gold. Farming stage {level}.,Босс побеждён! +{gold} золота. Фарм этапа {level}.,Gameplay status,{gold} is compact number; {level} is integer
+status.farming,+{gold} gold. Farming stage {level}.,+{gold} золота. Фарм этапа {level}.,Gameplay status,{gold} is compact number; {level} is integer
+status.boss_defeated_stage_unlocked,Boss defeated! +{gold} gold. Stage {level} unlocked.,Босс побеждён! +{gold} золота. Этап {level} открыт.,Gameplay status,{gold} is compact number; {level} is integer
+status.stage_unlocked,+{gold} gold. Stage {level} unlocked.,+{gold} золота. Этап {level} открыт.,Gameplay status,{gold} is compact number; {level} is integer
+ui.buy_mode.x1,x1,x1,BuyModeSelector,
+ui.buy_mode.x10,x10,x10,BuyModeSelector,
+ui.buy_mode.x100,x100,x100,BuyModeSelector,
+ui.buy_mode.max,Max,Макс,BuyModeSelector,
+settings.title,Settings,Настройки,SettingsWindow title,
+settings.language,Language,Язык,SettingsWindow language row label,
+settings.language.en,English,English,Language selector option,
+settings.language.ru,Русский,Русский,Language selector option,
+settings.saved,Saved,Сохранено,SettingsWindow save status message,
+settings.save_failed,Save failed,Ошибка Сохранения,SettingsWindow save status message,
+settings.account_button,Account,Аккаунт,SettingsWindow account button (opens AccountWindow),
+auto_transition.status_on,ON,Вкл,AutoTransitionPopup status label,
+auto_transition.status_off,OFF,Выкл,AutoTransitionPopup status label,
+auto_transition.description.line_1,When enabled cleared,Когда включено,AutoTransitionPopup description line 1,
+auto_transition.description.line_2,stages automatically,пройденные этапы,AutoTransitionPopup description line 2,
+auto_transition.description.line_3,move to the next,автоматически переходят,AutoTransitionPopup description line 3,
+auto_transition.description.line_4,unlocked level,на следующий уровень,AutoTransitionPopup description line 4,
+skill_popup.hero.title,Skill,Навык,UpgradeSkillPopup header title fallback,
+skill_popup.partner.title,Partner Skill,Навык партнёра,PartnerSkillPopup header title fallback,
+skill_popup.requirement.hero_level,Requires {level} Lv,Требуется {level} Ур,Skill popup requirement row,{level} is integer
+skill_popup.requirement.ability_purchase,Requires {ability},Требуется {ability},Skill popup requirement row for ability-gated skill,{ability} is ability display name
+skill_popup.requirement.partner_count,Requires {count},Требуется {count},Skill popup requirement row,{count} integer; {partner} name
+skill_popup.current.hero_level,Current: {current} / {required},Сейчас: {current} / {required},Skill popup current state row,{current} and {required} are integers
+skill_popup.current.partner_count,Current: {current} / {required},Сейчас: {current} / {required},Skill popup current state row,{current} and {required} are integers
+skill_popup.current.unlocked,Unlocked,Открыто,Skill popup current state when requirement met,
+skill_popup.button.buy,{cost},{cost},Skill popup buy button,{cost} is compact number
+skill_popup.button.locked,Locked,Закрыто,Skill popup buy button locked state,
+skill_popup.button.purchased,Purchased,Куплено,Skill popup buy button purchased state,
+skill.partner.dps_mastery.name,DPS Mastery {rank},Мастерство DPS {rank},Partner skill popup title,{rank} is Roman numeral
+skill.partner.dps_mastery.effect,x2 This Partner DPS,x2 DPS этого партнёра,Partner skill popup effect,
+skill.partner.click_synergy.name,Click Synergy,Синергия клика,Partner skill popup title,
+skill.partner.click_synergy.effect,+0.7% Partner DPS as Click Damage,+0.7% DPS партнёра в урон клика,Partner skill popup effect,
+skill.hero.click_damage.name,Hero Strike {rank},Удар героя {rank},Hero skill popup title,{rank} is Roman numeral
+skill.hero.click_damage.effect,+{bonus}% Click Damage,+{bonus}% урона клика,Hero skill popup effect,{bonus} is integer
+skill.hero.partner_dps.name,Hero Command {rank},Команда героя {rank},Hero skill popup title,{rank} is Roman numeral
+skill.hero.partner_dps.effect,+{bonus}% Partner DPS,+{bonus}% DPS партнёров,Hero skill popup effect,{bonus} is integer
+skill.hero.gold.name,Treasure Sense {rank},Чутьё сокровищ {rank},Hero skill popup title,{rank} is Roman numeral
+skill.hero.gold.effect,+{bonus}% Gold Gain,+{bonus}% золота,Hero skill popup effect,{bonus} is integer
+skill.ability.name,{ability} {rank},{ability} {rank},Ability skill popup title,{ability} is localized ability; {rank} is Roman numeral
+skill.ability.autoclick.effect,+{rate}% rate, +{duration}s duration,+{rate}% к скорости, +{duration} сек. длительности,Ability skill popup effect,{rate} and {duration} are integers
+skill.ability.gold_bonus.effect,Improves to x{multiplier} gold,Улучшает золото до x{multiplier},Ability skill popup effect,{multiplier} is decimal
+skill.ability.focus_burst.effect,Improves to x{multiplier} damage,Улучшает урон до x{multiplier},Ability skill popup effect,{multiplier} is decimal
+skill.ability.rally.effect,Improves to x{multiplier} partner DPS,Улучшает DPS партнёров до x{multiplier},Ability skill popup effect,{multiplier} is decimal
+task.in_progress,In Progress,В Процессе,TasksWindow task button,
+task.claim,Claim,Получить,TasksWindow task button,
+task.claimed,Claimed,Получено,TasksWindow task button after clicking,
+task.progress,{current} / {target},{current} / {target},TasksWindow progress line,{current} and {target} are integers
+task.reward,Reward: {reward} Gold,Награда: {reward} Золота,TasksWindow reward line,{reward} is compact number
+upgrade.hero.button,x{count} - {cost},x{count} - {cost},UpgradePanel hero upgrade button,{count} is integer; {cost} is compact number
+upgrade.hero.card.name,Hero,Герой,UpgradePanel hero card row 1,
+upgrade.hero.card.level_gain,{level} Lv | +{gain} Damage,{level} Ур | +{gain} Урон,UpgradePanel hero card row 2,{level} is integer; {gain} is compact damage gain
+upgrade.hero.card.damage,Damage {damage},Урон {damage},UpgradePanel hero card row 3,{damage} is compact current damage
+upgrade.hero.card.milestone_next,x2 at {milestone} Lv,x2 на {milestone} Ур,UpgradePanel hero card row 4,{milestone} is integer
+upgrade.hero.card.milestone_max,Max,Максимум,UpgradePanel hero card row 4 all reached,
+upgrade.ability.purchased,Purchased,Куплено,UpgradePanel ability unlock button,
+upgrade.ability.requires_level,Requires {level} Lv,Требуется {level} Ур,UpgradePanel ability unlock button,{level} is integer
+upgrade.ability.buy,{cost},{cost},UpgradePanel ability unlock button,{cost} is compact number
+upgrade.ability.card.name,{name},{name},UpgradePanel ability card row 1,{name} is ability name
+upgrade.ability.card.rank,Rank {rank}/{max_rank},Ранг {rank}/{max_rank},UpgradePanel ability card row 2,{rank} and {max_rank} are integers
+upgrade.ability.unlock_with_duration,{duration},{duration},locked ability row 4,{level} is integer; {duration} is duration text
+partner.hire_button,x{count} - {cost},x{count} - {cost},PartnerPanel hire button,{count} is integer; {cost} is compact number
+partner.card.name,{name},{name},PartnerPanel card row 1,{name} is partner name
+partner.card.count_gain,{count} | +{gain} DPS,{count} | +{gain} Урон,PartnerPanel card row 2,{count} is owned copies; {gain} is compact DPS gain
+partner.card.total_dps,Total {total} DPS,Всего {total} DPS,PartnerPanel card row 3,{total} is compact total DPS
+partner.card.milestone_next,x2 at {milestone} Lv,x2 на {milestone} Ур,PartnerPanel card row 4,{milestone} is integer
+partner.card.milestone_max,Max,Максимум,PartnerPanel card row 4 all reached,
+settlement.build_button,x{count} - {cost},x{count} - {cost},SettlementPanel build button,{count} integer; {cost} compact number
+settlement.card.name,{name},{name},SettlementPanel card row 1,{name} is building name
+settlement.card.count,Owned: {count},Всего: {count},SettlementPanel card row 2,{count} is integer
+settlement.card.milestone_next,x2 at {milestone} Lv,x2 на {milestone} Ур,SettlementPanel card row 5,{milestone} is integer next milestone count
+settlement.card.milestone_max,Max,Максимум,SettlementPanel card row 5 all reached,
+prestige.action,Prestige,Престиж,PrestigePanel button,
+prestige.action_card.title,Prestige,Престиж,PrestigePanel action card row 1,
+prestige.action_card.reward,Receive +{points},Получить +{points},PrestigePanel action card row 2,{points} is compact number
+prestige.action_card.reset_progress,Reset progress,Сбросить прогресс,PrestigePanel action card row 3,
+prestige.action_card.get_points,Get points,Получить очки,PrestigePanel action card row 4,
+prestige.talent_upgrade_bulk,x{count} - {cost},x{count} - {cost},PrestigePanel talent upgrade button,{count} is integer; {cost} is compact PP cost
+prestige.card.name,{name},{name},PrestigePanel talent card row 1,{name} is talent name
+prestige.card.count,Owned: {count},Кол-во: {count},PrestigePanel talent card row 2,{count} is integer talent level
+prestige.card.empty, , ,PrestigePanel talent card row 5 (reserved blank row),
+prestige.confirm.stage_level,Stage,Этап,PrestigeConfirmDialog label,followed by colon and value in code
+prestige.confirm.character_level,Level,Уровень,PrestigeConfirmDialog label,
+prestige.confirm.stage_points,Stage points,Очки этапа,PrestigeConfirmDialog label,
+prestige.confirm.character_points,Level points,Очки уровня,PrestigeConfirmDialog label,
+prestige.confirm.points_to_gain,Points to gain: {points},Очки к получению: {points},PrestigeConfirmDialog label,{points} is compact number
+prestige.confirm.available_after,Available after,Доступно после,PrestigeConfirmDialog label,
+prestige.confirm.total_earned_after,Total earned after,Все заработано,PrestigeConfirmDialog label,
+prestige.confirm.warning,All normal progress will reset,Весь прогресс будет сброшен,PrestigeConfirmDialog warning text,
+prestige.confirm.talents_note,Purchased talents remain,Купленные таланты сохраняются,PrestigeConfirmDialog note,
+prestige.confirm.title,Prestige,Престиж,PrestigeConfirmDialog window title,
+prestige.confirm.stage,Stage: {stage},Этап: {stage},PrestigeConfirmDialog stage row,{stage} is integer level
+prestige.confirm.level,Level: {level},Уровень: {level},PrestigeConfirmDialog character level row,{level} is integer
+prestige.confirm.reset_warning,All progress will be reset,Весь прогресс будет сброшен,PrestigeConfirmDialog reset warning,
+prestige.confirm.talents_kept,Prestige talents are kept,Таланты престижа сохраняются,PrestigeConfirmDialog talents note,
+prestige.confirm.yes,Yes,Да,PrestigeConfirmDialog yes button,
+prestige.confirm.no,No,Нет,PrestigeConfirmDialog no button,
+shop.buy_button,Buy,Купить,ShopPanel buy button,
+shop.confirm.title,Confirm purchase,Подтвердите покупку,ShopPurchaseConfirmDialog title,
+shop.confirm.confirm,Confirm,Подтвердить,ShopPurchaseConfirmDialog confirm button,
+shop.confirm.cancel,Cancel,Отмена,ShopPurchaseConfirmDialog cancel button,
+zone.01.name,Hidden Leaf Forest,Лес Скрытого Листа,ZoneConfig zone 01,
+zone.02.name,Training Camp,Тренировочная Площадка,ZoneConfig zone 02,
+zone.03.name,Fog Forest,Лес Тумана,ZoneConfig zone 03,
+zone.04.name,Great Naruto Bridge,Великий мост Наруто,ZoneConfig zone 04,
+zone.05.name,Challenge Forest,Лес Испытаний,ZoneConfig zone 05,
+zone.06.name,Challenge Forest,Лес Испытаний,ZoneConfig zone 06,
+zone.07.name,Hidden Leaf Forest,Лес Скрытого Листа,ZoneConfig zone 07,
+zone.08.name,Hidden Leaf Village,Деревня Скрытого Листа,ZoneConfig zone 08,
+zone.09.name,Hidden Leaf Village,Деревня Скрытого Листа,ZoneConfig zone 09,
+zone.10.name,Valley of the End,Долина Завершения,ZoneConfig zone 10,
+zone.11.name,Cave,Пещера,ZoneConfig zone 11,
+zone.12.name,Cave,Пещера,ZoneConfig zone 12,
+zone.13.name,Hidden Leaf Forest,Лес Скрытого Листа,ZoneConfig zone 13,
+zone.14.name,Hidden Leaf Forest,Лес Скрытого Листа,ZoneConfig zone 14,
+zone.15.name,Hidden Leaf Village,Деревня Скрытого Листа,ZoneConfig zone 15,
+zone.16.name,Five Kage Hall,Зал Пяти Каге,ZoneConfig zone 16,
+zone.17.name,Shinobi War Field,Поле Войны Шиноби,ZoneConfig zone 17,
+zone.18.name,Shinobi War Field,Поле Войны Шиноби,ZoneConfig zone 18,
+zone.19.name,Shinobi War Field,Поле Войны Шиноби,ZoneConfig zone 19,
+zone.20.name,Shinobi War Field,Поле Войны Шиноби,ZoneConfig zone 20,
+zone.21.name,Shinobi War Field,Поле Войны Шиноби,ZoneConfig zone 21,
+zone.01.boss,Mizuki,Мизуки,ZoneConfig zone 01 boss,
+zone.02.boss,Kakashi Hatake,Какаши Хатаке,ZoneConfig zone 02 boss,
+zone.03.boss,Haku,Хаку,ZoneConfig zone 03 boss,
+zone.04.boss,Zabuza Momochi,Забуза Момочи,ZoneConfig zone 04 boss,
+zone.05.boss,Kabuto Yakushi,Кабуто Якуши,ZoneConfig zone 05 boss,
+zone.06.boss,Orochimaru,Орочимару,ZoneConfig zone 06 boss,
+zone.07.boss,Gaara,Гаара,ZoneConfig zone 07 boss,
+zone.08.boss,Kisame,Кисаме,ZoneConfig zone 08 boss,
+zone.09.boss,Itachi Uchiha,Итачи Учиха,ZoneConfig zone 09 boss,
+zone.10.boss,Sasuke Uchiha,Саске Учиха,ZoneConfig zone 10 boss,
+zone.11.boss,Sasori,Сасори,ZoneConfig zone 11 boss,
+zone.12.boss,Deidara,Дейдара,ZoneConfig zone 12 boss,
+zone.13.boss,Hidan,Хидан,ZoneConfig zone 13 boss,
+zone.14.boss,Kakuzu,Какузу,ZoneConfig zone 14 boss,
+zone.15.boss,Pain,Пейн,ZoneConfig zone 15 boss,
+zone.16.boss,Sasuke Uchiha,Саске Учиха,ZoneConfig zone 16 boss,
+zone.17.boss,Tobi,Тоби,ZoneConfig zone 17 boss,
+zone.18.boss,Madara Uchiha,Мадара Учиха,ZoneConfig zone 18 boss,
+zone.19.boss,Madara Jinchuriki,Мадара Джинчурики,ZoneConfig zone 19 boss,
+zone.20.boss,Kaguya Otsutsuki,Кагуя Ооцуцуки,ZoneConfig zone 20 boss,
+zone.21.boss,Sasuke Uchiha,Саске Учиха,ZoneConfig zone 21 boss,
+partner.01.name,Naruto Uzumaki,Наруто Узумаки,PartnerConfig partner 01,
+partner.02.name,Sasuke Uchiha,Саске Учиха,PartnerConfig partner 02,
+partner.03.name,Sakura Haruno,Сакура Харуно,PartnerConfig partner 03,
+partner.04.name,Kakashi Hatake,Какаши Хатаке,PartnerConfig partner 04,
+partner.05.name,Jiraya,Джирайя,PartnerConfig partner 05,
+partner.06.name,Orochimaru,Орочимару,PartnerConfig partner 06,
+partner.07.name,Itachi Uchiha,Итачи Учиха,PartnerConfig partner 07,
+partner.08.name,Six Path of Pain,Шесть Путей Пейна,PartnerConfig partner 08,
+partner.09.name,Konan,Конан,PartnerConfig partner 09,
+partner.10.name,Tsunade,Цунаде,PartnerConfig partner 10,
+partner.11.name,Itachi (Susanoo),Итачи (Сусаноо),PartnerConfig partner 11,
+partner.12.name,Muu,Муу,PartnerConfig partner 12,
+partner.13.name,Gengetsu Hozuki,Генгецу Хозуки,PartnerConfig partner 13,
+partner.14.name,Killer B,Киллер Би,PartnerConfig partner 14,
+partner.15.name,Kabuto Yakushi,Кабуто Якуши,PartnerConfig partner 15,
+partner.16.name,A (4th Raikage),Эй (4ый Райкаге),PartnerConfig partner 16,
+partner.17.name,Hiruzen Sarutobi,Хирузен Сарутоби,PartnerConfig partner 17,
+partner.18.name,Tobirama Senzu,Тобирама Сенджу,PartnerConfig partner 18,
+partner.19.name,A (3rd Raikage),Эй (3ий Райкаге),PartnerConfig partner 19,
+partner.20.name,Hashirama Senzu,Хаширама Сенджу,PartnerConfig partner 20,
+partner.21.name,Obito Uchiha,Обито Учиха,PartnerConfig partner 21,
+partner.22.name,Madara Uchiha,Мадара Учиха,PartnerConfig partner 22,
+partner.23.name,Minato Namikaze,Минато Намикадзе,PartnerConfig partner 23,
+partner.24.name,Maito Guy,Майто Гай,PartnerConfig partner 24,
+partner.25.name,Obito Jinchuriki,Обито Джинчурики,PartnerConfig partner 25,
+partner.26.name,Madara Jinchuriki,Мадара Джинчурики,PartnerConfig partner 26,
+partner.27.name,Sasuke Six Paths,Саске Шесть Путей,PartnerConfig partner 27,
+partner.28.name,Naruto Six Paths,Наруто Шесть Путей,PartnerConfig partner 28,
+building.01.name,Training Ground,Тренировочное Поле,SettlementConfig building 01,
+building.02.name,Hokage Residence,Резиденция Хокаге,SettlementConfig building 02,
+building.03.name,Ichiraku Ramen,Ичираку Рамен,SettlementConfig building 03,
+building.04.name,Hospital,Госпиталь,SettlementConfig building 04,
+building.05.name,Shinobi Academy,Академия Шиноби,SettlementConfig building 05,
+building.06.name,Hokage Rock,Скала Хокаге,SettlementConfig building 06,
+building.01.purchase_gain,+{bonus}% DPS,+{bonus}% DPS,SettlementPanel building 01 card row 3,{bonus} is integer percent gain
+building.01.total_bonus,DPS +{bonus}%,DPS +{bonus}%,SettlementPanel building 01 card row 4,{bonus} is integer current total bonus
+building.02.purchase_gain,+{bonus}% Gold,+{bonus}% Золота,SettlementPanel building 02 card row 3,{bonus} is integer percent gain
+building.02.total_bonus,Gold +{bonus}%,Золото +{bonus}%,SettlementPanel building 02 card row 4,{bonus} is integer current total bonus
+building.03.purchase_gain,+{bonus}% Damage,+{bonus}% Урона,SettlementPanel building 03 card row 3,{bonus} is integer percent gain
+building.03.total_bonus,Damage +{bonus}%,Урон +{bonus}%,SettlementPanel building 03 card row 4,{bonus} is integer current total bonus
+building.04.purchase_gain,+{bonus}% Ability,+{bonus}% Навыка,SettlementPanel building 04 card row 3,{bonus} is integer percent gain
+building.04.total_bonus,Ability +{bonus}%,Навык +{bonus}%,SettlementPanel building 04 card row 4,{bonus} is integer current total bonus
+building.05.purchase_gain,-{bonus}% CD,-{bonus}% CD,SettlementPanel building 05 card row 3,{bonus} is integer percent gain
+building.05.total_bonus,CD -{bonus}%,CD -{bonus}%,SettlementPanel building 05 card row 4,{bonus} is integer current total bonus
+building.06.purchase_gain,+{bonus}% Boss Gold,+{bonus}% Золота Босса,SettlementPanel building 06 card row 3,{bonus} is integer percent gain
+building.06.total_bonus,Boss Gold +{bonus}%,Золото Босса +{bonus}%,SettlementPanel building 06 card row 4,{bonus} is integer current total bonus
+prestige.talent.01.name,Empower,Мощь Каге,PrestigeConfig talent 01,
+prestige.talent.02.name,Bounty Hunter,Охотник,PrestigeConfig talent 02,
+prestige.talent.03.name,Warchief,Военачальник,PrestigeConfig talent 03,
+prestige.talent.04.name,Quick Hands,Быстрые руки,PrestigeConfig talent 04,
+prestige.talent.05.name,Builder,Строитель,PrestigeConfig talent 05,
+prestige.talent.06.name,Boss Hunter,Убийца Боссов,PrestigeConfig talent 06,
+prestige.talent.01.purchase_gain,+{bonus}% Damage,+{bonus}% Урона,PrestigePanel talent 01 card row 3,{bonus} is integer percent gain
+prestige.talent.01.total_bonus,Damage +{bonus}%,Урон +{bonus}%,PrestigePanel talent 01 card row 4,{bonus} is integer current total bonus
+prestige.talent.02.purchase_gain,+{bonus}% Gold,+{bonus}% Золота,PrestigePanel talent 02 card row 3,{bonus} is integer percent gain
+prestige.talent.02.total_bonus,Gold +{bonus}%,Золото +{bonus}%,PrestigePanel talent 02 card row 4,{bonus} is integer current total bonus
+prestige.talent.03.purchase_gain,+{bonus}% DPS,+{bonus}% DPS,PrestigePanel talent 03 card row 3,{bonus} is integer percent gain
+prestige.talent.03.total_bonus,DPS +{bonus}%,DPS +{bonus}%,PrestigePanel talent 03 card row 4,{bonus} is integer current total bonus
+prestige.talent.04.purchase_gain,+{bonus}% Autoclick,+{bonus}% Автоклика,PrestigePanel talent 04 card row 3,{bonus} is integer percent gain
+prestige.talent.04.total_bonus,Autoclick +{bonus}%,Автоклик +{bonus}%,PrestigePanel talent 04 card row 4,{bonus} is integer current total bonus
+prestige.talent.05.purchase_gain,+{bonus}% Settlement,+{bonus}% Поселение,PrestigePanel talent 05 card row 3,{bonus} is integer percent gain
+prestige.talent.05.total_bonus,Settlement +{bonus}%,Поселение +{bonus}%,PrestigePanel talent 05 card row 4,{bonus} is integer current total bonus
+prestige.talent.06.purchase_gain,+{bonus}% Boss Damage,+{bonus}% Урон Боссу,PrestigePanel talent 06 card row 3,{bonus} is integer percent gain
+prestige.talent.06.total_bonus,Boss Damage +{bonus}%,Урон Боссу +{bonus}%,PrestigePanel talent 06 card row 4,{bonus} is integer current total bonus
+shop.gold_pack_small.name,Small Gold Pack,Малый пакет золота,ShopConfig product name,
+shop.gold_pack_small.description,Gain 5 hours of gold,5 часов золота,ShopConfig product description,
+shop.gold_pack_large.name,Large Gold Pack,Большой пакет золота,ShopConfig product name,
+shop.gold_pack_large.description,Gain 24 hours of gold,24 часа золота,ShopConfig product description,
+shop.boss_retry_token.name,Boss Retry,Повтор босса,ShopConfig product name,
+shop.boss_retry_token.description,Return to the failed boss level,Вернуться к непройденному уровню босса,ShopConfig product description,
+shop.task_boost.name,Task Reward Boost,Удвоенная награда задания,ShopConfig product name,
+shop.task_boost.description,Next claimed task gives x2 gold,Следующее полученное задание даст x2 золота,ShopConfig product description,
+shop.permanent_partner_dps_x2.name,Permanent DPS x2,Вечный x2 DPS,Shop product name,
+shop.permanent_partner_dps_x2.description,Permanently х2 DPS,Навсегда х2 DPS,Shop product description,
+shop.permanent_click_damage_x2.name,Permanent Damage x2,Вечный x2 Урон,Shop product name,
+shop.permanent_click_damage_x2.description,Permanently х2 Damage,Навсегда x2 Урон,Shop product description,
+shop.permanent_gold_x2.name,Permanent Gold x2,Вечный x2 золото,Shop product name,
+shop.permanent_gold_x2.description,Permanently x2 Gold,Навсегда х2 Золота,Shop product description,
+shop.buy_button_count,x{count} - {cost},x{count} - {cost},ShopPanel buy button,{count} is integer; {cost} is compact number
+shop.card.gold_reward,Gives +{amount} Gold,Даёт +{amount} золота,ShopPanel card effect row for gold packs,{amount} is compact number
+shop.card.partner_dps_multiplier,Gives DPS x{multiplier},Даёт DPS x{multiplier},ShopPanel card effect row for partner DPS product,{multiplier} is integer
+shop.card.click_damage_multiplier,Gives Damage x{multiplier},Даёт Урон x{multiplier},ShopPanel card effect row for click damage product,{multiplier} is integer
+shop.card.gold_multiplier,Gives Gold x{multiplier},Даёт Золото x{multiplier},ShopPanel card effect row for gold multiplier product,{multiplier} is integer
+shop.card.owned,Owned: {count},Всего: {count},ShopPanel card row 4 owned count,{count} is integer
+shop.card.total_multiplier,Bonus: x{multiplier},Бонус: x{multiplier},ShopPanel card row 5 total bonus,{multiplier} is integer
+shop.rewarded_gems_ad.name,Watch Ad: +3 Gems,Реклама: +3 гема,Shop rewarded ad product name,
+shop.rewarded_gems_ad.description,Gems for AD,Гемы за рекламу,Shop rewarded ad product description,
+shop.card.rewarded_gems,+{amount} Gems,+{amount} Гемов,ShopPanel card effect row for rewarded gems ad,{amount} is compact number
+shop.button.watch_ad,Watch Ad,Смотреть,ShopPanel buy button for rewarded ad products,
+shop.button.open,Open,Открыть,ShopPanel buy button for donation_entry products,
+shop.gem_purchase_entry.name,Buy Gems,Купить гемы,ShopConfig gem_purchase_entry product name,
+shop.gem_purchase_entry.description,Purchase gems,Покупка гемов,ShopConfig gem_purchase_entry product description,
+shop.card.gem_purchase_entry,Buy Gems,Купить гемы,ShopPanel card effect row for gem_purchase_entry,
+shop.gem_purchase.title,Buy Gems,Купить гемы,GemPurchaseDialog title,
+shop.gem_purchase.invalid_product,Invalid gem product,Неверный товар,GemPurchaseDialog error status,
+shop.gem_purchase.success,+{amount} Gems!,+{amount} гемов!,GemPurchaseDialog success status,{amount} is integer
+shop.gem_purchase.cancelled,Purchase cancelled.,Покупка отменена.,GemPurchaseDialog cancel status,
+shop.gem_purchase.error,Purchase failed. Please try again later.,Покупка не удалась. Попробуйте позже.,GemPurchaseDialog error status,
+shop.gem_purchase.unavailable,Purchases are temporarily unavailable. Please try again later.,Покупки временно недоступны. Попробуйте позже.,GemPurchaseDialog unavailable status,
+shop.gem_purchase.processing,Opening payment...,Открываем оплату...,GemPurchaseDialog processing status,
+shop.gem_purchase.buy,Buy,Купить,GemPurchaseDialog buy button,
+shop.gem_purchase.amount_plain,+{amount} Gems,+{amount} гемов,GemPurchaseDialog gem amount label no bonus,{amount} is integer
+shop.gem_purchase.amount_bonus,+{base} Gems +{bonus} Free,+{base} гемов +{bonus} бесплатно,GemPurchaseDialog gem amount label with bonus,{base} and {bonus} are integers
+shop.gem_purchase.total,Total: {amount} Gems,Всего: {amount} гемов,GemPurchaseDialog total gems label,{amount} is integer
+shop.gem_purchase.price,{price} ₽,{price} ₽,GemPurchaseDialog price label,{price} is integer
+shop.gem_purchase.loading_price,Loading price...,Загрузка цены...,GemPurchaseDialog Yandex catalog loading state,
+shop.gem_purchase.catalog_error,Failed to load prices,Не удалось загрузить цены,GemPurchaseDialog Yandex catalog load error,
+shop.gem_purchase.product_not_found,Product not found,Товар не найден,GemPurchaseDialog Yandex catalog product missing,
+yandex.ad.unavailable,Ad is currently unavailable,Реклама сейчас недоступна,Yandex rewarded ad SDK error/unavailable status,
+yandex.ad.timeout,Ad did not open,Реклама не открылась,Yandex rewarded ad timeout status,
+yandex.catalog.timeout,Failed to load prices,Не удалось загрузить цены,Yandex payment catalog load timeout status,
+yandex.catalog.unavailable,Products are currently unavailable,Товары сейчас недоступны,Yandex payment catalog unavailable status,
+yandex.language.sdk_unavailable,Failed to detect platform language,Не удалось определить язык платформы,Yandex SDK language fallback diagnostic status,
+shop.gems_25.name,25 Gems,25 гемов,GemPurchaseConfig product name,
+shop.gems_25.description,25 gems for 24 ₽,25 гемов за 24 ₽,GemPurchaseConfig product description,
+shop.gems_150.name,150 Gems,150 гемов,GemPurchaseConfig product name,
+shop.gems_150.description,100 gems + 50 free for 99 ₽,100 гемов + 50 бесплатно за 99 ₽,GemPurchaseConfig product description,
+shop.gems_500.name,500 Gems,500 гемов,GemPurchaseConfig product name,
+shop.gems_500.description,250 gems + 250 free for 249 ₽,250 гемов + 250 бесплатно за 249 ₽,GemPurchaseConfig product description,
+shop.gems_1500.name,1500 Gems,1500 гемов,GemPurchaseConfig product name,
+shop.gems_1500.description,500 gems + 1000 free for 499 ₽,500 гемов + 1000 бесплатно за 499 ₽,GemPurchaseConfig product description,
+shop.rewarded_gems_ad.reward_status,+{amount} Gems!,+{amount} гемов!,Status text after rewarded ad grants gems,{amount} is integer
+task.manual_damage_500.title,Deal 500 Damage,Нанести 500 Урона,TaskConfig task title,
+task.defeat_25_enemies.title,Defeat 25 enemies,Победить 25 врагов,TaskConfig task title,
+task.defeat_2_elites.title,Defeat 2 elite enemies,Победить 2 элитных врагов,TaskConfig task title,
+task.defeat_1_boss.title,Defeat 1 boss,Победить 1 босса,TaskConfig task title,
+task.gain_10_hero_levels.title,Buy 10 Levels,Купить 10 Уровней,TaskConfig task title,
+task.hire_10_partners.title,Hire 10 partners,Нанять 10 Партнеров,TaskConfig task title,
+task.build_5_buildings.title,Buy 5 buildings,Купить 5 Строений,TaskConfig task title,
+task.activate_autoclick_1.title,Activate Autoclick 1 time,Активировать Автоклик 1 раз,TaskConfig task title,
+task.gain_10_game_levels.title,Reach 10 more stages,Пройти 10 этапов,TaskConfig task title,
+ability.autoclick.name,Autoclick,Автоклик,UpgradePanel ability name,
+ability.gold_bonus.name,Gold Bonus,Бонус Золота,UpgradePanel ability name,
+ability.focus_burst.name,Focus Burst,Взрывной Урон,UpgradePanel ability name,
+ability.rally.name,Rally,Боевой Клич,UpgradePanel ability name,
+ability.description.autoclick.unlock,Unlock: {hits} hits/sec | {duration}s,Открытие: {hits} ударов/с | {duration}с,Ability description,{hits} and {duration} are integers
+ability.description.autoclick.max,{hits} hits/sec | {duration}s,{hits} ударов/с | {duration}с,Ability description,{hits} and {duration} are integers
+ability.description.autoclick.next,{hits} hits/sec | {duration}s | Next: +{rate}% rate, +{bonus_duration}s,{hits} ударов/с | {duration}с | Далее: +{rate}% скорость, +{bonus_duration}с,Ability description,{hits}, {duration}, {rate}, and {bonus_duration} are integers
+ability.description.gold_bonus.unlock,Unlock: x{multiplier} gold | 45s,Открытие: x{multiplier} золото | 45с,Ability description,{multiplier} is decimal
+ability.description.gold_bonus.max,x{multiplier} gold,x{multiplier} золото,Ability description,{multiplier} is decimal
+ability.description.gold_bonus.next,x{multiplier} gold | Next: x{next},x{multiplier} золото | Далее: x{next},Ability description,{multiplier} and {next} are decimals
+ability.description.focus_burst.unlock,Unlock: x{multiplier} damage | 20s,Открытие: x{multiplier} урон | 20с,Ability description,{multiplier} is decimal
+ability.description.focus_burst.max,x{multiplier} damage,x{multiplier} урон,Ability description,{multiplier} is decimal
+ability.description.focus_burst.next,x{multiplier} damage | Next: x{next},x{multiplier} урон | Далее: x{next},Ability description,{multiplier} and {next} are decimals
+ability.description.rally.unlock,Unlock: x{multiplier} partner DPS | 30s,Открытие: x{multiplier} DPS партнёров | 30с,Ability description,{multiplier} is decimal
+ability.description.rally.max,x{multiplier} partner DPS,x{multiplier} DPS партнёров,Ability description,{multiplier} is decimal
+ability.description.rally.next,x{multiplier} partner DPS | Next: x{next},x{multiplier} DPS партнёров | Далее: x{next},Ability description,{multiplier} and {next} are decimals
+ability.autoclick.effect,Autoclick {hits}/s,Автоклик {hits}/с,UpgradePanel ability card effect row,{hits} is attacks per second
+ability.gold_bonus.effect,Gold x{multiplier},Золото x{multiplier},UpgradePanel ability card effect row,{multiplier} is formatted multiplier
+ability.focus_burst.effect,Damage x{multiplier},Урон x{multiplier},UpgradePanel ability card effect row,{multiplier} is formatted multiplier
+ability.rally.effect,DPS x{multiplier},DPS x{multiplier},UpgradePanel ability card effect row,{multiplier} is formatted multiplier
+ability.autoclick.duration,Duration: {seconds}s,Длительность: {seconds}с,UpgradePanel ability duration row,{seconds} is integer seconds
+ability.gold_bonus.duration,Duration: {seconds}s,Длительность: {seconds}с,UpgradePanel ability duration row,{seconds} is integer seconds
+ability.focus_burst.duration,Duration: {seconds}s,Длительность: {seconds}с,UpgradePanel ability duration row,{seconds} is integer seconds
+ability.rally.duration,Duration: {seconds}s,Длительность: {seconds}с,UpgradePanel ability duration row,{seconds} is integer seconds
+enemy.pool_01.enemy_01.name,Naruto Uzumaki,Наруто Узумаки,EnemyPoolConfig pool 01 normal enemy 01,
+enemy.pool_01.enemy_02.name,Sasuke Uchiha,Саске Учиха,EnemyPoolConfig pool 01 normal enemy 02,
+enemy.pool_01.enemy_03.name,Sakura Haruno,Сакура Харуно,EnemyPoolConfig pool 01 normal enemy 03,
+enemy.pool_01.enemy_04.name,Rock Lee,Рок Ли,EnemyPoolConfig pool 01 normal enemy 04,
+enemy.pool_01.enemy_05.name,Neji Hyuga,Неджи Хьюга,EnemyPoolConfig pool 01 normal enemy 05,
+enemy.pool_01.enemy_06.name,Ten-Ten,Тен-Тен,EnemyPoolConfig pool 01 normal enemy 06,
+enemy.pool_01.enemy_07.name,Hinata Hyuga,Хината Хьюга,EnemyPoolConfig pool 01 normal enemy 07,
+enemy.pool_01.enemy_08.name,Kiba Inuzuka,Киба Инузука,EnemyPoolConfig pool 01 normal enemy 08,
+enemy.pool_01.enemy_09.name,Shino Aburame,Шино Абураме,EnemyPoolConfig pool 01 normal enemy 09,
+enemy.pool_01.enemy_10.name,Kankuro,Канкуро,EnemyPoolConfig pool 01 normal enemy 10,
+enemy.pool_01.enemy_11.name,Temari,Темари,EnemyPoolConfig pool 01 normal enemy 11,
+enemy.pool_01.enemy_12.name,Jirono,Джиробо,EnemyPoolConfig pool 01 normal enemy 12,
+enemy.pool_01.enemy_13.name,Kidomaru,Кидомару,EnemyPoolConfig pool 01 normal enemy 13,
+enemy.pool_01.enemy_14.name,Tauy,Таюи,EnemyPoolConfig pool 01 normal enemy 14,
+enemy.pool_01.enemy_15.name,Sakon and Ukon,Сакон и Укон,EnemyPoolConfig pool 01 normal enemy 15,
+enemy.pool_01.elite_01.name,Iruka Umino,Ирука Умино,EnemyPoolConfig pool 01 elite enemy 01,
+enemy.pool_01.elite_02.name,Maito Guy,Майто Гай,EnemyPoolConfig pool 01 elite enemy 02,
+enemy.pool_01.elite_03.name,Kurenai Uhi,Куренай Юхи,EnemyPoolConfig pool 01 elite enemy 03,
+enemy.pool_01.elite_04.name,Baki,Баки,EnemyPoolConfig pool 01 elite enemy 04,
+enemy.pool_11.enemy_01.name,Jugo,Джуго,EnemyPoolConfig pool 11 normal enemy 01,
+enemy.pool_11.enemy_02.name,Karin,Карин,EnemyPoolConfig pool 11 normal enemy 02,
+enemy.pool_11.enemy_03.name,Suigetsu Hozuki,Суйгетцу Хозуки,EnemyPoolConfig pool 11 normal enemy 03,
+enemy.pool_11.enemy_04.name,Ino Yamanaka,Ино Яманака,EnemyPoolConfig pool 11 normal enemy 04,
+enemy.pool_11.enemy_05.name,Shikamaru Nara,Шикамару Нара,EnemyPoolConfig pool 11 normal enemy 05,
+enemy.pool_11.enemy_06.name,Choji Akimichi,Чоджи Акимичи,EnemyPoolConfig pool 11 normal enemy 06,
+enemy.pool_11.enemy_07.name,Sai,Сай,EnemyPoolConfig pool 11 normal enemy 07,
+enemy.pool_11.enemy_08.name,Sakura Haruno,Сакура Харуно,EnemyPoolConfig pool 11 normal enemy 08,
+enemy.pool_11.enemy_09.name,Naruto Uzumaki,Наруто Узумаки,EnemyPoolConfig pool 11 normal enemy 09,
+enemy.pool_11.enemy_10.name,Sasuke Uchiha,Саске Учиха,EnemyPoolConfig pool 11 normal enemy 10,
+enemy.pool_11.enemy_11.name,Yamato,Ямато,EnemyPoolConfig pool 11 normal enemy 11,
+enemy.pool_11.enemy_12.name,Konan,Конан,EnemyPoolConfig pool 11 normal enemy 12,
+enemy.pool_11.enemy_13.name,Karui,Каруи,EnemyPoolConfig pool 11 normal enemy 13,
+enemy.pool_11.enemy_14.name,Darui,Даруи,EnemyPoolConfig pool 11 normal enemy 14,
+enemy.pool_11.enemy_15.name,Omoi,Омои,EnemyPoolConfig pool 11 normal enemy 15,
+enemy.pool_11.elite_01.name,Asuma Sarutobi,Асума Сарутоби,EnemyPoolConfig pool 11 elite enemy 01,
+enemy.pool_11.elite_02.name,Jiraya,Джирая,EnemyPoolConfig pool 11 elite enemy 02,
+enemy.pool_11.elite_03.name,Tsunade,Цунаде,EnemyPoolConfig pool 11 elite enemy 03,
+enemy.pool_11.elite_04.name,Orochimaru,Орочимару,EnemyPoolConfig pool 11 elite enemy 04,
+enemy.pool_11.elite_05.name,Itachi Uchiha,Итачи Учиха,EnemyPoolConfig pool 11 elite enemy 05,
+enemy.pool_17.enemy_01.name,Muu,Муу,EnemyPoolConfig pool 17 normal enemy 01,
+enemy.pool_17.enemy_02.name,Oonoki,Ооноки,EnemyPoolConfig pool 17 normal enemy 02,
+enemy.pool_17.enemy_03.name,Gengetsu Hozuki,Генгецу Хозуки,EnemyPoolConfig pool 17 normal enemy 03,
+enemy.pool_17.enemy_04.name,Mei Terumi,Мей Теруми,EnemyPoolConfig pool 17 normal enemy 04,
+enemy.pool_17.enemy_05.name,Tobirama Senzu,Тобирама Сенджу,EnemyPoolConfig pool 17 normal enemy 05,
+enemy.pool_17.enemy_06.name,Hiruzen Sarutobi,Хирузен Сарутоби,EnemyPoolConfig pool 17 normal enemy 06,
+enemy.pool_17.enemy_07.name,Killer B,Киллер Би,EnemyPoolConfig pool 17 normal enemy 07,
+enemy.pool_17.enemy_08.name,A (Third Raikage),Эй (Третий Райкаге),EnemyPoolConfig pool 17 normal enemy 08,
+enemy.pool_17.enemy_09.name,A (Fourth Raikage),Эй (Четвертый Райкаге),EnemyPoolConfig pool 17 normal enemy 09,
+enemy.pool_17.elite_01.name,Minato Namikaze,Минато Намикадзе,EnemyPoolConfig pool 17 elite enemy 01,
+enemy.pool_17.elite_02.name,Hashirama Senzu,Хаширама Сенджу,EnemyPoolConfig pool 17 elite enemy 02,
+enemy.pool_17.elite_03.name,Maito Guy (8 Gates),Майто Гай (8 Врат),EnemyPoolConfig pool 17 elite enemy 03,
+ui.combat.gold_reward,+{amount} Gold,+{amount} Золота,Combat reward floating text,{amount} is compact formatted gold amount
+rewarded_ad.banner.available,Watch Ad: Get Bonus,Смотреть рекламу: Получи бонус,RewardedAdBanner fallback label when no reward selected,
+rewarded_ad.banner.all_damage,Watch Ad: x2 Damage,Реклама: x2 урон,RewardedAdBanner label for all_damage_x2 reward,
+rewarded_ad.banner.gems,Watch Ad: +5 Gems,Реклама: +5 гемов,RewardedAdBanner label for gems_5 reward,
+rewarded_ad.banner.gold,Watch Ad: x4 Gold,Реклама: x4 золото,RewardedAdBanner label for gold_x4 reward,
+rewarded_ad.banner.loading,Loading Ad...,Загрузка рекламы...,RewardedAdBanner button loading state,
+rewarded_ad.banner.cooldown,Bonus available soon,Бонус скоро будет доступен,RewardedAdBanner button cooldown state,
+rewarded_ad.banner.error,Ad unavailable,Реклама недоступна,RewardedAdBanner button error state,
+rewarded_ad.reward.all_damage,All damage x2 for 60 seconds!,Весь урон x2 на 60 секунд!,RewardedAdBanner reward notification,
+rewarded_ad.reward.gems,+5 Gems!,+5 гемов!,RewardedAdBanner reward notification,
+rewarded_ad.reward.gold,Gold x4 for 60 seconds!,Золото x4 на 60 секунд!,RewardedAdBanner reward notification,
+rewarded_ad.status.not_available,Reward unavailable,Награда недоступна,RewardedAdBanner fallback error,
+offline_reward.title,Welcome back!,С возвращением!,OfflineRewardDialog title,
+offline_reward.time,Away time: {time},Вне игры: {time},OfflineRewardDialog time label,{time} formatted duration
+offline_reward.reward,+ {gold} Gold,+ {gold} золота,OfflineRewardDialog reward label,{gold} formatted gold amount
+offline_reward.claim,Claim,Получить,OfflineRewardDialog claim button,
+offline_reward.claim_x3,Watch Ad x3,Реклама x3,OfflineRewardDialog claim x3 button,
+offline_reward.loading_ad,Loading ad...,Загрузка рекламы...,OfflineRewardDialog loading state,
+settings.sound,Sound,Звук,SettingsWindow sound row label,
+settings.music,Music,Музыка,SettingsWindow music row label,
+settings.save_now,Save,Сохранить,SettingsWindow save button,
+settings.version,Version: {version},Версия: {version},SettingsWindow version label,{version} is the app version string
+auto_transition.title,Auto-transition,Автопереход,AutoTransitionPopup title label,
+ui.gameplay.new_zone,New Zone!,Новая Зона!,GameField defeat feedback when zone changes,
+ui.gameplay.level_up,Level Up!,Новый Уровень!,GameField defeat feedback when level up,
+common.duration.seconds,{seconds}s,{seconds}с,OfflineRewardDialog duration format,{seconds} is integer
+common.duration.minutes,{minutes}m,{minutes}м,OfflineRewardDialog duration format,{minutes} is integer
+common.duration.hours,{hours}h,{hours}ч,OfflineRewardDialog duration format,{hours} is integer
+common.duration.hours_minutes,{hours}h {minutes}m,{hours}ч {minutes}м,OfflineRewardDialog duration format,{hours} and {minutes} are integers
+auth.title,Sign In,Вход,AuthGateScreen title,
+auth.checking_account,Checking account...,Проверка аккаунта...,AuthGateScreen checking state,
+auth.login_tab,Sign In,Вход,AuthGateScreen login tab label,
+auth.register_tab,Register,Регистрация,AuthGateScreen register tab label,
+auth.email_placeholder,Email,Email,AuthGateScreen email field placeholder,
+auth.password_placeholder,Password,Пароль,AuthGateScreen password field placeholder,
+auth.confirm_password_placeholder,Confirm Password,Подтвердите пароль,AuthGateScreen confirm password placeholder,
+auth.login_button,Sign In,Войти,AuthGateScreen login submit button,
+auth.register_button,Register,Зарегистрироваться,AuthGateScreen register submit button,
+auth.guest_button,Continue as Guest,Продолжить как гость,AuthGateScreen guest mode button,
+auth.guest_warning,Guest mode: progress saved locally only,Гостевой режим: прогресс только локально,AuthGateScreen guest mode info label,
+auth.forgot_password_button,Forgot password?,Забыли пароль?,AuthGateScreen forgot password link,
+auth.reset_title,Reset Password,Сброс пароля,AuthGateScreen password reset title,
+auth.reset_request_button,Send Reset Code,Отправить код,AuthGateScreen reset request submit,
+auth.reset_code_placeholder,6-digit code,6-значный код,AuthGateScreen reset code field placeholder,
+auth.new_password_placeholder,New Password,Новый пароль,AuthGateScreen new password field placeholder,
+auth.reset_confirm_button,Set New Password,Установить пароль,AuthGateScreen reset confirm submit,
+auth.back_to_login_button,Back to Sign In,Назад,AuthGateScreen back link,
+auth.error_email_required,Email is required,Введите email,AuthGateScreen validation error,
+auth.error_password_short,Password must be at least 8 characters,Пароль не менее 8 символов,AuthGateScreen validation error,
+auth.error_password_mismatch,Passwords do not match,Пароли не совпадают,AuthGateScreen validation error,
+auth.error_code_invalid,Enter a 6-digit code,Введите 6-значный код,AuthGateScreen validation error,
+auth.status_reset_code_sent,Reset code sent to your email,Код сброса отправлен на email,AuthGateScreen status message,
+auth.status_password_changed,Password updated,Пароль обновлён,AuthGateScreen status message,
+auth.status_login_after_reset,Sign in with your new password,Войдите с новым паролем,AuthGateScreen status message,
+auth.status_guest_mode,Playing as guest,Игра в гостевом режиме,AuthGateScreen status message,
+auth.status_checking_failed,Session expired. Please sign in.,Сессия истекла. Войдите снова.,AuthGateScreen status message,
+settings.account_cloud.title,Account / Cloud,Аккаунт / Облако,SettingsWindow account/cloud section title,
+settings.account.status_unsupported,Account unavailable on this platform,Аккаунт недоступен на этой платформе,SettingsWindow account status label,
+settings.account.email,Email: {email},Email: {email},SettingsWindow email label,{email} is user email address
+settings.account.email_verified,Email verified,Email подтверждён,SettingsWindow email verification status,
+settings.account.email_not_verified,Email not verified,Email не подтверждён,SettingsWindow email verification status,
+settings.account.guest_explanation,"Guest mode: progress is stored on this device only. Sign in or register to save progress in cloud and buy gems. Rewarded ads remain available.","Гостевой режим. Войдите или зарегистрируйтесь, чтобы сохранять прогресс в облаке и покупать гемы. Реклама остаётся доступной.",SettingsWindow guest mode explanation label,
+settings.account.sign_in_register,Sign in / Register,Войти / Зарегистрироваться,SettingsWindow sign in button,
+settings.account.logout,Logout,Выйти,SettingsWindow logout button,
+settings.account.logout_in_progress,Logging out...,Выходим из аккаунта...,SettingsWindow logout busy status,
+settings.account.logout_success,Logged out,Вы вышли из аккаунта,SettingsWindow logout success,
+settings.account.logout_local_fallback,Local session cleared,Локальная сессия очищена,SettingsWindow logout local fallback,
+settings.account.backend_error,Backend error: {error},Ошибка backend: {error},SettingsWindow backend error label,{error} is the error code string
+settings.cloud.save_to_cloud,Save to Cloud,Сохранить в облако,SettingsWindow cloud upload button,
+settings.cloud.upload_started,Uploading cloud save...,Сохраняем в облако...,SettingsWindow cloud upload status,
+settings.cloud.upload_success,Cloud save uploaded,Прогресс сохранён в облако,SettingsWindow cloud upload success status,
+settings.cloud.upload_failed,Cloud upload failed,Не удалось сохранить в облако,SettingsWindow cloud upload failed status,
+settings.cloud.upload_queued,Upload queued,Сохранение в облако поставлено в очередь,SettingsWindow background cloud upload queued status,
+settings.cloud.upload_in_progress,Uploading to cloud...,Сохраняем в облако...,SettingsWindow cloud upload in-progress status,
+settings.cloud.background_upload_failed,Background cloud upload failed,Фоновое сохранение в облако не удалось,SettingsWindow background cloud upload failed status,
+shop.paid_guest_locked_title,Purchases unavailable in guest mode,Покупки недоступны в гостевом режиме,ShopSheet / GemPurchaseDialog guest lock title,
+shop.paid_guest_locked_message,Sign in or register to buy gems. Ads remain available.,Войдите или зарегистрируйтесь чтобы покупать гемы. Реклама остаётся доступной.,ShopSheet guest lock message,
+shop.paid_guest_locked_action,Sign in / Register,Войти / зарегистрироваться,ShopSheet guest lock action button,
+shop.paid_guest_locked_short,Account required,Требуется аккаунт,ShopPanel donation_entry card description when locked for guest,
+account_flow.register_guest_upload_started,Saving guest progress to account...,Сохраняем гостевой прогресс в аккаунт...,ClickerScreen register flow status,
+account_flow.register_guest_upload_success,Guest progress saved to account,Гостевой прогресс сохранён в аккаунт,ClickerScreen register flow status,
+account_flow.register_guest_upload_failed,Failed to save guest progress to account,Не удалось сохранить гостевой прогресс в аккаунт,ClickerScreen register flow status,
+account_flow.login_cloud_load_started,Loading account progress...,Загружаем прогресс аккаунта...,ClickerScreen login flow status,
+account_flow.login_cloud_load_success,Account progress loaded,Прогресс аккаунта загружен,ClickerScreen login flow status,
+account_flow.login_cloud_load_missing,No cloud save found. Starting fresh.,Облачный прогресс аккаунта не найден. Начинаем с чистого сохранения.,ClickerScreen login flow status,
+account_flow.login_cloud_load_failed,Failed to load account progress,Не удалось загрузить прогресс аккаунта,ClickerScreen login flow status,

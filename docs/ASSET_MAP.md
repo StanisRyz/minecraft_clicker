@@ -1,0 +1,554 @@
+# Asset Map
+
+## Asset folder convention
+
+- Use flat PNG files for single-image assets (e.g. `ui/settings.png`, `ui/gold.png`).
+- Use folders only for multi-state, multi-file, or dynamically loaded asset groups (e.g. `ui/bottom_bar/tabs/upgrades/`, `abilities/autoclick/`, `backgrounds/zone_01/`).
+- Do not keep placeholder folders if the active asset is a flat PNG with the same purpose.
+- `.gitkeep` files are allowed in folders that will receive real PNG assets; remove them once real assets land.
+
+---
+
+## Debug visual testing controls (debug builds only)
+
+These keys work only when `BuildConfig.IS_DEBUG_BUILD = true`. Nothing is saved after using them.
+
+| Key | Action |
+|-----|--------|
+| F12 | Toggle visual test mode. Current and future enemies get 100000 HP. Boss timer pauses. Press again to restore normal HP and resume timer. |
+| L | Deal 51% of max HP to current enemy. First press: ~49000/100000 HP (triggers wounded state). Second press: defeats or nearly defeats. |
+| K | Mark current level as cleared and advance to the next level. Updates StageNavigator. Zone changes every 5 levels; press K repeatedly to walk through the 10-zone cycle in 50 presses. |
+
+- Not saved. Does not call SaveManager.
+- Does not grant gold or progress tasks.
+- Does not affect release builds (`IS_DEBUG_BUILD = false`).
+- Intended for validating zones 1–10 enemy textures, elite textures, boss textures, and backgrounds.
+- Useful for checking the current zone_01 non-boss pool and each zone's unique boss.
+
+## Enemy pools
+
+T1 keeps the existing non-boss pool implementation unchanged. The active
+10-zone cycle currently routes normal and elite enemies through `zone_01`;
+the `zone_11` and `zone_17` pool definitions/assets remain for the separate T2
+enemy-pool simplification. Bosses remain unique per active gameplay zone.
+
+| Gameplay Zones | Enemy Pool Folder  | Normal Count | Elite Count |
+|----------------|--------------------|--------------|-------------|
+| 1–10           | enemies/zone_01    | 15           | 4           |
+
+**Active slot names:**
+
+- `enemies/zone_01`: `enemy_01`–`enemy_15`, `elite_01`–`elite_04`
+
+Enemy state filenames: `healthy.png`, `hit.png`, `wounded.png`, `defeated.png`
+
+Runtime selection via `EnemyPoolConfig`. ZoneConfig `enemies` and `elite_enemy` fields are legacy content notes and no longer used for enemy spawning.
+
+## Boss asset zones
+
+Every gameplay zone has a unique boss. Bosses load from the actual gameplay zone folder and do not use shared enemy pools.
+
+| Gameplay Zone | Boss Asset Folder        |
+|---------------|--------------------------|
+| 1             | enemies/zone_01/boss_01/ |
+| 2             | enemies/zone_02/boss_01/ |
+| 3             | enemies/zone_03/boss_01/ |
+| 4             | enemies/zone_04/boss_01/ |
+| 5             | enemies/zone_05/boss_01/ |
+| 6             | enemies/zone_06/boss_01/ |
+| 7             | enemies/zone_07/boss_01/ |
+| 8             | enemies/zone_08/boss_01/ |
+| 9             | enemies/zone_09/boss_01/ |
+| 10            | enemies/zone_10/boss_01/ |
+
+## Cyclic zones
+
+The game has 10 visual/content zones. After stage 50 (end of zone 10), zone data and assets loop cyclically:
+
+- Stages 51–55 → zone 1
+- Stages 56–60 → zone 2
+- …
+- Stages 96–100 → zone 10
+- Stages 101–105 → zone 1
+
+Stage numbers continue increasing normally. Only zone data/assets (backgrounds, enemies, boss names, zone names, stage navigation images) are cyclic. `ZoneConfig.get_zone_index_for_level(level)` returns the cyclic index for any level.
+
+---
+
+## Background assets
+
+Each gameplay zone owns the same-numbered background folder.
+
+| Gameplay Zone | Levels | Background Folder       |
+|---------------|--------|-------------------------|
+| 1             | 1–5    | backgrounds/zone_01/    |
+| 2             | 6–10   | backgrounds/zone_02/    |
+| 3             | 11–15  | backgrounds/zone_03/    |
+| 4             | 16–20  | backgrounds/zone_04/    |
+| 5             | 21–25  | backgrounds/zone_05/    |
+| 6             | 26–30  | backgrounds/zone_06/    |
+| 7             | 31–35  | backgrounds/zone_07/    |
+| 8             | 36–40  | backgrounds/zone_08/    |
+| 9             | 41–45  | backgrounds/zone_09/    |
+| 10            | 46–50  | backgrounds/zone_10/    |
+
+## Required image folders
+
+### Non-boss enemy pool folders
+
+The current active cycle uses this normal/elite enemy pool folder:
+
+- `assets/images/enemies/zone_01/` — `enemy_01`–`enemy_15`, `elite_01`–`elite_04`
+
+Each slot folder needs four states: `healthy.png`, `hit.png`, `wounded.png`, `defeated.png`.
+The old `zone_11` and `zone_17` pool data/assets are retained only as T2 cleanup dependencies.
+
+### Boss folders
+
+Every active zone requires a unique `boss_01` folder:
+
+- `assets/images/enemies/zone_01/boss_01/` through `assets/images/enemies/zone_10/boss_01/`
+
+Each boss folder needs the same four state files listed above.
+
+### Background folders
+
+Each same-numbered folder from `assets/images/backgrounds/zone_01/` through
+`assets/images/backgrounds/zone_10/` requires a `background.png`.
+
+Missing files fall back to the default game asset catalog placeholder (no crash).
+
+### TasksWindow window background, close button, and claim button
+
+| Asset key | Path | Recommended size |
+|-----------|------|-----------------|
+| `task.window.background` | `assets/images/tasks/window/background.png` | 620×670 px |
+
+- `task.window.background`: missing → white 620×670 fallback. Present → texture shown, fallback hidden.
+- Close button uses the shared `ui.sheet.close_button` / `ui.sheet.close_button.pressed` keys (see Standard bottom sheet background section). No per-window close texture.
+- **Obsolete:** `task.window.close` (`assets/images/tasks/window/close.png`) is no longer referenced by active code. The PNG file is kept until cleanup is confirmed.
+
+Task claim buttons now use the shared popup button textures (35:12 ratio, 140×48 px UI size):
+
+| State | Asset key | Path |
+|-------|-----------|------|
+| Normal / in-progress (disabled dark) | `ui.popup.button.default` | `assets/images/ui/popups/buttons/default.png` |
+| Pressed flash (0.2 s) | `ui.popup.button.pressed` | `assets/images/ui/popups/buttons/pressed.png` |
+
+Button text (Claim / In Progress / Claimed) is drawn above the texture by `ButtonTextLabel`. Disabled state dims image modulate to `Color(0.65, 0.65, 0.65)` and label to `Color(0.45, 0.45, 0.45)`.
+
+> **Obsolete:** `task.window.claim_button` (`assets/images/tasks/window/claim_button.png`, was 120×80 px) is no longer used by TasksWindow. Keep the file until all validators confirm it is unreferenced.
+
+Validation: `godot --headless --script res://scripts/tools/ValidateTaskAssets.gd`
+
+### Shop product icons
+
+Recommended size: **136×136 px**
+
+| Product ID | Asset key | Path |
+|------------|-----------|------|
+| `gold_pack_small` | `shop.gold_pack_small` | `assets/images/shop/gold_pack_small.png` |
+| `gold_pack_large` | `shop.gold_pack_large` | `assets/images/shop/gold_pack_large.png` |
+| `permanent_partner_dps_x2` | `shop.permanent_partner_dps_x2` | `assets/images/shop/permanent_partner_dps_x2.png` |
+| `permanent_click_damage_x2` | `shop.permanent_click_damage_x2` | `assets/images/shop/permanent_click_damage_x2.png` |
+| `permanent_gold_x2` | `shop.permanent_gold_x2` | `assets/images/shop/permanent_gold_x2.png` |
+
+Fallback: missing → white 136×136 square. Present → texture shown, fallback hidden (`show_fallback_behind_texture = false`).
+
+Asset key lookup: `GameAssetCatalog.shop_product_icon_key(product_id)` → `"shop.<product_id>"`.
+
+---
+
+### TasksWindow open button
+
+Path: `assets/images/tasks/tasks_button/`
+
+| File | Asset key | Shown when |
+|------|-----------|-----------|
+| `default.png` | `task.window_button.default` | No active task can be claimed |
+| `completed.png` | `task.window_button.completed` | At least one active task is completed and ready to claim |
+
+Both files are optional during development. Missing files fall back to a white placeholder — no crash.
+
+### Task card background
+
+Path: `assets/images/tasks/task_card.png`
+
+| Asset key | Path |
+|---|---|
+| `task.card.background` | `res://assets/images/tasks/task_card.png` |
+
+Recommended size: **523×100 px** (visual card width 523, height 100). Missing → white fallback. Present → texture shown, fallback hidden. Used by all task cards via `ImageSlot` as the first (bottom-most) child of each task row. Cards are centered inside the 580 px content area (equal ~28.5 px insets each side). First card top: approximately 96 px from panel top (MarginContainer top 20 + TopSpacer 76).
+
+### Task card icons
+
+Path: `assets/images/tasks/task_type/icon.png`
+
+Task card image size: **80×80 px** (square). Displayed beside the 3-row text layout:
+1. **Condition** (row 0) — task requirement text, font size `TASK_CONDITION_FONT_SIZE`
+2. **Progress** (row 1) — `{current} / {target}`, font size `TASK_PROGRESS_FONT_SIZE`
+3. **Reward** (row 2) — `Reward: {reward} Gold`, font size `TASK_REWARD_FONT_SIZE`
+
+Font sizes are controlled via `UiFontConfig`. Claim button is **160×80 px**, vertically centered.
+
+## Stage navigation assets
+
+StageNavigator images live in `assets/images/stage_navigation/zone_##/stage.png`.
+The ten same-numbered zone folders mirror the active background folders.
+
+Required folders:
+
+```
+assets/images/stage_navigation/zone_01/stage.png
+assets/images/stage_navigation/zone_02/stage.png
+assets/images/stage_navigation/zone_03/stage.png
+assets/images/stage_navigation/zone_04/stage.png
+assets/images/stage_navigation/zone_05/stage.png
+assets/images/stage_navigation/zone_06/stage.png
+assets/images/stage_navigation/zone_07/stage.png
+assets/images/stage_navigation/zone_08/stage.png
+assets/images/stage_navigation/zone_09/stage.png
+assets/images/stage_navigation/zone_10/stage.png
+```
+
+Missing `stage.png` files are **warnings** (safe fallback color shown). Missing or unexpected zone folders are **errors**.
+
+### Common overlays
+
+`assets/images/stage_navigation/common/` — shared overlay icons, both 80×80, both optional.
+
+| File | When shown |
+|------|-----------|
+| `locked.png` | Locked stage buttons (also darkened by modulate) |
+| `current.png` | Current (active) stage button only |
+
+Overlays are layered above the zone stage image, below the stage number label. Missing files are safe — fallback colors and darkening still apply.
+
+Run the following to validate:
+
+```
+godot --headless --script res://scripts/tools/ValidateStageNavigationAssets.gd
+```
+
+---
+
+## StageNavigator side button textures
+
+Side buttons no longer render text labels. Visuals come entirely from `ImageSlot` texture or fallback color.
+
+Recommended size: **80×80 px**.
+
+| Asset key | Path | Fallback |
+|-----------|------|---------|
+| `stage.auto_on` | `assets/images/ui/stage_navigation/auto_transition/enabled.png` | Green (`COLOR_AUTO_ON`) |
+| `stage.auto_off` | `assets/images/ui/stage_navigation/auto_transition/disabled.png` | Gray (`COLOR_AUTO_OFF`) |
+| `stage.latest` | `assets/images/ui/stage_navigation/latest_stage/default.png` | Gold (`COLOR_LATEST`) |
+
+- Missing files are **warnings** (safe color fallback shown, no crash).
+- `stage.auto_on` / `stage.auto_off` keys are set by `StageNavigator.set_auto_transition_enabled()` — key names must not change.
+- `stage.latest` key is set once in `_build_ui()` — key name must not change.
+
+Validated by: `godot --headless --script res://scripts/tools/ValidateStageNavigationAssets.gd`
+
+---
+
+## Enemy asset validation
+
+Run the following command from the project root to validate all required enemy PNG files:
+
+```
+godot --headless --script res://scripts/tools/ValidateEnemyAssets.gd
+```
+
+What the script checks:
+
+- All required PNG files exist under `assets/images/enemies/`
+- Missing PNG files are reported as **errors** (exit code 1)
+- Missing `.import` sidecar files are reported as **warnings** (exit code stays 0 if no PNG errors)
+- Boss validation covers the 10 active same-numbered boss folders.
+- The unchanged T1 pool definitions are also checked; expected total: **61 slots** × 4 states = **244 required PNG files**.
+
+## Expected filenames
+
+| Asset type | Filename(s) |
+|------------|-------------|
+| Enemy state | `healthy.png`, `hit.png`, `wounded.png`, `defeated.png` |
+| Background | `background.png` |
+| Partner / ability / building / shop / task / UI icon | `icon.png` |
+| Shared skill rank icons | `skill_01.png` … `skill_05.png` (see below) |
+| Prestige talent icons | `talent_01.png` … `talent_06.png` |
+
+### Shared skill rank icons
+
+All hero skill, partner skill, and ability rank skill buttons use the same 5 shared icon files:
+
+| Asset key | Path | Displayed size |
+|-----------|------|---------------|
+| `skill.rank.1` | `assets/images/skills/skill_01.png` | 32×32 px |
+| `skill.rank.2` | `assets/images/skills/skill_02.png` | 32×32 px |
+| `skill.rank.3` | `assets/images/skills/skill_03.png` | 32×32 px |
+| `skill.rank.4` | `assets/images/skills/skill_04.png` | 32×32 px |
+| `skill.rank.5` | `assets/images/skills/skill_05.png` | 32×32 px |
+
+Recommended source size: **64×64 or 128×128 px**.
+
+Used by:
+- Hero skill slots (ranks 1–5) via `GameAssetCatalog.hero_skill_key(rank)`
+- Partner skill slots (ranks 1–5) via `GameAssetCatalog.partner_skill_key(partner_index, rank)`
+- Ability rank skill slots (ranks 1–5) via `GameAssetCatalog.ability_skill_key(ability_id, rank)`
+
+All three helpers resolve to `skill.rank.N`, which `GameAssetCatalog.get_path()` maps to the shared file. The `partner_index` and `ability_id` arguments are retained in the method signatures for call-site compatibility but do not affect the returned path.
+
+Icon visual state is applied as `modulate` on the `ImageSlot` node:
+- **Purchased** → `Color.WHITE` (no tint)
+- **Affordable / can buy** → `Color(0.65, 1.0, 0.65)` (light green)
+- **Locked / cannot buy** → `Color(0.35, 0.35, 0.35)` (dark gray)
+
+Missing files fall back to the locked dark-gray color — no crash.
+
+Active ability visual: a white radial timer drawn by `AbilityCooldownOverlay` (ACTIVE mode). No image file is used — `active.png` is not referenced.
+
+See `docs/ASSET_FOLDERS.md` for a complete folder listing with full paths.
+
+## Fixed popup/window texture sizes
+
+These sizes are authoritative for texture authoring. Popups and windows use explicit fixed dimensions so backgrounds can be prepared at exact pixel sizes.
+
+| Scene | Texture path | Exact size | ImageHolder node name |
+|---|---|---|---|
+| UpgradeSkillPopup | `assets/images/ui/popups/skill/background.png` | 350×270 px | `PopupBackgroundImageHolder` (added at runtime) |
+| PartnerSkillPopup | `assets/images/ui/popups/skill/background.png` | 350×270 px | `PopupBackgroundImageHolder` (added at runtime) |
+| AutoTransitionPopup | `assets/images/ui/popups/auto_transition/background.png` | 340×220 px | `PopupBackgroundImageHolder` (added at runtime) |
+| SettingsWindow | `assets/images/ui/windows/settings/background.png` | 540×525 px | `SettingsBackgroundImageHolder` (added at runtime) |
+| PrestigeConfirmDialog fullscreen | `assets/images/ui/dialogs/prestige/background.png` | 720×1280 px | `PrestigeDialogBackgroundImageHolder` (added at runtime) |
+| PrestigeConfirmDialog inner panel | `assets/images/ui/dialogs/prestige/inner_background.png` | 500×350 px | `PrestigeDialogInnerBackgroundImageHolder` (added at runtime) |
+| ShopPurchaseConfirmDialog inner panel | `assets/images/ui/popups/shop_confirm/background.png` | 500×230 px | `ShopPurchaseConfirmBackgroundImageHolder` (added at runtime) |
+
+Asset folder structure (folders exist with `.gitkeep`; no PNG files yet):
+
+```
+assets/images/ui/popups/skill/
+assets/images/ui/popups/auto_transition/
+assets/images/ui/popups/shop_confirm/
+assets/images/ui/windows/settings/
+assets/images/ui/dialogs/prestige/
+```
+
+Scene size summary:
+- `PanelContainer.custom_minimum_size` and offsets are both set to the exact pixel dimensions above.
+- ImageHolder nodes are full-rect (`PRESET_FULL_RECT`) inside their respective `PanelContainer`, so texture fills the panel exactly.
+- PrestigeConfirmDialog: outer `PanelContainer` is full-screen (darkened backdrop, 720×1280 design target); `InnerPanel` is fixed 500×350 and centered via `CenterContainer`.
+
+---
+
+## Popup and window textures
+
+All popup/window backgrounds and action buttons use `ImageSlot` nodes added at runtime in `_ready()`.
+
+- **Texture exists** → texture shown, fallback hidden (`show_fallback_behind_texture = false`).
+- **Texture missing** → white rectangle fallback shown, no crash.
+
+All close buttons use shared textures: `ui.sheet.close_button` / `assets/images/ui/sheets/close_button.png` (normal) and `ui.sheet.close_button.pressed` / `assets/images/ui/sheets/close_button_pressed.png` (pressed). Recommended size 56×56 px; x2 source: 112×112 px. On press: button switches to pressed texture for 0.2 s, then restores normal and closes. Do not add per-window close textures.
+
+### Popup backgrounds
+
+| Asset key | Path | Recommended size | Used by |
+|-----------|------|-----------------|---------|
+| `ui.popup.skill.background` | `assets/images/ui/popups/skill/background.png` | 350×270 px | UpgradeSkillPopup, PartnerSkillPopup |
+| `ui.popup.auto_transition.background` | `assets/images/ui/popups/auto_transition/background.png` | 340×220 px | AutoTransitionPopup |
+
+### Window and dialog backgrounds
+
+| Asset key | Path | Recommended size | Used by |
+|-----------|------|-----------------|---------|
+| `ui.window.settings.background` | `assets/images/ui/windows/settings/background.png` | 540×525 px | SettingsWindow main panel |
+| `ui.dialog.prestige.background` | `assets/images/ui/dialogs/prestige/background.png` | 720×1280 px | PrestigeConfirmDialog full-screen panel |
+| `ui.dialog.prestige.inner_background` | `assets/images/ui/dialogs/prestige/inner_background.png` | 500×350 px | PrestigeConfirmDialog inner panel |
+| `ui.popup.shop_confirm.background` | `assets/images/ui/popups/shop_confirm/background.png` | 500×230 px | ShopPurchaseConfirmDialog inner panel |
+
+### Popup action buttons
+
+| Asset key | Path | Base size | Aspect ratio | Source style | Used for |
+|-----------|------|-----------|-------------|-------------|---------|
+| `ui.popup.button.default` | `assets/images/ui/popups/buttons/default.png` | 210×72 px | 35:12 | Copied from `assets/images/ui/cards/button/default.png` | Buy, Save, Cancel, Yes/No buttons |
+| `ui.popup.button.danger` | `assets/images/ui/popups/buttons/danger.png` | 210×72 px | 35:12 | Same ratio as default | Reset and destructive action buttons |
+| `ui.popup.button.pressed` | `assets/images/ui/popups/buttons/pressed.png` | 210×72 px | 35:12 | Copied from `assets/images/ui/cards/button/active.png` | Pressed state flash (0.2 s) for all popup buttons; set via `ButtonVisualUtils.flash_button_image_holder` / `set_button_pressed_visual` |
+
+**Shared button aspect ratio rule:** All popup action buttons (default and danger) must keep a **35:12** ratio (same as card buy buttons) so textures are never stretched or distorted. Do not scale either texture to arbitrary widths. If using a ×2 source: `420×144 px`, aspect ratio 35:12.
+
+Valid scaled sizes for `ui.popup.button.default` and `ui.popup.button.danger`:
+
+| Size | Used in |
+|------|---------|
+| 210×72 px | UpgradeSkillPopup BuyButton, PartnerSkillPopup BuyButton, SettingsWindow SaveButton, ShopPurchaseConfirmDialog ConfirmButton/CancelButton, PrestigeConfirmDialog YesButton/NoButton |
+| 175×60 px | SettingsWindow SoundToggleButton, MusicToggleButton |
+
+Button text is drawn by a child `Label` (`ButtonTextLabel`) placed above the `ImageSlot` (`ButtonImageHolder`). Native button text is cleared. Both children have `mouse_filter = IGNORE` so clicks reach the `Button` node.
+
+---
+
+## Standard bottom sheet background
+
+| Asset key | Path | Recommended size |
+|-----------|------|-----------------|
+| `ui.sheet.standard` | `assets/images/ui/sheets/standard_sheet.png` | 720×645 px |
+| `ui.sheet.close_button` | `assets/images/ui/sheets/close_button.png` | 56×56 px (1:1) |
+| `ui.sheet.close_button.pressed` | `assets/images/ui/sheets/close_button_pressed.png` | 56×56 px (1:1) |
+
+Used by UpgradeSheet, PartnerSheet, SettlementSheet, PrestigeSheet, and ShopSheet.
+Rendered by `SheetBackgroundImageHolder` (`ImageSlot`) — first child of `PanelContainer` (Control),
+full-rect, `mouse_filter = IGNORE`. Missing file shows dark fallback `Color(0.08, 0.085, 0.1)`.
+Texture hides fallback when present (`show_fallback_behind_texture = false`, `stretch_mode = STRETCH_SCALE`).
+
+Validation: `godot --headless --script res://scripts/tools/ValidateSheetAssets.gd`
+
+---
+
+## Standard sheet card background
+
+| Asset key | Path | Recommended size |
+|-----------|------|-----------------|
+| `ui.card.sheet` | `assets/images/ui/cards/sheet_card.png` | 656×156 px |
+
+Rendered by `CardBackgroundImageHolder` (`ImageSlot`) inside each standard card row in UpgradePanel, PartnerPanel, SettlementPanel, PrestigePanel, and ShopPanel. Positioned as the first child of the row `Control` (behind all content). `mouse_filter = IGNORE`.
+
+Rules:
+- Missing file is a **warning** (safe dark fallback shown, no crash).
+- Fallback color: `Color(0.12, 0.125, 0.145, 1.0)`.
+- Fallback is hidden once the texture loads (`show_fallback_behind_texture = false`).
+- Do not put button text or dynamic values in the texture.
+
+Run `godot --headless --script res://scripts/tools/ValidateCardAssets.gd` to validate.
+
+## Standard card purchase button textures
+
+| Asset key | Path | Recommended size | When shown |
+|-----------|------|-----------------|------------|
+| `ui.card.button.default` | `assets/images/ui/cards/button/default.png` | 210×72 px | Normal / idle state |
+| `ui.card.button.active` | `assets/images/ui/cards/button/active.png` | 210×72 px | 0.3 s flash after successful purchase |
+
+Rendered by `ButtonImageHolder` (`ImageSlot`) inside each card purchase button. The button occupies rows 2–4 of the card (y=29..101 inside the 210×136 slot). The button is always a child of a `ButtonSlot` Control (210×136) added to the card `HBoxContainer`.
+
+Used by:
+- Upgrade hero level button (`UpgradeButton`)
+- Upgrade ability unlock/buy buttons (`BuyButton`)
+- Partner hire buttons (`HireButton`)
+- Settlement building buy buttons (`BuyButton`)
+- Prestige reset/action button (`PrestigeButton`) — default only, no active feedback
+- Prestige talent upgrade buttons (`UpgradeButton`)
+- Shop product buy buttons (`BuyButton`) — active feedback on successful purchase
+
+Rules:
+- Missing file is a **warning** (safe white fallback shown, no crash).
+- Fallback color: `Color.WHITE`.
+- Fallback is hidden once the texture loads (`show_fallback_behind_texture = false`).
+- Button text is drawn by `ButtonTextLabel` (`Label`) child placed above the `ImageSlot`, centered, with word-wrap.
+- Native Button background and focus styles are cleared (`button.flat = true`).
+- `ImageSlot` and `Label` both have `mouse_filter = IGNORE` — clicks reach the `Button` node.
+- Disabled state: `button_image_holder.modulate = Color(0.65, 0.65, 0.65)`, `button_label.modulate = Color(0.45, 0.45, 0.45)`.
+- Active flash uses integer token guard; rapid re-purchases cancel the previous timer's reset.
+
+Run `godot --headless --script res://scripts/tools/ValidateCardAssets.gd` to validate.
+
+---
+
+## Top interface image
+
+Asset key: `ui.top_interface`
+Path: `assets/images/ui/top_interface.png`
+Recommended size: **720×320 px**
+
+Purpose: Shared decorative backdrop for the top HUD + StageNavigator area. Rendered by `TopInterfaceImageHolder` (`ColorRect` + `ImageSlot`, `anchors_preset = -1`, `offset_bottom = 320`) in `ClickerScreen.tscn`, positioned above `GameField` and below all dynamic UI elements.
+
+Covers: y = 0..320 — resource HUD (y = 91..179), settings button, StageNavigator (y = 210..308).
+
+Does **not** cover: ProgressInfoPanel, enemy sprite area, active abilities, bottom tabs.
+
+Rules:
+- Missing file falls back to a white rectangle (`Color(1, 1, 1, 1)`) — no crash.
+- Texture exists: texture is shown, white fallback is hidden (`show_fallback_behind_texture = false`).
+- `mouse_filter = IGNORE` — does not block any input.
+- No text, stage numbers, or dynamic values baked into the texture.
+
+Validation: `godot --headless --script res://scripts/tools/ValidateTopInterfaceAssets.gd`
+
+---
+
+## Bottom tabs decorative backdrop
+
+| Asset key | Path |
+|-----------|------|
+| `ui.bottom_tabs.backdrop` | `assets/images/ui/bottom_bar/tabs_backdrop.png` |
+
+Recommended size: **820×165 px** (50px bleed each side beyond the 720px viewport).
+
+Rendered by `BottomTabsBackdrop` in `ClickerScreen.tscn` — a `ColorRect` + `ImageSlot` positioned behind `BottomBar`. `mouse_filter = IGNORE`. Missing file falls back to transparent. This is a decorative layer only; do not put important detail within ~50px of the left/right edges.
+
+Layout: BottomBar height = 165px, vertical margins = 20/20, button height = 125px. Buttons are vertically centered inside the backdrop (20 + 125 + 20 = 165).
+
+No old `BottomBar` panel background (`ui.bottom_bar.background`) is used.
+
+---
+
+## Bottom tab buttons
+
+Each tab has two image states: `default` and `active`.
+
+| Asset key | Path |
+|-----------|------|
+| `ui.bottom_tab.upgrades.default` | `assets/images/ui/bottom_bar/tabs/upgrades/default.png` |
+| `ui.bottom_tab.upgrades.active` | `assets/images/ui/bottom_bar/tabs/upgrades/active.png` |
+| `ui.bottom_tab.partners.default` | `assets/images/ui/bottom_bar/tabs/partners/default.png` |
+| `ui.bottom_tab.partners.active` | `assets/images/ui/bottom_bar/tabs/partners/active.png` |
+| `ui.bottom_tab.settlement.default` | `assets/images/ui/bottom_bar/tabs/settlement/default.png` |
+| `ui.bottom_tab.settlement.active` | `assets/images/ui/bottom_bar/tabs/settlement/active.png` |
+| `ui.bottom_tab.prestige.default` | `assets/images/ui/bottom_bar/tabs/prestige/default.png` |
+| `ui.bottom_tab.prestige.active` | `assets/images/ui/bottom_bar/tabs/prestige/active.png` |
+| `ui.bottom_tab.shop.default` | `assets/images/ui/bottom_bar/tabs/shop/default.png` |
+| `ui.bottom_tab.shop.active` | `assets/images/ui/bottom_bar/tabs/shop/active.png` |
+
+Recommended tab image size: **125×125 px** (square). BottomBar has no background texture. Button nodes remain (`Button` type) so pressed signals continue to work. `ImageHolder` (`ImageSlot`) is visual only — mouse input passes through to the button. Missing tab textures fall back to white. Godot no longer draws native text on these buttons.
+
+---
+
+## Top HUD layout
+
+The top HUD (`PrimaryStatsPanel`) uses a single horizontal row containing 4 elements:
+
+Gold | Click Damage | Partner DPS | Settings
+
+Gems are intentionally hidden from the top HUD but remain in the game economy and Shop.
+
+Each stat icon is displayed at **72×72 px**, centered inside an 80×80 px layout cell (4 px inset on all sides). Recommended source image size: 128×128 or 256×256 for sharper scaling. The panel spans the full screen width. All 4 elements are evenly distributed across available width so spacing is equal on all sides. ImageSlot `show_fallback_behind_texture = false` is set on all HUD icons so that loaded PNG icons appear without a white square background; the fallback color is still shown when an image file is missing.
+
+The Settings button retains an 80×80 px clickable area while its icon texture is 72×72 px.
+
+## Sheet header icons
+
+Sheet header resource icons (gold in Upgrades/Partners/Settlement, prestige points in Prestige, gems in Shop) are displayed at **56×56 px** with `show_fallback_behind_texture = false`. The `ResourceValueLabel` uses compact number formatting.
+
+## Number formatting
+
+## ImageSlot fallback rule
+
+`ImageSlot` (`scripts/ui/ImageSlot.gd`) renders a texture on top of a `ColorRect` fallback.
+
+- **Texture exists → fallback must be hidden.** `show_fallback_behind_texture = false` (default) makes the `ColorRect` transparent so transparent PNGs do not show white squares behind them.
+- **Texture missing → fallback color is shown.** White for icon slots, colored for state-communicating slots, transparent for decorative slots.
+- Only set `show_fallback_behind_texture = true` when an asset intentionally needs a colored background behind a transparent texture. No current slots require this.
+
+Run `godot --headless --script res://scripts/tools/ValidateImageSlotFallbacks.gd` to catch accidental `true` values.
+
+---
+
+All player-facing economy and power values (costs, damage, DPS, HP, gold, rewards, gems, prestige points) use `NumberFormatter.compact()` from `res://scripts/ui/NumberFormatter.gd`. Raw values are preserved in save data, balance calculations, and the playtest logger. Standard compact thresholds (K from 1 000, M from 1 000 000, etc.) — 304 400 displays as 304.4K. Value labels use compact number formatting to prevent overflow:
+
+| Raw value | Displayed |
+|-----------|-----------|
+| 999 | 999 |
+| 1 000 | 1.0K |
+| 1 500 | 1.5K |
+| 1 000 000 | 1.0M |
+| 1 250 000 | 1.3M |
+| 1 000 000 000 | 1.0B |
+| 1 000 000 000 000 | 1.0T |

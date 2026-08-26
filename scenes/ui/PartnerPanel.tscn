@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/PartnerPanel.gd" id="1_qxodb"]
+
+[node name="PartnerPanel" type="VBoxContainer"]
+theme_override_constants/separation = 12
+script = ExtResource("1_qxodb")
+
+[node name="RowsContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10

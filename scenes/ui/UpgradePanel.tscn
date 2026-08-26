@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/UpgradePanel.gd" id="1_x2nck"]
+
+[node name="UpgradePanel" type="VBoxContainer"]
+theme_override_constants/separation = 12
+script = ExtResource("1_x2nck")
+
+[node name="RowsContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
