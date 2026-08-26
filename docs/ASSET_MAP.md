@@ -22,25 +22,23 @@ These keys work only when `BuildConfig.IS_DEBUG_BUILD = true`. Nothing is saved 
 - Not saved. Does not call SaveManager.
 - Does not grant gold or progress tasks.
 - Does not affect release builds (`IS_DEBUG_BUILD = false`).
-- Intended for validating zones 1–10 enemy textures, elite textures, boss textures, and backgrounds.
-- Useful for checking the global normal/elite pools and each zone's unique boss.
+- Intended for validating shared enemy textures, boss textures, and backgrounds.
+- Useful for checking the global enemy pool and each zone's unique boss.
 
 ## Enemy pools
 
-All levels select normal enemies from one global 15-enemy pool. Selection does
-not depend on the level, gameplay zone, or visual cycle. Normal sprites load
-from `common`; elites temporarily load from `elite`; bosses remain unique per
-active gameplay zone.
+All non-boss encounters select from one global 15-enemy pool. Selection does
+not depend on the level, gameplay zone, or visual cycle. Elite encounters reuse
+the selected common enemy identity and assets; elite remains a gameplay
+modifier. Bosses remain unique per active gameplay zone.
 
 | Enemy type | Enemy Pool Folder | Count |
 |------------|-------------------|-------|
-| Normal     | enemies/common    | 15    |
-| Elite      | enemies/elite     | 4     |
+| Non-boss   | enemies/common    | 15    |
 
 **Active slot names:**
 
 - `enemies/common`: `enemy_01`–`enemy_15`
-- `enemies/elite`: `elite_01`–`elite_04`
 
 Enemy state filenames: `healthy.png`, `hit.png`, `wounded.png`, `defeated.png`
 
@@ -98,10 +96,9 @@ Each gameplay zone owns the same-numbered background folder.
 
 ### Non-boss enemy pool folders
 
-The active non-boss enemy folders are:
+The active non-boss enemy folder is:
 
 - `assets/images/enemies/common/` — `enemy_01`–`enemy_15`
-- `assets/images/enemies/elite/` — `elite_01`–`elite_04`
 
 Each slot folder needs four states: `healthy.png`, `hit.png`, `wounded.png`, `defeated.png`.
 Only `zone_01` through `zone_10` exist for boss assets.

@@ -8,19 +8,17 @@ Git does not track empty directories. Every folder in this project contains a `.
 
 ## Enemy images
 
-Paths: `assets/images/enemies/common/enemy_##/state.png`,
-`assets/images/enemies/elite/elite_##/state.png`, and
+Paths: `assets/images/enemies/common/enemy_##/state.png` and
 `assets/images/enemies/zone_##/boss_01/state.png`
 
 ### Non-boss enemy pools
 
-All levels use the same global normal enemy pool. Temporary elites use their
-own global folder.
+All non-boss encounters use the same global enemy pool. Elite encounters reuse
+common identities and assets.
 
 | Pool folder | Slots               |
 |-------------|---------------------|
 | common      | enemy_01–enemy_15   |
-| elite       | elite_01–elite_04   |
 
 Each slot folder needs four files:
 - `healthy.png`
@@ -37,13 +35,13 @@ Old non-boss source folders (zone_03, zone_05, zone_08, zone_10, zone_16, zone_2
 
 ### Boss folders
 
-Every gameplay zone requires a unique `boss_01` folder, regardless of normal/elite pool assignment.
+Every gameplay zone requires a unique `boss_01` folder.
 
 Zones 1–10: `assets/images/enemies/zone_01/boss_01/` through `zone_10/boss_01/`
 
 Each boss folder needs the same four state files listed above.
 
-Every zone directory contains only `boss_01/`; normal and elite slots are global.
+Every zone directory contains only `boss_01/`; all non-boss slots are global.
 
 ---
 

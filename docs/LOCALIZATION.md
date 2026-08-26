@@ -137,11 +137,10 @@ Enemy names are resolved through localization keys at display time.
 
 | Enemy type | Key format | Example |
 |------------|-----------|---------|
-| Normal enemy | `enemy.common.enemy_YY.name` | `enemy.common.enemy_03.name` |
-| Elite enemy  | `enemy.pool_01.elite_YY.name` | `enemy.pool_01.elite_02.name` |
+| Non-boss enemy | `enemy.common.enemy_YY.name` | `enemy.common.enemy_03.name` |
 | Boss         | `zone.XX.boss`                | `zone.07.boss` |
 
-Pool numbers match the shared pool folder: `pool_01`, `pool_11`, `pool_17`.
+Elite encounters use the selected common enemy's key; no duplicate elite name keys exist.
 
 `ClickerState.enemy_name_key` is set by `choose_enemy_for_current_level()` whenever a new enemy is selected. It is **runtime-derived and not saved** — it is always recalculated from the selected candidate on `setup_current_level()` / `reset_target()`.
 
@@ -157,7 +156,7 @@ When adding a new enemy slot to `EnemyPoolConfig`, add a matching `name_key` fie
 godot --headless --script res://scripts/tools/ValidateLocalization.gd
 ```
 
-Checks all active global normal, temporary elite, and `zone.XX.boss` keys exist in the CSV. Missing `en` values are errors (exit 1); missing `ru` values are warnings (exit 0).
+Checks all active common enemy and `zone.XX.boss` keys exist in the CSV. Missing `en` values are errors (exit 1); missing `ru` values are warnings (exit 0).
 
 ---
 

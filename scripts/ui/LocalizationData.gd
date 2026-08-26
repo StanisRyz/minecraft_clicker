@@ -4,8 +4,8 @@ extends RefCounted
 # AUTO-GENERATED — do not edit by hand.
 # Source: res://localization/game_text.csv
 # Regenerate with: godot --headless --script res://scripts/tools/GenerateLocalizationData.gd
-# Generated key count: 435
-# Generated at: 1787742747
+# Generated key count: 431
+# Generated at: 1787750151
 
 const TRANSLATIONS: Dictionary = {
 	"en": {
@@ -354,10 +354,6 @@ const TRANSLATIONS: Dictionary = {
 		"enemy.common.enemy_13.name": "Kidomaru",
 		"enemy.common.enemy_14.name": "Tauy",
 		"enemy.common.enemy_15.name": "Sakon and Ukon",
-		"enemy.pool_01.elite_01.name": "Iruka Umino",
-		"enemy.pool_01.elite_02.name": "Maito Guy",
-		"enemy.pool_01.elite_03.name": "Kurenai Uhi",
-		"enemy.pool_01.elite_04.name": "Baki",
 		"ui.combat.gold_reward": "+{amount} Gold",
 		"rewarded_ad.banner.available": "Watch Ad: Get Bonus",
 		"rewarded_ad.banner.all_damage": "Watch Ad: x2 Damage",
@@ -791,10 +787,6 @@ const TRANSLATIONS: Dictionary = {
 		"enemy.common.enemy_13.name": "Кидомару",
 		"enemy.common.enemy_14.name": "Таюи",
 		"enemy.common.enemy_15.name": "Сакон и Укон",
-		"enemy.pool_01.elite_01.name": "Ирука Умино",
-		"enemy.pool_01.elite_02.name": "Майто Гай",
-		"enemy.pool_01.elite_03.name": "Куренай Юхи",
-		"enemy.pool_01.elite_04.name": "Баки",
 		"ui.combat.gold_reward": "+{amount} Золота",
 		"rewarded_ad.banner.available": "Смотреть рекламу: Получи бонус",
 		"rewarded_ad.banner.all_damage": "Реклама: x2 урон",

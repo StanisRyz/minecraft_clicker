@@ -19,15 +19,6 @@ const NORMAL_ENEMIES: Array[Dictionary] = [
 	{"name_key": "enemy.common.enemy_15.name", "slot": "enemy_15"},
 ]
 
-# T2 keeps elite gameplay in a separate shared list. T3 will replace it.
-const ELITE_ENEMIES: Array[Dictionary] = [
-	{"name_key": "enemy.pool_01.elite_01.name", "slot": "elite_01"},
-	{"name_key": "enemy.pool_01.elite_02.name", "slot": "elite_02"},
-	{"name_key": "enemy.pool_01.elite_03.name", "slot": "elite_03"},
-	{"name_key": "enemy.pool_01.elite_04.name", "slot": "elite_04"},
-]
-
-
 static func get_random_normal_candidate(rng: RandomNumberGenerator) -> Dictionary:
 	if NORMAL_ENEMIES.is_empty():
 		return {
@@ -35,12 +26,3 @@ static func get_random_normal_candidate(rng: RandomNumberGenerator) -> Dictionar
 			"slot": "enemy_01",
 		}
 	return NORMAL_ENEMIES[rng.randi_range(0, NORMAL_ENEMIES.size() - 1)]
-
-
-static func get_random_elite_candidate(rng: RandomNumberGenerator) -> Dictionary:
-	if ELITE_ENEMIES.is_empty():
-		return {
-			"name_key": "",
-			"slot": "elite_01",
-		}
-	return ELITE_ENEMIES[rng.randi_range(0, ELITE_ENEMIES.size() - 1)]

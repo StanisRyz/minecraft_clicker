@@ -2364,19 +2364,11 @@ func choose_enemy_for_current_level() -> void:
 		current_enemy_slot = "boss_01"
 		return
 
-	if rng.randf() < get_current_elite_spawn_chance():
-		is_elite_enemy = true
-		var elite_candidate: Dictionary = EnemyPoolConfig.get_random_elite_candidate(rng)
-		enemy_name = String(elite_candidate.get("name", "Элитный враг"))
-		enemy_name_key = String(elite_candidate.get("name_key", ""))
-		current_enemy_slot = String(elite_candidate.get("slot", "elite_01"))
-		return
-
-	is_elite_enemy = false
-	var normal_candidate: Dictionary = EnemyPoolConfig.get_random_normal_candidate(rng)
-	enemy_name = String(normal_candidate.get("name", "Враг"))
-	enemy_name_key = String(normal_candidate.get("name_key", ""))
-	current_enemy_slot = String(normal_candidate.get("slot", "enemy_01"))
+	is_elite_enemy = rng.randf() < get_current_elite_spawn_chance()
+	var candidate: Dictionary = EnemyPoolConfig.get_random_normal_candidate(rng)
+	enemy_name = String(candidate.get("name", "Враг"))
+	enemy_name_key = String(candidate.get("name_key", ""))
+	current_enemy_slot = String(candidate.get("slot", "enemy_01"))
 
 
 func recalculate_level_values() -> void:

@@ -67,8 +67,7 @@ naruto-clicker/
 │       ├── shop/         # Shop product icons
 │       ├── tasks/        # Task type icons
 │       ├── enemies/
-│       │   ├── common/   # Global normal pool (enemy_01–15)
-│       │   ├── elite/    # Temporary elite pool (elite_01–04)
+│       │   ├── common/   # Shared non-boss pool (enemy_01–15)
 │       │   └── zone_01/ … zone_10/  # zone-specific boss_01/ folders
 │       └── backgrounds/
 │           ├── zone_01/  # background.png for Training Grounds

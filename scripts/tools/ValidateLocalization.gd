@@ -19,11 +19,9 @@ func _init() -> void:
 			_check_key("zone.%02d.name" % zone_num, csv_keys, errors, warnings)
 			_check_key("zone.%02d.boss" % zone_num, csv_keys, errors, warnings)
 
-		# --- Check global normal and temporary elite enemy keys ---
+		# --- Check global enemy keys ---
 		for i in range(1, 16):
 			_check_key("enemy.common.enemy_%02d.name" % i, csv_keys, errors, warnings)
-		for i in range(1, 5):
-			_check_key("enemy.pool_01.elite_%02d.name" % i, csv_keys, errors, warnings)
 
 	# --- Report ---
 	print("")

@@ -15,8 +15,6 @@ enemies/
     enemy_02/
       healthy.png  ...
     enemy_03/ ...
-  elite/
-    elite_01/ ...
   zone_01/
     boss_01/ ...
   zone_02/ ...
@@ -26,13 +24,12 @@ enemies/
 
 ## Non-boss enemy pool mapping
 
-All levels use one global normal pool. Temporary elites use their own global
-folder; bosses remain unique per gameplay zone.
+All non-boss encounters use one global enemy pool. Elite encounters reuse the
+selected common enemy and remain a gameplay modifier. Bosses are unique per zone.
 
 | Pool folder | Slots              |
 |-------------|--------------------|
 | common      | enemy_01–enemy_15  |
-| elite       | elite_01–elite_04  |
 
 Normal selection is independent of level and zone. Only `zone_01` through
 `zone_10` exist for boss assets.
@@ -43,9 +40,8 @@ Empty folders use `.gitkeep` until real PNG assets are added.
 
 | Folder   | Type                                  |
 |----------|---------------------------------------|
-| common/enemy_## | Global normal enemy slot         |
-| elite/elite_##  | Temporary elite-pool slot        |
-| boss_01  | Boss — unique per gameplay zone       |
+| common/enemy_## | Shared non-boss enemy slot      |
+| boss_01          | Boss — unique per gameplay zone |
 
 ## Required state files per enemy folder
 

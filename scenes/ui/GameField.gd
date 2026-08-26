@@ -181,8 +181,6 @@ func _refresh_enemy_textures(state: ClickerState) -> void:
 func _get_enemy_asset_key(state: ClickerState) -> String:
 	if state.is_boss_level:
 		return "boss/%02d/%s" % [state.current_zone_index + 1, state.current_enemy_slot]
-	if state.is_elite_enemy:
-		return "elite/" + state.current_enemy_slot
 	return "common/" + state.current_enemy_slot
 
 
@@ -192,8 +190,6 @@ func _load_enemy_tex_with_fallback(clicker_state: ClickerState, texture_state: S
 		tex = EnemyAssetCatalog.load_boss_enemy_texture(
 			clicker_state.current_zone_index, clicker_state.current_enemy_slot, texture_state
 		)
-	elif clicker_state.is_elite_enemy:
-		tex = EnemyAssetCatalog.load_elite_enemy_texture(clicker_state.current_enemy_slot, texture_state)
 	else:
 		tex = EnemyAssetCatalog.load_normal_enemy_texture(clicker_state.current_enemy_slot, texture_state)
 	if tex != null:

@@ -5,9 +5,7 @@ extends SceneTree
 const STATES: Array[String] = ["healthy.png", "hit.png", "wounded.png", "defeated.png"]
 
 const NORMAL_ENEMY_FOLDER: String = "common"
-const ELITE_ENEMY_FOLDER: String = "elite"
 const NORMAL_ENEMY_COUNT: int = 15
-const ELITE_ENEMY_COUNT: int = 4
 
 const BOSS_ZONE_COUNT: int = ZoneConfig.ZONE_COUNT
 
@@ -23,12 +21,6 @@ func _init() -> void:
 		_check_slot("assets/images/enemies/%s/%s" % [NORMAL_ENEMY_FOLDER, slot], errors, warnings)
 		slots_checked += 1
 		pngs_checked += STATES.size()
-	for i in range(1, ELITE_ENEMY_COUNT + 1):
-		var slot: String = "elite_%02d" % i
-		_check_slot("assets/images/enemies/%s/%s" % [ELITE_ENEMY_FOLDER, slot], errors, warnings)
-		slots_checked += 1
-		pngs_checked += STATES.size()
-
 	# --- Boss slots (one per gameplay zone) ---
 	for zone_num in range(1, BOSS_ZONE_COUNT + 1):
 		var zone_folder: String = "zone_%02d" % zone_num
@@ -37,7 +29,7 @@ func _init() -> void:
 		pngs_checked += STATES.size()
 
 	_check_runtime_asset_resolution(errors)
-	_check_no_obsolete_zone_folders(errors)
+	_check_no_obsolete_asset_folders(errors)
 
 	# --- Print report ---
 	print("")
@@ -61,7 +53,7 @@ func _init() -> void:
 		print("")
 
 	print("--- Summary ---")
-	var expected_slots: int = NORMAL_ENEMY_COUNT + ELITE_ENEMY_COUNT + BOSS_ZONE_COUNT
+	var expected_slots: int = NORMAL_ENEMY_COUNT + BOSS_ZONE_COUNT
 	var expected_pngs: int = expected_slots * STATES.size()
 	print("Slots checked:      %d / %d" % [slots_checked, expected_slots])
 	print("PNG files checked:  %d / %d" % [pngs_checked, expected_pngs])
@@ -87,7 +79,7 @@ func _check_slot(rel_path: String, errors: Array[String], warnings: Array[String
 			warnings.append("Missing .import: %s/%s.import" % [rel_path, state])
 
 
-func _check_no_obsolete_zone_folders(errors: Array[String]) -> void:
+func _check_no_obsolete_asset_folders(errors: Array[String]) -> void:
 	var enemy_root := DirAccess.open("res://assets/images/enemies")
 	if enemy_root == null:
 		errors.append("Cannot open enemy asset root")
@@ -95,10 +87,13 @@ func _check_no_obsolete_zone_folders(errors: Array[String]) -> void:
 	enemy_root.list_dir_begin()
 	var name: String = enemy_root.get_next()
 	while name != "":
-		if enemy_root.current_is_dir() and name.begins_with("zone_"):
-			var zone_number_text: String = name.trim_prefix("zone_")
-			if zone_number_text.is_valid_int() and int(zone_number_text) > BOSS_ZONE_COUNT:
-				errors.append("Obsolete enemy zone folder: assets/images/enemies/" + name)
+		if enemy_root.current_is_dir():
+			if name == "elite":
+				errors.append("Obsolete elite asset folder: assets/images/enemies/elite")
+			elif name.begins_with("zone_"):
+				var zone_number_text: String = name.trim_prefix("zone_")
+				if zone_number_text.is_valid_int() and int(zone_number_text) > BOSS_ZONE_COUNT:
+					errors.append("Obsolete enemy zone folder: assets/images/enemies/" + name)
 		name = enemy_root.get_next()
 	enemy_root.list_dir_end()
 
@@ -110,12 +105,6 @@ func _check_runtime_asset_resolution(errors: Array[String]) -> void:
 			var state_name: String = state.get_basename()
 			if EnemyAssetCatalog.load_normal_enemy_texture(normal_slot, state_name) == null:
 				errors.append("Runtime normal texture unavailable: %s/%s" % [normal_slot, state])
-	for i in range(1, ELITE_ENEMY_COUNT + 1):
-		var elite_slot: String = "elite_%02d" % i
-		for state: String in STATES:
-			var state_name: String = state.get_basename()
-			if EnemyAssetCatalog.load_elite_enemy_texture(elite_slot, state_name) == null:
-				errors.append("Runtime elite texture unavailable: %s/%s" % [elite_slot, state])
 	for zone_index in range(BOSS_ZONE_COUNT):
 		for state: String in STATES:
 			var state_name: String = state.get_basename()

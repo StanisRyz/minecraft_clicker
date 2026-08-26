@@ -344,10 +344,6 @@ enemy.common.enemy_12.name,Jirono,Джиробо,EnemyPoolConfig global normal e
 enemy.common.enemy_13.name,Kidomaru,Кидомару,EnemyPoolConfig global normal enemy 13,
 enemy.common.enemy_14.name,Tauy,Таюи,EnemyPoolConfig global normal enemy 14,
 enemy.common.enemy_15.name,Sakon and Ukon,Сакон и Укон,EnemyPoolConfig global normal enemy 15,
-enemy.pool_01.elite_01.name,Iruka Umino,Ирука Умино,EnemyPoolConfig pool 01 elite enemy 01,
-enemy.pool_01.elite_02.name,Maito Guy,Майто Гай,EnemyPoolConfig pool 01 elite enemy 02,
-enemy.pool_01.elite_03.name,Kurenai Uhi,Куренай Юхи,EnemyPoolConfig pool 01 elite enemy 03,
-enemy.pool_01.elite_04.name,Baki,Баки,EnemyPoolConfig pool 01 elite enemy 04,
 ui.combat.gold_reward,+{amount} Gold,+{amount} Золота,Combat reward floating text,{amount} is compact formatted gold amount
 rewarded_ad.banner.available,Watch Ad: Get Bonus,Смотреть рекламу: Получи бонус,RewardedAdBanner fallback label when no reward selected,
 rewarded_ad.banner.all_damage,Watch Ad: x2 Damage,Реклама: x2 урон,RewardedAdBanner label for all_damage_x2 reward,
