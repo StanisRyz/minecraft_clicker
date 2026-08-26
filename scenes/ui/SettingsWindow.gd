@@ -5,7 +5,6 @@ signal sound_toggled(enabled: bool)
 signal music_toggled(enabled: bool)
 signal save_requested
 signal language_manually_changed(language_code: String)
-signal account_window_requested
 
 const ImageSlotClass = preload("res://scripts/ui/ImageSlot.gd")
 
@@ -13,8 +12,7 @@ const ImageSlotClass = preload("res://scripts/ui/ImageSlot.gd")
 @onready var panel_container: PanelContainer = $PanelContainer
 # Settings panel/background is a fixed-size textured window ("ui.window.settings.background",
 # STRETCH_SCALE) — never resize it dynamically based on content. Everything below the
-# header lives in BodyScrollContainer so extra content scrolls inside the fixed window
-# instead of growing it. Detailed account/cloud UI lives in AccountWindow (C7.3.2), not here.
+# header lives in BodyScrollContainer so extra content scrolls inside the fixed window.
 const BODY_PATH: String = "MarginContainer/VBoxContainer/BodyScrollContainer/BodyVBoxContainer"
 
 @onready var close_button: Button = $PanelContainer/MarginContainer/VBoxContainer/HeaderMargin/Header/CloseButton
@@ -37,10 +35,6 @@ var _sound_button_label: Label = null
 var _music_button_label: Label = null
 var _save_button_label: Label = null
 
-var _account_button: Button = null
-var _account_button_label: Label = null
-
-
 func _ready() -> void:
 	overlay.gui_input.connect(_on_overlay_gui_input)
 	panel_container.gui_input.connect(_on_panel_container_gui_input)
@@ -62,8 +56,6 @@ func _ready() -> void:
 	UiFontConfig.apply_label_font_size(_sound_button_label, UiFontConfig.SETTINGS_ROW_FONT_SIZE)
 	UiFontConfig.apply_label_font_size(_music_button_label, UiFontConfig.SETTINGS_ROW_FONT_SIZE)
 	UiFontConfig.apply_label_font_size(_save_button_label, UiFontConfig.SETTINGS_ACTION_BUTTON_FONT_SIZE)
-	if _is_backend_account_ui_supported():
-		_create_account_button()
 	LocalizationManager.language_changed.connect(_refresh_static_labels)
 	_refresh_static_labels()
 	hide()
@@ -77,8 +69,6 @@ func _refresh_static_labels() -> void:
 		_language_label.text = LocalizationManager.tr_key("settings.language") + ":"
 	if _save_button_label:
 		_save_button_label.text = LocalizationManager.tr_key("settings.save_now")
-	if _account_button_label:
-		_account_button_label.text = LocalizationManager.tr_key("settings.account_button")
 
 
 func _create_language_row() -> void:
@@ -288,33 +278,3 @@ func _make_image_button_label(button: Button, asset_key: String, initial_text: S
 	button.add_child(label)
 	return label
 
-
-# ── Account button (Android/RuStore-only; opens AccountWindow, C7.3.2) ────────
-
-func _is_backend_account_ui_supported() -> bool:
-	return OS.has_feature("android")
-
-
-func _create_account_button() -> void:
-	var vbox: VBoxContainer = panel_container.get_node(BODY_PATH)
-
-	var account_btn := Button.new()
-	account_btn.custom_minimum_size = Vector2(218, 75)
-	account_btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	account_btn.pressed.connect(_on_account_button_pressed)
-	vbox.add_child(account_btn)
-	vbox.move_child(account_btn, save_button.get_index() + 1)
-	_account_button = account_btn
-	_account_button_label = _make_image_button_label(
-		account_btn, "ui.popup.button.default",
-		LocalizationManager.tr_key("settings.account_button")
-	)
-	UiFontConfig.apply_label_font_size(_account_button_label, UiFontConfig.SETTINGS_ACTION_BUTTON_FONT_SIZE)
-
-
-func _on_account_button_pressed() -> void:
-	ButtonVisualUtils.flash_button_image_holder(
-		_account_button.find_child("ButtonImageHolder", false, false),
-		"ui.popup.button.default"
-	)
-	account_window_requested.emit()

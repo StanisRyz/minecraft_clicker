@@ -14,22 +14,10 @@ const TEMP_SAVE_PATH: String = "user://save_v1.tmp"
 const CLOUD_SAVE_MIN_INTERVAL_SEC: float = 15.0
 const CLOUD_SAVE_MAX_BYTES: int = 200 * 1024
 
-const BACKEND_CLOUD_AUTO_UPLOAD_MIN_INTERVAL_SEC: float = 45.0
-const BACKEND_CLOUD_AUTO_UPLOAD_MAX_BYTES: int = 200 * 1024
-
 var _pending_cloud_save_data: Dictionary = {}
 var _cloud_save_timer_running: bool = false
 var _last_cloud_save_unix_time: int = 0
 var _cloud_load_in_progress: bool = false
-
-var _pending_backend_cloud_save_data: Dictionary = {}
-var _backend_cloud_upload_timer_running: bool = false
-var _last_backend_cloud_upload_unix_time: int = 0
-var _backend_cloud_upload_in_flight: bool = false
-var _backend_cloud_upload_current_payload: Dictionary = {}
-var _backend_cloud_retry_pending: bool = false
-var _backend_cloud_auto_upload_suspended: bool = false
-
 
 func has_save() -> bool:
 	return FileAccess.file_exists(SAVE_PATH)
@@ -68,7 +56,6 @@ func save_data(data: Dictionary) -> bool:
 
 	save_completed.emit()
 	queue_cloud_save(data)
-	queue_backend_cloud_save(data)
 	return true
 
 
@@ -241,47 +228,6 @@ func _on_cloud_save_timer_expired() -> void:
 	_send_cloud_save(data, false)
 
 
-# ── Backend cloud save helpers ────────────────────────────────────────────────
-
-func get_cloud_save_payload() -> Dictionary:
-	var data: Dictionary = load_data()
-	if data.is_empty():
-		return {}
-	var payload: Dictionary = data.duplicate(true)
-	payload["save_version"] = SAVE_VERSION
-	payload["last_save_unix_time"] = int(Time.get_unix_time_from_system())
-	payload["cloud_save_meta"] = {
-		"client_platform": "android_rustore",
-		"client_build": ProjectSettings.get_setting("application/config/version", ""),
-	}
-	return payload
-
-
-func apply_cloud_save_payload(payload: Dictionary) -> bool:
-	if payload.is_empty():
-		push_warning("SaveManager: apply_cloud_save_payload called with empty payload")
-		return false
-	if not payload.has("save_version"):
-		push_warning("SaveManager: cloud payload missing save_version")
-		return false
-	var version: int = int(payload.get("save_version", 0))
-	if version <= 0:
-		push_warning("SaveManager: cloud payload has invalid save_version")
-		return false
-	if not payload.has("last_save_unix_time"):
-		push_warning("SaveManager: cloud payload missing last_save_unix_time")
-		return false
-	var ts: int = int(payload.get("last_save_unix_time", 0))
-	if ts <= 0:
-		push_warning("SaveManager: cloud payload has invalid last_save_unix_time")
-		return false
-	var migrated: Dictionary = migrate_save_data(payload)
-	if not validate_save_data(migrated):
-		push_warning("SaveManager: cloud payload failed save validation")
-		return false
-	return save_data(migrated)
-
-
 func _send_cloud_save(data: Dictionary, flush: bool) -> void:
 	var json_string: String = JSON.stringify(data)
 	var byte_size: int = json_string.to_utf8_buffer().size()
@@ -291,135 +237,3 @@ func _send_cloud_save(data: Dictionary, flush: bool) -> void:
 	_last_cloud_save_unix_time = int(Time.get_unix_time_from_system())
 	Platform.save_cloud_save(data, flush)
 
-
-# ── Backend cloud auto-upload ─────────────────────────────────────────────────
-
-func set_backend_cloud_auto_upload_suspended(suspended: bool) -> void:
-	_backend_cloud_auto_upload_suspended = suspended
-
-
-func is_backend_cloud_auto_upload_suspended() -> bool:
-	return _backend_cloud_auto_upload_suspended
-
-
-func queue_backend_cloud_save(data: Dictionary, flush: bool = false) -> void:
-	if not OS.has_feature("android"):
-		return
-	if not Platform.backend_has_session():
-		return
-	if _backend_cloud_auto_upload_suspended:
-		return
-
-	var payload: Dictionary = data.duplicate(true)
-	payload["save_version"] = SAVE_VERSION
-	payload["last_save_unix_time"] = int(Time.get_unix_time_from_system())
-	payload["cloud_save_meta"] = {
-		"client_platform": "android_rustore",
-		"client_build": ProjectSettings.get_setting("application/config/version", ""),
-	}
-
-	var json_string: String = JSON.stringify(payload)
-	var byte_size: int = json_string.to_utf8_buffer().size()
-	if byte_size > BACKEND_CLOUD_AUTO_UPLOAD_MAX_BYTES:
-		push_warning("SaveManager: backend cloud save too large (%d bytes), skipping" % byte_size)
-		return
-
-	_pending_backend_cloud_save_data = payload
-
-	if flush:
-		flush_backend_cloud_save_now()
-		return
-
-	if _backend_cloud_upload_in_flight:
-		_backend_cloud_retry_pending = true
-		return
-
-	if _backend_cloud_upload_timer_running:
-		return
-
-	var now: int = int(Time.get_unix_time_from_system())
-	var elapsed: float = float(now - _last_backend_cloud_upload_unix_time)
-
-	if elapsed >= BACKEND_CLOUD_AUTO_UPLOAD_MIN_INTERVAL_SEC:
-		var send_payload: Dictionary = _pending_backend_cloud_save_data
-		_pending_backend_cloud_save_data = {}
-		_send_backend_cloud_save(send_payload)
-	else:
-		_backend_cloud_upload_timer_running = true
-		var delay: float = BACKEND_CLOUD_AUTO_UPLOAD_MIN_INTERVAL_SEC - elapsed
-		get_tree().create_timer(delay).timeout.connect(_on_backend_cloud_upload_timer_expired, CONNECT_ONE_SHOT)
-
-
-func flush_backend_cloud_save_now() -> void:
-	if _pending_backend_cloud_save_data.is_empty():
-		return
-	if _backend_cloud_upload_in_flight:
-		_backend_cloud_retry_pending = true
-		return
-	_backend_cloud_upload_timer_running = false
-	var payload: Dictionary = _pending_backend_cloud_save_data
-	_pending_backend_cloud_save_data = {}
-	_send_backend_cloud_save(payload)
-
-
-func upload_current_save_to_backend_cloud_now() -> bool:
-	if not OS.has_feature("android"):
-		return false
-	if not Platform.backend_has_session():
-		return false
-	var payload: Dictionary = get_cloud_save_payload()
-	if payload.is_empty():
-		return false
-	var json_string: String = JSON.stringify(payload)
-	var byte_size: int = json_string.to_utf8_buffer().size()
-	if byte_size > BACKEND_CLOUD_AUTO_UPLOAD_MAX_BYTES:
-		push_warning("SaveManager: backend cloud save too large (%d bytes), skipping" % byte_size)
-		return false
-	if _backend_cloud_upload_in_flight:
-		# Another upload is active — queue current payload for retry after it finishes.
-		_pending_backend_cloud_save_data = payload
-		_backend_cloud_retry_pending = true
-		return true
-	_backend_cloud_upload_timer_running = false
-	_pending_backend_cloud_save_data = {}
-	_send_backend_cloud_save(payload)
-	return true
-
-
-func mark_backend_cloud_upload_finished(success: bool) -> void:
-	_backend_cloud_upload_in_flight = false
-	if success:
-		_backend_cloud_upload_current_payload = {}
-		if _pending_backend_cloud_save_data.is_empty():
-			_backend_cloud_retry_pending = false
-	else:
-		# On failure, restore the in-flight payload if nothing newer is queued.
-		if _pending_backend_cloud_save_data.is_empty() and not _backend_cloud_upload_current_payload.is_empty():
-			_pending_backend_cloud_save_data = _backend_cloud_upload_current_payload
-		_backend_cloud_upload_current_payload = {}
-		if not _pending_backend_cloud_save_data.is_empty():
-			_backend_cloud_retry_pending = true
-	if _backend_cloud_retry_pending and not _pending_backend_cloud_save_data.is_empty():
-		_backend_cloud_retry_pending = false
-		_backend_cloud_upload_timer_running = true
-		get_tree().create_timer(60.0).timeout.connect(_on_backend_cloud_upload_timer_expired, CONNECT_ONE_SHOT)
-
-
-func is_backend_cloud_upload_in_flight() -> bool:
-	return _backend_cloud_upload_in_flight
-
-
-func _send_backend_cloud_save(payload: Dictionary) -> void:
-	_backend_cloud_upload_in_flight = true
-	_backend_cloud_upload_current_payload = payload.duplicate(true)
-	_last_backend_cloud_upload_unix_time = int(Time.get_unix_time_from_system())
-	Platform.backend_save_save(payload)
-
-
-func _on_backend_cloud_upload_timer_expired() -> void:
-	_backend_cloud_upload_timer_running = false
-	if _backend_cloud_upload_in_flight or _pending_backend_cloud_save_data.is_empty():
-		return
-	var payload: Dictionary = _pending_backend_cloud_save_data
-	_pending_backend_cloud_save_data = {}
-	_send_backend_cloud_save(payload)

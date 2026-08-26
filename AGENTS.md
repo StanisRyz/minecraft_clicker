@@ -19,7 +19,10 @@ Development rules for AI coding agents working on this repository.
   and loading/gameplay lifecycle notifications.
 - LocalDebug simulations must remain debug-gated and must never grant fake
   production rewards.
-- Keep legacy backend/account code inert on Web; clean it up only in a dedicated task.
+- Web/Yandex has no custom account, login, or backend subsystem. Yandex Player
+  is the cloud-save source.
+- Platform exposes only active Web/Yandex and LocalDebug services. Do not
+  reintroduce custom backend auth or cloud storage without an explicit requirement.
 
 ## Web release
 

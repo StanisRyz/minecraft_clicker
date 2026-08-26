@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://iyfdkc71gxgi"]
+[gd_scene load_steps=23 format=3 uid="uid://iyfdkc71gxgi"]
 
 [ext_resource type="Script" uid="uid://dnim7mf4hei23" path="res://scenes/game/ClickerScreen.gd" id="1_ymqc8"]
 [ext_resource type="PackedScene" path="res://scenes/ui/PrimaryStatsPanel.tscn" id="2_primary"]
@@ -22,7 +22,6 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/RewardedAdBanner.tscn" id="21_rad"]
 [ext_resource type="PackedScene" path="res://scenes/ui/GemPurchaseDialog.tscn" id="22_gpd"]
 [ext_resource type="PackedScene" path="res://scenes/ui/OfflineRewardDialog.tscn" id="23_ord"]
-[ext_resource type="PackedScene" path="res://scenes/ui/AccountWindow.tscn" id="25_account"]
 
 [node name="ClickerScreen" type="Control"]
 layout_mode = 3
@@ -307,9 +306,6 @@ layout_mode = 1
 [node name="SettingsWindow" parent="." instance=ExtResource("15_settings")]
 layout_mode = 1
 
-[node name="AccountWindow" parent="." instance=ExtResource("25_account")]
-layout_mode = 1
-
 [node name="PrestigeConfirmDialog" parent="." instance=ExtResource("19_pcd")]
 layout_mode = 1
 anchors_preset = 15
@@ -346,4 +342,3 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
