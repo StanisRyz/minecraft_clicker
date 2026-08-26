@@ -1,9 +1,11 @@
-# Godot 4+ specific ignores
 .godot/
 __pycache__/
-
-# External Web shell assets are copied beside index.html by the packaging helper.
-/assets/images/web/*.import
-
-# Generated Web release builds
 /builds/
+local.properties
+*.jks
+*.keystore
+*.apk
+*.aab
+
+# Copied beside the Web export by the packaging helper.
+/assets/images/web/*.import
