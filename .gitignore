@@ -5,32 +5,5 @@ __pycache__/
 # External Web shell assets are copied beside index.html by the packaging helper.
 /assets/images/web/*.import
 
-# Android build — generated/cache/secret files (template source is tracked)
-android/.gradle/
-android/build/.gradle/
-android/build/build/
-android/build/outputs/
-android/build/generated/
-android/build/intermediates/
-android/build/tmp/
-android/build/kotlin/
-android/build/local.properties
-android/local.properties
-# Godot-exported game assets and pre-compiled engine AARs (generated/binary)
-android/build/assets/
-android/build/libs/
-
-# Android signing / local release secrets
-*.jks
-*.keystore
-*.p12
-local.properties
-local_release_env.sh
-local_release_env.ps1
-local_release_env.txt
-
-# Local release builds
-*.apk
-*.aab
+# Generated Web release builds
 /builds/
-/godot_apk/

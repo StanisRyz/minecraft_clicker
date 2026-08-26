@@ -7,7 +7,7 @@
 ##   - Required fields present and non-empty
 ##   - Positive gem amounts and prices
 ##   - No duplicate ids
-##   - Non-empty yandex_product_id and rustore_product_id
+##   - Non-empty yandex_product_id
 ##   - Consistent amount_gems = base_gems + bonus_gems
 ##
 ## Exit code 0 = all checks passed.  Exit code 1 = one or more failures.
@@ -18,7 +18,6 @@ const GemPurchaseConfigClass = preload("res://scripts/game/config/GemPurchaseCon
 const REQUIRED_STRING_FIELDS: Array[String] = [
 	"id",
 	"yandex_product_id",
-	"rustore_product_id",
 	"name_key",
 	"description_key",
 	"icon_key",

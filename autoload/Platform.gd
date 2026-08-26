@@ -4,9 +4,8 @@ extends Node
 # Selects the correct PlatformServices implementation at startup and
 # re-exposes its signals so callers never reference YandexBridge directly.
 #
-# Web export  → WebYandexPlatform   (delegates to YandexBridge)
-# Android     → AndroidRuStorePlatform (safe placeholder; no real SDK yet)
-# Editor/other → LocalDebugPlatform  (simulates flows in debug builds only)
+# Web export   → WebYandexPlatform  (delegates to YandexBridge)
+# Editor/other → LocalDebugPlatform (simulates flows in debug builds only)
 
 # ── Rewarded ad signals ───────────────────────────────────────────────────────
 signal rewarded_ad_opened
@@ -14,7 +13,7 @@ signal rewarded_ad_rewarded
 signal rewarded_ad_closed(was_shown: bool)
 signal rewarded_ad_error(message: String)
 
-# ── Yandex SDK readiness signals (Web only; never emitted on Android/debug) ──
+# ── Yandex SDK readiness signals (Web only; never emitted in local debug) ──
 signal yandex_sdk_ready
 signal yandex_sdk_unavailable(message: String)
 
@@ -59,10 +58,6 @@ func _ready() -> void:
 		_impl = preload("res://scripts/platform/WebYandexPlatform.gd").new()
 		add_child(_impl)
 		_connect_yandex_bridge_signals()
-	elif OS.has_feature("android"):
-		_impl = preload("res://scripts/platform/AndroidRuStorePlatform.gd").new()
-		add_child(_impl)
-		_connect_impl_signals()
 	else:
 		_impl = preload("res://scripts/platform/LocalDebugPlatform.gd").new()
 		add_child(_impl)

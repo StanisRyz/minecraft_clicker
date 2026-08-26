@@ -734,8 +734,6 @@ func _find_gem_product_by_any_id(product_id: String) -> Dictionary:
 	for candidate: Dictionary in GemPurchaseConfigClass.get_all():
 		if String(candidate.get("yandex_product_id", "")) == product_id:
 			return candidate
-		if String(candidate.get("rustore_product_id", "")) == product_id:
-			return candidate
 	return {}
 
 

@@ -206,7 +206,7 @@ func _init() -> void:
 
 		# Strict value comparison — stale values are export-blocking errors.
 		# A key count match or key presence match is not enough; if the en/ru text
-		# differs between CSV and LocalizationData.gd, Android will show old text.
+		# differs between CSV and LocalizationData.gd, exported builds will show old text.
 		for row: Dictionary in csv_rows:
 			var key: String = row["key"]
 			var csv_en_val: String = row["en"]
@@ -235,7 +235,6 @@ func _init() -> void:
 			var content: String = pfile.get_as_text()
 			pfile.close()
 			_check_preset_include(content, "Web", errors)
-			_check_preset_include(content, "Android", errors)
 
 	# --- Report ---
 	print("")
