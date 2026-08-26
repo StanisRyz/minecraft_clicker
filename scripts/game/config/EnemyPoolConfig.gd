@@ -1,8 +1,6 @@
 class_name EnemyPoolConfig
 extends RefCounted
 
-const SHARED_ENEMY_ASSET_ZONE_INDEX: int = 0
-
 const NORMAL_ENEMIES: Array[Dictionary] = [
 	{"name_key": "enemy.common.enemy_01.name", "slot": "enemy_01"},
 	{"name_key": "enemy.common.enemy_02.name", "slot": "enemy_02"},

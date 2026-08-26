@@ -4,7 +4,8 @@ extends SceneTree
 
 const STATES: Array[String] = ["healthy.png", "hit.png", "wounded.png", "defeated.png"]
 
-const SHARED_ENEMY_FOLDER: String = "zone_01"
+const NORMAL_ENEMY_FOLDER: String = "common"
+const ELITE_ENEMY_FOLDER: String = "elite"
 const NORMAL_ENEMY_COUNT: int = 15
 const ELITE_ENEMY_COUNT: int = 4
 
@@ -16,15 +17,15 @@ func _init() -> void:
 	var slots_checked: int = 0
 	var pngs_checked: int = 0
 
-	# --- Shared non-boss slots ---
+	# --- Canonical non-boss slots ---
 	for i in range(1, NORMAL_ENEMY_COUNT + 1):
 		var slot: String = "enemy_%02d" % i
-		_check_slot("assets/images/enemies/%s/%s" % [SHARED_ENEMY_FOLDER, slot], errors, warnings)
+		_check_slot("assets/images/enemies/%s/%s" % [NORMAL_ENEMY_FOLDER, slot], errors, warnings)
 		slots_checked += 1
 		pngs_checked += STATES.size()
 	for i in range(1, ELITE_ENEMY_COUNT + 1):
 		var slot: String = "elite_%02d" % i
-		_check_slot("assets/images/enemies/%s/%s" % [SHARED_ENEMY_FOLDER, slot], errors, warnings)
+		_check_slot("assets/images/enemies/%s/%s" % [ELITE_ENEMY_FOLDER, slot], errors, warnings)
 		slots_checked += 1
 		pngs_checked += STATES.size()
 
@@ -34,6 +35,9 @@ func _init() -> void:
 		_check_slot("assets/images/enemies/%s/boss_01" % zone_folder, errors, warnings)
 		slots_checked += 1
 		pngs_checked += STATES.size()
+
+	_check_runtime_asset_resolution(errors)
+	_check_no_obsolete_zone_folders(errors)
 
 	# --- Print report ---
 	print("")
@@ -81,3 +85,39 @@ func _check_slot(rel_path: String, errors: Array[String], warnings: Array[String
 			errors.append("Missing PNG: %s/%s" % [rel_path, state])
 		elif not FileAccess.file_exists(import_path):
 			warnings.append("Missing .import: %s/%s.import" % [rel_path, state])
+
+
+func _check_no_obsolete_zone_folders(errors: Array[String]) -> void:
+	var enemy_root := DirAccess.open("res://assets/images/enemies")
+	if enemy_root == null:
+		errors.append("Cannot open enemy asset root")
+		return
+	enemy_root.list_dir_begin()
+	var name: String = enemy_root.get_next()
+	while name != "":
+		if enemy_root.current_is_dir() and name.begins_with("zone_"):
+			var zone_number_text: String = name.trim_prefix("zone_")
+			if zone_number_text.is_valid_int() and int(zone_number_text) > BOSS_ZONE_COUNT:
+				errors.append("Obsolete enemy zone folder: assets/images/enemies/" + name)
+		name = enemy_root.get_next()
+	enemy_root.list_dir_end()
+
+
+func _check_runtime_asset_resolution(errors: Array[String]) -> void:
+	for i in range(1, NORMAL_ENEMY_COUNT + 1):
+		var normal_slot: String = "enemy_%02d" % i
+		for state: String in STATES:
+			var state_name: String = state.get_basename()
+			if EnemyAssetCatalog.load_normal_enemy_texture(normal_slot, state_name) == null:
+				errors.append("Runtime normal texture unavailable: %s/%s" % [normal_slot, state])
+	for i in range(1, ELITE_ENEMY_COUNT + 1):
+		var elite_slot: String = "elite_%02d" % i
+		for state: String in STATES:
+			var state_name: String = state.get_basename()
+			if EnemyAssetCatalog.load_elite_enemy_texture(elite_slot, state_name) == null:
+				errors.append("Runtime elite texture unavailable: %s/%s" % [elite_slot, state])
+	for zone_index in range(BOSS_ZONE_COUNT):
+		for state: String in STATES:
+			var state_name: String = state.get_basename()
+			if EnemyAssetCatalog.load_boss_enemy_texture(zone_index, "boss_01", state_name) == null:
+				errors.append("Runtime boss texture unavailable: zone_%02d/%s" % [zone_index + 1, state])

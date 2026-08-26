@@ -17,8 +17,7 @@ var current_health_color: Color = HEALTHY_COLOR
 var current_asset_key: String = "enemy.default.healthy"
 
 var _cached_background_zone_index: int = -1
-var _cached_zone_index: int = -1
-var _cached_enemy_slot: String = ""
+var _cached_enemy_asset_key: String = ""
 var _tex_healthy: Texture2D = null
 var _tex_hit: Texture2D = null
 var _tex_wounded: Texture2D = null
@@ -78,7 +77,7 @@ func _update_background_visual(state: ClickerState) -> void:
 
 
 func update_enemy_visual_state(state: ClickerState) -> void:
-	_refresh_enemy_textures(state.current_enemy_zone_index, state.current_enemy_slot)
+	_refresh_enemy_textures(state)
 	current_health_color = _get_health_color(state)
 	current_asset_key = _get_health_asset_key(state)
 
@@ -168,22 +167,38 @@ func set_enemy_transition_locked(is_locked: bool) -> void:
 		enemy_image_holder.set_direct_texture(_current_tex, current_health_color, false)
 
 
-func _refresh_enemy_textures(zone_index: int, enemy_slot: String) -> void:
-	if zone_index == _cached_zone_index and enemy_slot == _cached_enemy_slot:
+func _refresh_enemy_textures(state: ClickerState) -> void:
+	var asset_key: String = _get_enemy_asset_key(state)
+	if asset_key == _cached_enemy_asset_key:
 		return
-	_cached_zone_index = zone_index
-	_cached_enemy_slot = enemy_slot
-	_tex_healthy = _load_enemy_tex_with_fallback(zone_index, enemy_slot, "healthy")
-	_tex_hit = _load_enemy_tex_with_fallback(zone_index, enemy_slot, "hit")
-	_tex_wounded = _load_enemy_tex_with_fallback(zone_index, enemy_slot, "wounded")
-	_tex_defeated = _load_enemy_tex_with_fallback(zone_index, enemy_slot, "defeated")
+	_cached_enemy_asset_key = asset_key
+	_tex_healthy = _load_enemy_tex_with_fallback(state, "healthy")
+	_tex_hit = _load_enemy_tex_with_fallback(state, "hit")
+	_tex_wounded = _load_enemy_tex_with_fallback(state, "wounded")
+	_tex_defeated = _load_enemy_tex_with_fallback(state, "defeated")
 
 
-func _load_enemy_tex_with_fallback(zone_index: int, enemy_slot: String, state: String) -> Texture2D:
-	var tex: Texture2D = EnemyAssetCatalog.load_enemy_texture(zone_index, enemy_slot, state)
+func _get_enemy_asset_key(state: ClickerState) -> String:
+	if state.is_boss_level:
+		return "boss/%02d/%s" % [state.current_zone_index + 1, state.current_enemy_slot]
+	if state.is_elite_enemy:
+		return "elite/" + state.current_enemy_slot
+	return "common/" + state.current_enemy_slot
+
+
+func _load_enemy_tex_with_fallback(clicker_state: ClickerState, texture_state: String) -> Texture2D:
+	var tex: Texture2D = null
+	if clicker_state.is_boss_level:
+		tex = EnemyAssetCatalog.load_boss_enemy_texture(
+			clicker_state.current_zone_index, clicker_state.current_enemy_slot, texture_state
+		)
+	elif clicker_state.is_elite_enemy:
+		tex = EnemyAssetCatalog.load_elite_enemy_texture(clicker_state.current_enemy_slot, texture_state)
+	else:
+		tex = EnemyAssetCatalog.load_normal_enemy_texture(clicker_state.current_enemy_slot, texture_state)
 	if tex != null:
 		return tex
-	return GameAssetCatalog.load_texture("enemy.default." + state)
+	return GameAssetCatalog.load_texture("enemy.default." + texture_state)
 
 
 func _get_health_color(state: ClickerState) -> Color:

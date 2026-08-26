@@ -82,7 +82,6 @@ var shop_permanent_click_damage_x2_count: int = 0
 var shop_permanent_gold_x2_count: int = 0
 
 var current_zone_index: int = 0
-var current_enemy_zone_index: int = 0
 var current_enemy_slot: String = "enemy_01"
 var zone_name: String = "Тренировочная площадка"
 var zone_level_start: int = 1
@@ -2363,10 +2362,7 @@ func choose_enemy_for_current_level() -> void:
 		enemy_name = zone.boss
 		enemy_name_key = ZoneConfig.get_boss_key(current_zone_index)
 		current_enemy_slot = "boss_01"
-		current_enemy_zone_index = current_zone_index
 		return
-
-	current_enemy_zone_index = EnemyPoolConfig.SHARED_ENEMY_ASSET_ZONE_INDEX
 
 	if rng.randf() < get_current_elite_spawn_chance():
 		is_elite_enemy = true

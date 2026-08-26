@@ -45,5 +45,5 @@ Development rules for AI coding agents working on this repository.
 
 - Keep 10 zones, 5 stages per zone, the repeating 50-stage visual/content cycle,
   infinite real stage progression, 10 backgrounds, and 10 bosses.
-- Preserve existing enemy-pool compatibility; T2 will replace legacy pools separately.
+- Keep normal and elite assets in their canonical global folders; bosses remain zone-specific.
 - Use GDScript and ASCII-only asset paths. Missing image assets must fail safely.

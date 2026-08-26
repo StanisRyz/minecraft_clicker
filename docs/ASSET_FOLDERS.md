@@ -8,16 +8,19 @@ Git does not track empty directories. Every folder in this project contains a `.
 
 ## Enemy images
 
-Path: `assets/images/enemies/zone_##/slot/state.png`
+Paths: `assets/images/enemies/common/enemy_##/state.png`,
+`assets/images/enemies/elite/elite_##/state.png`, and
+`assets/images/enemies/zone_##/boss_01/state.png`
 
 ### Non-boss enemy pools
 
-All levels use the same global normal enemy pool. The active normal slots and
-temporary elite pool share one folder.
+All levels use the same global normal enemy pool. Temporary elites use their
+own global folder.
 
-| Pool folder | Normal slots        | Elite slots         |
-|-------------|---------------------|---------------------|
-| zone_01     | enemy_01–enemy_15   | elite_01–elite_04   |
+| Pool folder | Slots               |
+|-------------|---------------------|
+| common      | enemy_01–enemy_15   |
+| elite       | elite_01–elite_04   |
 
 Each slot folder needs four files:
 - `healthy.png`
@@ -28,7 +31,7 @@ Each slot folder needs four files:
 Empty future enemy folders use `.gitkeep` until real PNG assets are added.
 
 Normal selection does not depend on gameplay zone, level, or visual cycle.
-Non-boss files under `zone_11` and `zone_17` are inactive legacy assets.
+Only `zone_01` through `zone_10` exist for boss assets.
 
 Old non-boss source folders (zone_03, zone_05, zone_08, zone_10, zone_16, zone_20 enemy/elite slots) are obsolete. Empty obsolete folders have been removed. Any that contained real assets were preserved.
 
@@ -36,11 +39,11 @@ Old non-boss source folders (zone_03, zone_05, zone_08, zone_10, zone_16, zone_2
 
 Every gameplay zone requires a unique `boss_01` folder, regardless of normal/elite pool assignment.
 
-Zones 1–21: `assets/images/enemies/zone_01/boss_01/` through `zone_21/boss_01/`
+Zones 1–10: `assets/images/enemies/zone_01/boss_01/` through `zone_10/boss_01/`
 
 Each boss folder needs the same four state files listed above.
 
-Note: zone_02, zone_03, zone_04, zone_06, zone_07, zone_09, zone_12, zone_13, zone_14, zone_15, zone_18, zone_19 directories contain only `boss_01/` — this is correct, as those zones are not enemy pool source zones but do require unique bosses.
+Every zone directory contains only `boss_01/`; normal and elite slots are global.
 
 ---
 

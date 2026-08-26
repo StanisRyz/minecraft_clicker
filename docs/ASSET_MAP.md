@@ -23,24 +23,24 @@ These keys work only when `BuildConfig.IS_DEBUG_BUILD = true`. Nothing is saved 
 - Does not grant gold or progress tasks.
 - Does not affect release builds (`IS_DEBUG_BUILD = false`).
 - Intended for validating zones 1–10 enemy textures, elite textures, boss textures, and backgrounds.
-- Useful for checking the current zone_01 non-boss pool and each zone's unique boss.
+- Useful for checking the global normal/elite pools and each zone's unique boss.
 
 ## Enemy pools
 
 All levels select normal enemies from one global 15-enemy pool. Selection does
-not depend on the level, gameplay zone, or visual cycle. The shared sprites stay
-in `zone_01` so existing image imports remain stable. Elites temporarily use a
-separate four-enemy list and the same shared folder until T3. Bosses remain
-unique per active gameplay zone.
+not depend on the level, gameplay zone, or visual cycle. Normal sprites load
+from `common`; elites temporarily load from `elite`; bosses remain unique per
+active gameplay zone.
 
 | Enemy type | Enemy Pool Folder | Count |
 |------------|-------------------|-------|
-| Normal     | enemies/zone_01   | 15    |
-| Elite      | enemies/zone_01   | 4     |
+| Normal     | enemies/common    | 15    |
+| Elite      | enemies/elite     | 4     |
 
 **Active slot names:**
 
-- `enemies/zone_01`: `enemy_01`–`enemy_15`, `elite_01`–`elite_04`
+- `enemies/common`: `enemy_01`–`enemy_15`
+- `enemies/elite`: `elite_01`–`elite_04`
 
 Enemy state filenames: `healthy.png`, `hit.png`, `wounded.png`, `defeated.png`
 
@@ -98,12 +98,13 @@ Each gameplay zone owns the same-numbered background folder.
 
 ### Non-boss enemy pool folders
 
-The current active cycle uses this normal/elite enemy pool folder:
+The active non-boss enemy folders are:
 
-- `assets/images/enemies/zone_01/` — `enemy_01`–`enemy_15`, `elite_01`–`elite_04`
+- `assets/images/enemies/common/` — `enemy_01`–`enemy_15`
+- `assets/images/enemies/elite/` — `elite_01`–`elite_04`
 
 Each slot folder needs four states: `healthy.png`, `hit.png`, `wounded.png`, `defeated.png`.
-The old `zone_11` and `zone_17` non-boss assets are inactive legacy files.
+Only `zone_01` through `zone_10` exist for boss assets.
 
 ### Boss folders
 
