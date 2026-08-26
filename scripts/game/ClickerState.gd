@@ -83,9 +83,7 @@ var shop_permanent_gold_x2_count: int = 0
 
 var current_zone_index: int = 0
 var current_enemy_slot: String = "enemy_01"
-var zone_name: String = "Тренировочная площадка"
-var zone_level_start: int = 1
-var zone_level_end: int = 10
+var zone_name: String = ""
 var zone_hp_multiplier: float = 1.0
 var zone_reward_multiplier: float = 1.0
 var sound_enabled: bool = true
@@ -641,8 +639,7 @@ func attack_with_damage(damage) -> Dictionary:
 		var next_zone_index: int = _get_zone_index_for_level(next_level)
 		zone_changed = next_zone_index != current_zone_index
 		if zone_changed:
-			var next_zone: Dictionary = ZoneConfig.ZONE_DATA[next_zone_index]
-			new_zone_name = next_zone.name
+			new_zone_name = LocalizationManager.tr_key(ZoneConfig.get_name_key(next_zone_index))
 
 	return _make_attack_result(true, did_level_up, BigNumber.zero(), damage_dealt, target_hp_before, BigNumber.zero(), "Враг побеждён!", zone_changed, new_zone_name)
 
@@ -1201,7 +1198,7 @@ func buy_partners(partner_index: int, mode: String) -> Dictionary:
 	recalculate_partner_cost(partner_index)
 	_update_character_state()
 	refresh_partner_visibility_unlocks()
-	return _make_purchase_result("%s нанят x%d!" % [PartnerConfig.PARTNER_NAMES[partner_index], bought], false, true)
+	return _make_purchase_result("%s нанят x%d!" % [LocalizationManager.tr_key(PartnerConfig.get_name_key(partner_index)), bought], false, true)
 
 
 func get_partner_bulk_count(partner_index: int, mode: String) -> int:
@@ -1265,7 +1262,7 @@ func buy_buildings(building_index: int, mode: String) -> Dictionary:
 	building_counts[building_index] += bought
 	recalculate_building_cost(building_index)
 	_update_character_state()
-	return _make_purchase_result("%s построено x%d!" % [SettlementConfig.BUILDING_NAMES[building_index], bought], false, true)
+	return _make_purchase_result("%s построено x%d!" % [LocalizationManager.tr_key(SettlementConfig.get_name_key(building_index)), bought], false, true)
 
 
 func get_building_bulk_count(building_index: int, mode: String) -> int:
@@ -1612,8 +1609,8 @@ func buy_partner_skill(skill_id: String) -> Dictionary:
 	if not is_partner_skill_unlocked(skill_id):
 		var partner_index: int = int(skill.get("partner_index", -1))
 		var partner_name: String = LocalizationManager.tr_key("skill_popup.partner.title")
-		if partner_index >= 0 and partner_index < PartnerConfig.PARTNER_NAMES.size():
-			partner_name = LocalizationManager.tr_key("partner.%02d.name" % (partner_index + 1))
+		if partner_index >= 0 and partner_index < PartnerConfig.get_partner_count():
+			partner_name = LocalizationManager.tr_key(PartnerConfig.get_name_key(partner_index))
 		return _make_purchase_result("Требуется %s x%d" % [
 			partner_name,
 			int(skill.get("unlock_count", 0)),
@@ -2359,14 +2356,12 @@ func choose_enemy_for_current_level() -> void:
 	var zone: Dictionary = ZoneConfig.ZONE_DATA[current_zone_index]
 	if is_boss_level:
 		is_elite_enemy = false
-		enemy_name = zone.boss
 		enemy_name_key = ZoneConfig.get_boss_key(current_zone_index)
 		current_enemy_slot = "boss_01"
 		return
 
 	is_elite_enemy = rng.randf() < get_current_elite_spawn_chance()
 	var candidate: Dictionary = EnemyPoolConfig.get_random_normal_candidate(rng)
-	enemy_name = String(candidate.get("name", "Враг"))
 	enemy_name_key = String(candidate.get("name_key", ""))
 	current_enemy_slot = String(candidate.get("slot", "enemy_01"))
 
@@ -2503,8 +2498,6 @@ func _update_zone() -> void:
 	var zone: Dictionary = ZoneConfig.ZONE_DATA[idx]
 	current_zone_index = idx
 	zone_name = LocalizationManager.tr_key(ZoneConfig.get_name_key_for_level(current_level))
-	zone_level_start = zone.level_start
-	zone_level_end = zone.level_end
 	zone_hp_multiplier = zone.hp_multiplier
 	zone_reward_multiplier = zone.reward_multiplier
 

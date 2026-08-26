@@ -54,7 +54,7 @@ func update_view(state: ClickerState) -> void:
 
 
 func _ensure_building_rows(_state: ClickerState) -> void:
-	while building_rows.size() < SettlementConfig.BUILDING_NAMES.size():
+	while building_rows.size() < SettlementConfig.get_building_count():
 		var building_index: int = building_rows.size()
 		building_rows.append(_create_building_row(building_index))
 
@@ -322,4 +322,4 @@ func set_buy_mode(mode: String) -> void:
 
 
 func _should_show_building_row(_state: ClickerState, building_index: int) -> bool:
-	return building_index >= 0 and building_index < SettlementConfig.BUILDING_NAMES.size()
+	return building_index >= 0 and building_index < SettlementConfig.get_building_count()

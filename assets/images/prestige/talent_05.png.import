@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dduvt43ex6fwf"
-path="res://.godot/imported/boss_hunter.png-21cd9d040cd50760e4aad05910cf8dff.ctex"
+uid="uid://danpnfs8udvim"
+path="res://.godot/imported/talent_05.png-d942773a42b01af0a401d403f466106d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/prestige/boss_hunter.png"
-dest_files=["res://.godot/imported/boss_hunter.png-21cd9d040cd50760e4aad05910cf8dff.ctex"]
+source_file="res://assets/images/prestige/talent_05.png"
+dest_files=["res://.godot/imported/talent_05.png-d942773a42b01af0a401d403f466106d.ctex"]
 
 [params]
 

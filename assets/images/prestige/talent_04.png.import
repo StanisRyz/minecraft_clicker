@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drevqg0g2tro5"
-path="res://.godot/imported/clock_tower.png-015084313a856664a117042534e2f56c.ctex"
+uid="uid://ddk6dfxcedp1b"
+path="res://.godot/imported/talent_04.png-e684e31b5b2baff316a6b4e41ea0e13c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/buildings/clock_tower.png"
-dest_files=["res://.godot/imported/clock_tower.png-015084313a856664a117042534e2f56c.ctex"]
+source_file="res://assets/images/prestige/talent_04.png"
+dest_files=["res://.godot/imported/talent_04.png-e684e31b5b2baff316a6b4e41ea0e13c.ctex"]
 
 [params]
 

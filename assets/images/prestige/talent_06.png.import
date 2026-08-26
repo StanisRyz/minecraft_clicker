@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tgdfdp6ah5j7"
-path="res://.godot/imported/focus_training.png-14f73c196cdc1436f785ad8c260fa93b.ctex"
+uid="uid://c5ce3408mshxg"
+path="res://.godot/imported/talent_06.png-85bad240bb8611c9d2215ab3495a10e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/prestige/focus_training.png"
-dest_files=["res://.godot/imported/focus_training.png-14f73c196cdc1436f785ad8c260fa93b.ctex"]
+source_file="res://assets/images/prestige/talent_06.png"
+dest_files=["res://.godot/imported/talent_06.png-85bad240bb8611c9d2215ab3495a10e7.ctex"]
 
 [params]
 

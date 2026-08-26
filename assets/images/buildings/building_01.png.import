@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5ie3peen84gb"
-path="res://.godot/imported/war_banner.png-103a24a3778740c622b18c734fb55ea9.ctex"
+uid="uid://dgfm8hejdsvvj"
+path="res://.godot/imported/building_01.png-b7f0ad3b7456d5be2f2ee194983132b9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/buildings/war_banner.png"
-dest_files=["res://.godot/imported/war_banner.png-103a24a3778740c622b18c734fb55ea9.ctex"]
+source_file="res://assets/images/buildings/building_01.png"
+dest_files=["res://.godot/imported/building_01.png-b7f0ad3b7456d5be2f2ee194983132b9.ctex"]
 
 [params]
 

@@ -67,7 +67,8 @@ static func buy_shop_products(state: ClickerState, product_id: String, mode: Str
 
 	var product_type: String = String(product.get("product_type", "consumable"))
 	var count: int = get_shop_buy_count(mode)
-	var product_name: String = String(product.get("name", "Товар магазина"))
+	var name_key: String = String(product.get("name_key", ""))
+	var product_name: String = LocalizationManager.tr_key(name_key) if name_key != "" else "Товар магазина"
 
 	if product_type == "permanent_multiplier":
 		var total_cost: int = get_permanent_upgrade_bulk_cost(state, product_id, count)

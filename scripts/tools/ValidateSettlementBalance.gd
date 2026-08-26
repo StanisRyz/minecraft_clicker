@@ -9,14 +9,14 @@ func _init() -> void:
 	var errors: Array[String] = []
 	var warnings: Array[String] = []
 
-	var building_count: int = SettlementConfig.BUILDING_NAMES.size()
+	var building_count: int = SettlementConfig.get_building_count()
 	var costs: Array = BalanceConfig.BUILDING_BASE_COSTS
 	var base_cost: int = BalanceConfig.BUILDING_BASE_COST
 	var growth: float = BalanceConfig.BUILDING_COST_GROWTH
 
 	# 1. BUILDING_BASE_COSTS size matches building count
 	if costs.size() != building_count:
-		errors.append("BUILDING_BASE_COSTS.size() is %d but SettlementConfig.BUILDING_NAMES.size() is %d" % [costs.size(), building_count])
+		errors.append("BUILDING_BASE_COSTS.size() is %d but SettlementConfig.get_building_count() is %d" % [costs.size(), building_count])
 
 	# 2. Every value in BUILDING_BASE_COSTS equals BUILDING_BASE_COST
 	for i in range(costs.size()):

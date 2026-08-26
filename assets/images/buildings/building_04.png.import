@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bttxr81bhatrh"
-path="res://.godot/imported/boss_shrine.png-4f2ec600515d021b6d4fbdbb78725489.ctex"
+uid="uid://dy8t3alfx3yvl"
+path="res://.godot/imported/building_04.png-adf456676a5e2bff94b018e46d2f6e97.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/buildings/boss_shrine.png"
-dest_files=["res://.godot/imported/boss_shrine.png-4f2ec600515d021b6d4fbdbb78725489.ctex"]
+source_file="res://assets/images/buildings/building_04.png"
+dest_files=["res://.godot/imported/building_04.png-adf456676a5e2bff94b018e46d2f6e97.ctex"]
 
 [params]
 

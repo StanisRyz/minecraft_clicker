@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://soseioofvuk8"
-path="res://.godot/imported/quick_hands.png-09dcb97eab13472d27c656728ebf83c4.ctex"
+uid="uid://bietw0ixg2hmc"
+path="res://.godot/imported/talent_02.png-443a11026fae66e225df6f2313b947cc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/prestige/quick_hands.png"
-dest_files=["res://.godot/imported/quick_hands.png-09dcb97eab13472d27c656728ebf83c4.ctex"]
+source_file="res://assets/images/prestige/talent_02.png"
+dest_files=["res://.godot/imported/talent_02.png-443a11026fae66e225df6f2313b947cc.ctex"]
 
 [params]
 

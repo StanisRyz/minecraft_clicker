@@ -64,7 +64,7 @@ func update_view(state: ClickerState) -> void:
 
 
 func _ensure_partner_rows(_state: ClickerState) -> void:
-	while partner_rows.size() < PartnerConfig.PARTNER_NAMES.size():
+	while partner_rows.size() < PartnerConfig.get_partner_count():
 		var partner_index: int = partner_rows.size()
 		partner_rows.append(_create_partner_row(partner_index))
 

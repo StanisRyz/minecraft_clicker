@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c74epgk7sdvmm"
-path="res://.godot/imported/knight_hut.png-7d35035c650f00e39fe86fb3820cfa78.ctex"
+uid="uid://bkgw3bo68e45w"
+path="res://.godot/imported/talent_01.png-d46aa0b577b73fff3e5ef667194663d4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/buildings/knight_hut.png"
-dest_files=["res://.godot/imported/knight_hut.png-7d35035c650f00e39fe86fb3820cfa78.ctex"]
+source_file="res://assets/images/prestige/talent_01.png"
+dest_files=["res://.godot/imported/talent_01.png-d46aa0b577b73fff3e5ef667194663d4.ctex"]
 
 [params]
 

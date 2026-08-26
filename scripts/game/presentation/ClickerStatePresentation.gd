@@ -8,7 +8,7 @@ extends RefCounted
 # --- Building descriptions ---
 
 static func get_building_short_effect_description(state: ClickerState, building_index: int) -> String:
-	if building_index < 0 or building_index >= SettlementConfig.BUILDING_NAMES.size():
+	if building_index < 0 or building_index >= SettlementConfig.get_building_count():
 		return ""
 
 	var amount: float = state.building_bonus_percent_per_level

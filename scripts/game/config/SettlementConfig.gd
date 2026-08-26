@@ -1,18 +1,12 @@
 class_name SettlementConfig
 extends RefCounted
 
-const BUILDING_NAMES: Array = ["Training Camp", "Market", "Knight Hut", "War Banner", "Clock Tower", "Boss Shrine"]
+const BUILDING_COUNT: int = 6
 const BUILDING_BONUS_TYPES: Array = ["partner_dps", "gold", "click_damage", "ability_duration", "ability_cooldown", "boss_gold"]
 
 
 static func get_building_count() -> int:
-	return BUILDING_NAMES.size()
-
-
-static func get_name(index: int) -> String:
-	if index < 0 or index >= BUILDING_NAMES.size():
-		return ""
-	return BUILDING_NAMES[index]
+	return BUILDING_COUNT
 
 
 static func get_bonus_type(index: int) -> String:

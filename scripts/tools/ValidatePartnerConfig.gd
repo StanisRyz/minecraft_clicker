@@ -4,11 +4,6 @@ extends SceneTree
 
 const CSV_PATH: String = "res://localization/game_text.csv"
 const EXPECTED_PARTNER_COUNT: int = 28
-const EXPECTED_PARTNER_NAMES_13: Array = [
-	"Partner 1", "Partner 2", "Partner 3", "Field Scout", "Spear Guard",
-	"Iron Defender", "Battle Monk", "Elite Samurai", "Shadow Captain",
-	"War Sage", "Beast Tamer", "Blade Master", "Legendary Commander",
-]
 
 
 func _init() -> void:
@@ -19,9 +14,6 @@ func _init() -> void:
 	var partner_count: int = PartnerConfig.get_partner_count()
 	if partner_count != EXPECTED_PARTNER_COUNT:
 		errors.append("PartnerConfig.get_partner_count() returned %d, expected %d" % [partner_count, EXPECTED_PARTNER_COUNT])
-
-	if PartnerConfig.PARTNER_NAMES.size() != EXPECTED_PARTNER_COUNT:
-		errors.append("PartnerConfig.PARTNER_NAMES.size() is %d, expected %d" % [PartnerConfig.PARTNER_NAMES.size(), EXPECTED_PARTNER_COUNT])
 
 	# Compact legacy arrays are intentionally shorter than PARTNER_COUNT:
 	# higher-index values overflow int64 (4*23^i at i>=14; 35*25^i at i>=13).
@@ -69,15 +61,6 @@ func _init() -> void:
 			errors.append("get_partner_cost_bignum(%d) did not increase from partner %d" % [i, i - 1])
 		prev_dps = dps_bn
 		prev_cost = cost_bn
-
-	# --- Existing 13 partner names not renamed ---
-	for i in range(EXPECTED_PARTNER_NAMES_13.size()):
-		if i >= PartnerConfig.PARTNER_NAMES.size():
-			break
-		var actual: String = String(PartnerConfig.PARTNER_NAMES[i])
-		var expected: String = EXPECTED_PARTNER_NAMES_13[i]
-		if actual != expected:
-			errors.append("Partner %d name changed: expected '%s', got '%s'" % [i + 1, expected, actual])
 
 	# --- ClickerState initialization ---
 	var state: ClickerState = ClickerState.new()

@@ -9,18 +9,14 @@ const PERMANENT_UPGRADE_MULTIPLIER_PER_LEVEL: float = 2.0
 const SHOP_PRODUCTS: Array = [
 	{
 		"id": "gem_purchase_entry",
-		"name": "Buy Gems",
 		"name_key": "shop.gem_purchase_entry.name",
-		"description": "Purchase gems",
 		"description_key": "shop.gem_purchase_entry.description",
 		"product_type": "donation_entry",
 		"cost_gems": 0,
 	},
 	{
 		"id": "rewarded_gems_ad",
-		"name": "Watch Ad: +3 Gems",
 		"name_key": "shop.rewarded_gems_ad.name",
-		"description": "Watch an ad to receive gems",
 		"description_key": "shop.rewarded_gems_ad.description",
 		"product_type": "rewarded_ad",
 		"reward_type": "gems",
@@ -29,9 +25,7 @@ const SHOP_PRODUCTS: Array = [
 	},
 	{
 		"id": "gold_pack_small",
-		"name": "Small Gold Pack",
 		"name_key": "shop.gold_pack_small.name",
-		"description": "Gain stage-scaled gold",
 		"description_key": "shop.gold_pack_small.description",
 		"product_type": "consumable",
 		"cost_gems": 10,
@@ -40,9 +34,7 @@ const SHOP_PRODUCTS: Array = [
 	},
 	{
 		"id": "gold_pack_large",
-		"name": "Large Gold Pack",
 		"name_key": "shop.gold_pack_large.name",
-		"description": "Gain a large stage-scaled gold reward",
 		"description_key": "shop.gold_pack_large.description",
 		"product_type": "consumable",
 		"cost_gems": 25,
@@ -51,9 +43,7 @@ const SHOP_PRODUCTS: Array = [
 	},
 	{
 		"id": "permanent_partner_dps_x2",
-		"name": "Permanent Partner DPS x2",
 		"name_key": "shop.permanent_partner_dps_x2.name",
-		"description": "Permanently doubles Partner DPS",
 		"description_key": "shop.permanent_partner_dps_x2.description",
 		"product_type": "permanent_multiplier",
 		"bonus_type": "partner_dps",
@@ -61,9 +51,7 @@ const SHOP_PRODUCTS: Array = [
 	},
 	{
 		"id": "permanent_click_damage_x2",
-		"name": "Permanent Click Damage x2",
 		"name_key": "shop.permanent_click_damage_x2.name",
-		"description": "Permanently doubles click damage",
 		"description_key": "shop.permanent_click_damage_x2.description",
 		"product_type": "permanent_multiplier",
 		"bonus_type": "click_damage",
@@ -71,9 +59,7 @@ const SHOP_PRODUCTS: Array = [
 	},
 	{
 		"id": "permanent_gold_x2",
-		"name": "Permanent Gold x2",
 		"name_key": "shop.permanent_gold_x2.name",
-		"description": "Permanently doubles gold from enemies",
 		"description_key": "shop.permanent_gold_x2.description",
 		"product_type": "permanent_multiplier",
 		"bonus_type": "gold",

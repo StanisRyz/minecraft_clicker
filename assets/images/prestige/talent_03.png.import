@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bovjgcbb8f14x"
-path="res://.godot/imported/trade_routes.png-fb170268bb3fbd53c1d1753123973919.ctex"
+uid="uid://by7qdx570sssw"
+path="res://.godot/imported/talent_03.png-86c1a9f7ea1e31a12ed113e6ce02ea5a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/prestige/trade_routes.png"
-dest_files=["res://.godot/imported/trade_routes.png-fb170268bb3fbd53c1d1753123973919.ctex"]
+source_file="res://assets/images/prestige/talent_03.png"
+dest_files=["res://.godot/imported/talent_03.png-86c1a9f7ea1e31a12ed113e6ce02ea5a.ctex"]
 
 [params]
 

@@ -53,21 +53,21 @@ const ASSET_PATHS: Dictionary = {
 	"upgrade.rally": "res://assets/images/upgrades/rally.png",
 
 	# Buildings (indexes 0–5)
-	"building.0.icon": "res://assets/images/buildings/training_camp.png",
-	"building.1.icon": "res://assets/images/buildings/market.png",
-	"building.2.icon": "res://assets/images/buildings/knight_hut.png",
-	"building.3.icon": "res://assets/images/buildings/war_banner.png",
-	"building.4.icon": "res://assets/images/buildings/clock_tower.png",
-	"building.5.icon": "res://assets/images/buildings/boss_shrine.png",
+	"building.0.icon": "res://assets/images/buildings/building_01.png",
+	"building.1.icon": "res://assets/images/buildings/building_02.png",
+	"building.2.icon": "res://assets/images/buildings/building_03.png",
+	"building.3.icon": "res://assets/images/buildings/building_04.png",
+	"building.4.icon": "res://assets/images/buildings/building_05.png",
+	"building.5.icon": "res://assets/images/buildings/building_06.png",
 
-	# Prestige
+	# Prestige (talent indexes 0–5)
 	"prestige.action": "res://assets/images/prestige/prestige.png",
-	"prestige.focus_training": "res://assets/images/prestige/focus_training.png",
-	"prestige.trade_routes": "res://assets/images/prestige/trade_routes.png",
-	"prestige.command_aura": "res://assets/images/prestige/command_aura.png",
-	"prestige.quick_hands": "res://assets/images/prestige/quick_hands.png",
-	"prestige.builder_wisdom": "res://assets/images/prestige/builder_wisdom.png",
-	"prestige.boss_hunter": "res://assets/images/prestige/boss_hunter.png",
+	"prestige.talent_01": "res://assets/images/prestige/talent_01.png",
+	"prestige.talent_02": "res://assets/images/prestige/talent_02.png",
+	"prestige.talent_03": "res://assets/images/prestige/talent_03.png",
+	"prestige.talent_04": "res://assets/images/prestige/talent_04.png",
+	"prestige.talent_05": "res://assets/images/prestige/talent_05.png",
+	"prestige.talent_06": "res://assets/images/prestige/talent_06.png",
 
 	# Shop
 	# Required path (create before release): res://assets/images/shop/rewarded_gems_ad.png

@@ -51,3 +51,16 @@ Development rules for AI coding agents working on this repository.
 - All non-boss encounters use the same 15 common enemy assets.
 - Elite is a gameplay modifier, not a separate asset category; bosses remain zone-specific.
 - Use GDScript and ASCII-only asset paths. Missing image assets must fail safely.
+
+## Template content contract
+
+This repo is a reusable template: gameplay configs hold stable ids,
+mechanics, balance values, and localization-key helpers only. Player-facing
+themed text (zone/boss/partner/building/task/shop/ability/skill/prestige
+names and descriptions) belongs in `localization/game_text.csv`, not in
+GDScript string literals. Asset filenames use stable slot names (e.g.
+`building_01.png`, `enemy_01/healthy.png`), never theme-specific names.
+Reskinning into a new themed game must not require renaming gameplay-code
+identifiers, adding new theme-specific fallback strings in code, or changing
+the 10 backgrounds / 15 common enemies / 10 bosses asset contract. See
+`docs/TEMPLATE_CONTENT_CONTRACT.md` for the replacement checklist.

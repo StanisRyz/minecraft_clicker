@@ -567,7 +567,7 @@ var _scenario_partner_base_cost_cache: Dictionary = {}
 
 func _init() -> void:
 	_div("=", 74)
-	_ln("  BALANCE AUDIT REPORT  —  naruto-clicker")
+	_ln("  BALANCE AUDIT REPORT  —  clicker-template")
 	_ln("  Headless probe: no save modified, no gameplay changed.")
 	_div("=", 74)
 
@@ -627,11 +627,10 @@ func _section_enemy() -> void:
 	var prev_rwd: int = 0
 
 	for lvl: int in _enemy_sample_levels():
-		var zd: Dictionary = _ZC.get_zone_data_for_level(lvl)
 		var hp_m: float  = _ZC.get_effective_hp_multiplier_for_level(lvl, _BC.ZONE_CYCLE_HP_MULTIPLIER)
 		var rwd_m: float = _ZC.get_effective_reward_multiplier_for_level(lvl, _BC.ZONE_CYCLE_REWARD_MULTIPLIER)
-		var zname: String = str(zd.get("name", "?"))
 		var zidx: int = _ZC.get_zone_index_for_level(lvl)
+		var zname: String = "Zone %d" % (zidx + 1)
 
 		var base_hp:  int = _EC.get_base_hp(lvl,     _BC.ENEMY_HP_BASE,     _BC.ENEMY_HP_GROWTH)
 		var base_rwd: int = _EC.get_base_reward(lvl, _BC.ENEMY_REWARD_BASE, _BC.ENEMY_REWARD_GROWTH)
@@ -959,8 +958,8 @@ func _section_prestige() -> void:
 	for i: int in range(_PRC.get_talent_count()):
 		var effect_type: String = _PRC.get_effect_type(i)
 		var bonus: int = _prestige_talent_bonus_percent_per_level(i)
-		_ln(_row([_lj(_PRC.get_talent_name(i), 22), _rj(effect_type, 18), _rj("%d%%" % bonus, 9)]))
-		_csv_append("prestige_talent_bonus", i + 1, 0, 0, 0, bonus, 0, 0.0, "talent=%s effect_type=%s per_copy=%d" % [_PRC.get_talent_name(i), effect_type, bonus])
+		_ln(_row([_lj(_talent_name(i), 22), _rj(effect_type, 18), _rj("%d%%" % bonus, 9)]))
+		_csv_append("prestige_talent_bonus", i + 1, 0, 0, 0, bonus, 0, 0.0, "talent=%s effect_type=%s per_copy=%d" % [_talent_name(i), effect_type, bonus])
 
 	_validate_prestige_formulas()
 
@@ -5350,7 +5349,7 @@ func _append_scenario_post_prestige_summary_if_needed(scenario: Dictionary, prof
 		return
 	var reward: int = int(result.get("first_prestige_reward", 0))
 	var talent_index: int = 0
-	var talent_name: String = _PRC.get_talent_name(talent_index)
+	var talent_name: String = _talent_name(talent_index)
 	var second_run: Dictionary = _run_progression_profile(profile, scenario, false, {
 		"prestige_points_available": reward,
 		"prestige_points_total_earned": reward,
@@ -5429,9 +5428,11 @@ func _sim_format_counts(counts: Dictionary) -> String:
 
 
 func _building_name(idx: int) -> String:
-	if idx >= 0 and idx < _SC.BUILDING_NAMES.size():
-		return str(_SC.BUILDING_NAMES[idx])
 	return "Building %d" % (idx + 1)
+
+
+func _talent_name(idx: int) -> String:
+	return "Talent %d" % (idx + 1)
 
 
 # ==========================================================================
@@ -5720,7 +5721,7 @@ func _run_prestige_loop_strategy(profile: Dictionary, scenario: Dictionary, stra
 						"loop_index=%d strategy_id=%s scenario_id=%s talent_index=%d talent_name=%s effect_type=%s cost=%d new_level=%d new_total_bonus=%d remaining_points=%d" % [
 							loop_idx, strategy_id, scenario_id,
 							tidx,
-							_PRC.get_talent_name(tidx) if tidx >= 0 else "",
+							_talent_name(tidx) if tidx >= 0 else "",
 							_PRC.get_effect_type(tidx) if tidx >= 0 else "",
 							cost, new_level, bonus_pct,
 							prestige_points_available,
@@ -7149,8 +7150,6 @@ func _combat_sample_levels() -> Array[int]:
 # ==========================================================================
 
 func _partner_name(idx: int) -> String:
-	if idx >= 0 and idx < PartnerConfig.PARTNER_NAMES.size():
-		return PartnerConfig.PARTNER_NAMES[idx]
 	return "Partner %d" % (idx + 1)
 
 

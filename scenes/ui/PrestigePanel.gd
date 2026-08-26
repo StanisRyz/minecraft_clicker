@@ -299,10 +299,9 @@ func _update_prestige_action_row(total_reward: int) -> void:
 
 
 func _ensure_talent_rows(_state: ClickerState) -> void:
-	while talent_rows.size() < PrestigeConfig.TALENT_NAMES.size():
+	while talent_rows.size() < PrestigeConfig.get_talent_count():
 		var talent_index: int = talent_rows.size()
-		var talent_name: String = PrestigeConfig.TALENT_NAMES[talent_index]
-		var talent_id: String = talent_name.to_lower().replace(" ", "_")
+		var talent_id: String = "talent_%02d" % (talent_index + 1)
 		talent_rows.append(_create_talent_row(talent_index, talent_id))
 
 
