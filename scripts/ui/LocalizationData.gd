@@ -4,8 +4,8 @@ extends RefCounted
 # AUTO-GENERATED — do not edit by hand.
 # Source: res://localization/game_text.csv
 # Regenerate with: godot --headless --script res://scripts/tools/GenerateLocalizationData.gd
-# Generated key count: 347
-# Generated at: 1787753603
+# Generated key count: 337
+# Generated at: 1787827278
 
 const TRANSLATIONS: Dictionary = {
 	"en": {
@@ -179,16 +179,6 @@ const TRANSLATIONS: Dictionary = {
 		"partner.16.name": "Partner 16",
 		"partner.17.name": "Partner 17",
 		"partner.18.name": "Partner 18",
-		"partner.19.name": "Partner 19",
-		"partner.20.name": "Partner 20",
-		"partner.21.name": "Partner 21",
-		"partner.22.name": "Partner 22",
-		"partner.23.name": "Partner 23",
-		"partner.24.name": "Partner 24",
-		"partner.25.name": "Partner 25",
-		"partner.26.name": "Partner 26",
-		"partner.27.name": "Partner 27",
-		"partner.28.name": "Partner 28",
 		"building.01.name": "Building 1",
 		"building.02.name": "Building 2",
 		"building.03.name": "Building 3",
@@ -528,16 +518,6 @@ const TRANSLATIONS: Dictionary = {
 		"partner.16.name": "Партнёр 16",
 		"partner.17.name": "Партнёр 17",
 		"partner.18.name": "Партнёр 18",
-		"partner.19.name": "Партнёр 19",
-		"partner.20.name": "Партнёр 20",
-		"partner.21.name": "Партнёр 21",
-		"partner.22.name": "Партнёр 22",
-		"partner.23.name": "Партнёр 23",
-		"partner.24.name": "Партнёр 24",
-		"partner.25.name": "Партнёр 25",
-		"partner.26.name": "Партнёр 26",
-		"partner.27.name": "Партнёр 27",
-		"partner.28.name": "Партнёр 28",
 		"building.01.name": "Здание 1",
 		"building.02.name": "Здание 2",
 		"building.03.name": "Здание 3",

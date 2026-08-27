@@ -1,7 +1,7 @@
 class_name PartnerConfig
 extends RefCounted
 
-const PARTNER_COUNT: int = 28
+const PARTNER_COUNT: int = BalanceConfig.PARTNER_COUNT
 
 
 static func get_partner_count() -> int:

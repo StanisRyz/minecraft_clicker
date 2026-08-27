@@ -71,13 +71,13 @@ Only source zones listed in the reuse map need a `background.png`.
 
 Path: `assets/images/partners/partner_##/partner.png`
 
-Each partner has its own folder. 28 folders exist: `partner_01/` through `partner_28/`.
+Each partner has its own folder. 18 folders exist: `partner_01/` through `partner_18/`.
 
 Example:
 - `assets/images/partners/partner_01/partner.png`
-- `assets/images/partners/partner_28/partner.png`
+- `assets/images/partners/partner_18/partner.png`
 
-All 28 partner folders must exist. Empty folders carry `.gitkeep` until real PNG art is added.
+All 18 partner folders must exist. Empty folders carry `.gitkeep` until real PNG art is added.
 
 Fallback behavior:
 - If `partner.png` exists: the UI shows the image; the white background square is hidden.

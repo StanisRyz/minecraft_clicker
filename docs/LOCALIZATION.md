@@ -125,9 +125,9 @@ Keep the file UTF-8 encoded. Quote any field that contains a comma: `"text, with
 
 ## Partner name keys
 
-Partner names use keys `partner.01.name` through `partner.28.name` in `game_text.csv`.
+Partner names use keys `partner.01.name` through `partner.18.name` in `game_text.csv`.
 
-28 partner name keys are defined. Partners 14–28 have English text only; Russian column is empty and falls back to English automatically.
+18 partner name keys are defined in both English and Russian.
 
 ---
 

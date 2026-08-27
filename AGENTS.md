@@ -50,6 +50,7 @@ Development rules for AI coding agents working on this repository.
   infinite real stage progression, 10 backgrounds, and 10 bosses.
 - All non-boss encounters use the same 15 common enemy assets.
 - Elite is a gameplay modifier, not a separate asset category; bosses remain zone-specific.
+- Keep exactly 18 partner slots; reskins use Partner 1 through Partner 18 only.
 - Use GDScript and ASCII-only asset paths. Missing image assets must fail safely.
 
 ## Template content contract
@@ -62,5 +63,6 @@ GDScript string literals. Asset filenames use stable slot names (e.g.
 `building_01.png`, `enemy_01/healthy.png`), never theme-specific names.
 Reskinning into a new themed game must not require renaming gameplay-code
 identifiers, adding new theme-specific fallback strings in code, or changing
-the 10 backgrounds / 15 common enemies / 10 bosses asset contract. See
+the 10 backgrounds / 15 common enemies / 10 bosses / 18 partners / 6 buildings
+asset contract. See
 `docs/TEMPLATE_CONTENT_CONTRACT.md` for the replacement checklist.

@@ -60,17 +60,17 @@ This audit covers code (static analysis), scenes, configs, and assets. Localizat
 - **Area:** Asset — partner skill icons and hero skill icons entirely absent
 - **File(s):** `assets/images/partners/Skills/` (empty — only `.gitkeep`), `assets/images/hero_skills/` (empty — only `.gitkeep`)
 - **Description:** `GameAssetCatalog` generates paths like `assets/images/partners/Skills/skill1.png` through `skill5.png` for partner skills, and `assets/images/hero_skills/skill_01.png` through `skill_05.png` for hero skills. None of these files exist. All partner skill cards and hero skill cards will display with no icon (fallback color only).
-- **Why it matters:** Every skill card in the Upgrades and Partners sheets shows a blank icon. This is visually broken for the entire skill upgrade UI across all 28 partners and 5 hero skill slots.
+- **Why it matters:** Every skill card in the Upgrades and Partners sheets shows a blank icon. This is visually broken for the entire skill upgrade UI across all 18 partners and 5 hero skill slots.
 - **Recommended fix:** Create and place `skill1.png` through `skill5.png` in `assets/images/partners/Skills/`, and `skill_01.png` through `skill_05.png` in `assets/images/hero_skills/`. Confirm image dimensions match the card slot size.
 - **Safe to do before balance?** Yes — pure asset addition, no logic changes.
 
 ### F-004
 - **Severity:** HIGH
-- **Area:** Balance config — partner DPS values for partners 14–28 are placeholder
+- **Area:** Balance config — partner DPS values for partners 14–18 are placeholder
 - **File(s):** `scripts/game/BalanceConfig.gd:52`, `scripts/game/BalanceConfig.gd:60`
-- **Description:** `PARTNER_DPS_VALUES` and `PARTNER_BASE_COSTS` contain explicit comments: *"Temporary placeholder values for partners 14–28. Final balance pass will be done later."* Partners 14–28 (indices 13–27) use geometrically extrapolated values, not carefully tuned ones.
+- **Description:** Partners 14–18 (indices 13–17) use geometrically extrapolated values, not carefully tuned ones.
 - **Why it matters:** Any balance work on mid-to-late game economy is based on untuned partner values. DPS curves, prestige timing, and settlement payoff ratios will need re-tuning after these are finalized.
-- **Recommended fix:** Complete the balance pass on partners 14–28 before declaring the project balance-ready. Use `ProgressionSimulator.gd` to validate time-to-reach milestones.
+- **Recommended fix:** Complete the balance pass on partners 14–18 before declaring the project balance-ready. Use `ProgressionSimulator.gd` to validate time-to-reach milestones.
 - **Safe to do before balance?** No — this is the primary balance work itself; must be done as part of the balance pass.
 
 ### F-005
@@ -205,7 +205,7 @@ This audit covers code (static analysis), scenes, configs, and assets. Localizat
 
 ### Complete Systems
 - **Hero damage + leveling** — fully implemented in ClickerState with segmented exponential cost scaling, milestone multipliers, hero skill bonuses
-- **Partner DPS** — fully implemented for all 28 partners with own-skill bonuses, milestone multipliers, command aura, settlement, shop, rally, boss multipliers
+- **Partner DPS** — fully implemented for all 18 partners with own-skill bonuses, milestone multipliers, command aura, settlement, shop, rally, boss multipliers
 - **Abilities (autoclick, gold_bonus, focus_burst, rally)** — full lifecycle: unlock, purchase, activate, cooldown, duration, rank upgrade, settlement duration/cooldown modifiers
 - **Settlement buildings** — 6 buildings, each with distinct effect, purchase/bulk buy, diminishing returns for cooldown reduction, milestone bonuses
 - **Prestige system** — prestige calculation, talent purchase (6 talents), reset, points accumulation tracked across prestiges
@@ -219,7 +219,7 @@ This audit covers code (static analysis), scenes, configs, and assets. Localizat
 ### Incomplete Systems
 - **Shop consumables (boss_retry_token, task_boost)** — state fields exist, runtime logic exists, but products are not in ShopConfig and not purchasable (F-002)
 - **Partner skill icons and hero skill icons** — functional in code but all visually broken due to missing assets (F-003)
-- **Balance tuning for partners 14–28** — placeholder values; this is the primary pending balance work (F-004)
+- **Balance tuning for partners 14–18** — placeholder values; this is the primary pending balance work (F-004)
 
 ### Obsolete/Unused Systems
 - `ZoneConfig.ZONE_DATA` `enemies` and `elite_enemy` arrays — documented as legacy, no longer used for spawning (F-010)
@@ -257,7 +257,7 @@ No scene-level node path issues identified from static review. All sub-scenes (U
 **PARTIAL** — The project is structurally sound enough to begin balance work on the early game (levels 1–65, partners 1–13, all abilities, all buildings, prestige system). All economy formulas are implemented and functional.
 
 **Must be fixed before balance work is meaningful:**
-1. F-004 (HIGH) — Partners 14–28 have placeholder DPS/cost values. Any balance simulation covering levels 66+ or late-game prestige loops is based on temporary numbers and will need to be redone. Run `ProgressionSimulator.gd` profiles after finalizing these values.
+1. F-004 (HIGH) — Partners 14–18 have placeholder DPS/cost values. Any balance simulation covering levels 66+ or late-game prestige loops is based on temporary numbers and will need to be redone. Run `ProgressionSimulator.gd` profiles after finalizing these values.
 
 **Should be fixed before playtesting:**
 1. F-002 + F-012 (BLOCKER + MEDIUM) — Boss retry tokens and task reward boosts are unreachable. Two shop products designed to affect progression pacing are non-functional. This affects mid-game pacing metrics.
@@ -271,7 +271,7 @@ No scene-level node path issues identified from static review. All sub-scenes (U
 **Balance systems present and ready to tune:**
 - Hero click damage curve (HERO_BASE_DAMAGE, HERO_DAMAGE_PER_LEVEL, HERO_COST_GROWTH_*)
 - Enemy HP and reward curves (ENEMY_HP_BASE, ENEMY_HP_GROWTH, ENEMY_REWARD_BASE, ENEMY_REWARD_GROWTH)
-- Partner DPS values (partners 1–13 are considered final; 14–28 are placeholder)
+- Partner DPS values (partners 1–13 are considered final; 14–18 are placeholder)
 - Building base costs and growth (BUILDING_BASE_COST = 500, BUILDING_COST_GROWTH = 1.22)
 - Prestige gate (PRESTIGE_REQUIRED_LEVEL = configurable), talent costs and bonuses
 - Ability unlock levels, costs, cooldowns, durations, rank multipliers
@@ -294,4 +294,3 @@ No scene-level node path issues identified from static review. All sub-scenes (U
 - [ ] Set IS_DEBUG_BUILD = false and verify no debug UI or logger leaks in an export build
 - [ ] Confirm YandexBridge `game_ready()` is called after initial asset load (not blocking balance, but required for Yandex release)
 - [ ] Verify `_handle_status_text` is implemented before user research or soft-launch
-

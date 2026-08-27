@@ -110,66 +110,6 @@ const SKILL_DEFINITIONS: Array = [
 	{"id": "p17_s3", "partner_index": 17, "skill_level": 3, "unlock_count": 50, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
 	{"id": "p17_s4", "partner_index": 17, "skill_level": 4, "unlock_count": 100, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
 	{"id": "p17_s5", "partner_index": 17, "skill_level": 5, "unlock_count": 250, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	# Partner 19 (index 18)
-	{"id": "p18_s1", "partner_index": 18, "skill_level": 1, "unlock_count": 10, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p18_s2", "partner_index": 18, "skill_level": 2, "unlock_count": 25, "bonus_type": "click_damage_from_partner_dps", "bonus_value": 0.007},
-	{"id": "p18_s3", "partner_index": 18, "skill_level": 3, "unlock_count": 50, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p18_s4", "partner_index": 18, "skill_level": 4, "unlock_count": 100, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p18_s5", "partner_index": 18, "skill_level": 5, "unlock_count": 250, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	# Partner 20 (index 19)
-	{"id": "p19_s1", "partner_index": 19, "skill_level": 1, "unlock_count": 10, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p19_s2", "partner_index": 19, "skill_level": 2, "unlock_count": 25, "bonus_type": "click_damage_from_partner_dps", "bonus_value": 0.007},
-	{"id": "p19_s3", "partner_index": 19, "skill_level": 3, "unlock_count": 50, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p19_s4", "partner_index": 19, "skill_level": 4, "unlock_count": 100, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p19_s5", "partner_index": 19, "skill_level": 5, "unlock_count": 250, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	# Partner 21 (index 20)
-	{"id": "p20_s1", "partner_index": 20, "skill_level": 1, "unlock_count": 10, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p20_s2", "partner_index": 20, "skill_level": 2, "unlock_count": 25, "bonus_type": "click_damage_from_partner_dps", "bonus_value": 0.007},
-	{"id": "p20_s3", "partner_index": 20, "skill_level": 3, "unlock_count": 50, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p20_s4", "partner_index": 20, "skill_level": 4, "unlock_count": 100, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p20_s5", "partner_index": 20, "skill_level": 5, "unlock_count": 250, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	# Partner 22 (index 21)
-	{"id": "p21_s1", "partner_index": 21, "skill_level": 1, "unlock_count": 10, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p21_s2", "partner_index": 21, "skill_level": 2, "unlock_count": 25, "bonus_type": "click_damage_from_partner_dps", "bonus_value": 0.007},
-	{"id": "p21_s3", "partner_index": 21, "skill_level": 3, "unlock_count": 50, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p21_s4", "partner_index": 21, "skill_level": 4, "unlock_count": 100, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p21_s5", "partner_index": 21, "skill_level": 5, "unlock_count": 250, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	# Partner 23 (index 22)
-	{"id": "p22_s1", "partner_index": 22, "skill_level": 1, "unlock_count": 10, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p22_s2", "partner_index": 22, "skill_level": 2, "unlock_count": 25, "bonus_type": "click_damage_from_partner_dps", "bonus_value": 0.007},
-	{"id": "p22_s3", "partner_index": 22, "skill_level": 3, "unlock_count": 50, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p22_s4", "partner_index": 22, "skill_level": 4, "unlock_count": 100, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p22_s5", "partner_index": 22, "skill_level": 5, "unlock_count": 250, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	# Partner 24 (index 23)
-	{"id": "p23_s1", "partner_index": 23, "skill_level": 1, "unlock_count": 10, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p23_s2", "partner_index": 23, "skill_level": 2, "unlock_count": 25, "bonus_type": "click_damage_from_partner_dps", "bonus_value": 0.007},
-	{"id": "p23_s3", "partner_index": 23, "skill_level": 3, "unlock_count": 50, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p23_s4", "partner_index": 23, "skill_level": 4, "unlock_count": 100, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p23_s5", "partner_index": 23, "skill_level": 5, "unlock_count": 250, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	# Partner 25 (index 24)
-	{"id": "p24_s1", "partner_index": 24, "skill_level": 1, "unlock_count": 10, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p24_s2", "partner_index": 24, "skill_level": 2, "unlock_count": 25, "bonus_type": "click_damage_from_partner_dps", "bonus_value": 0.007},
-	{"id": "p24_s3", "partner_index": 24, "skill_level": 3, "unlock_count": 50, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p24_s4", "partner_index": 24, "skill_level": 4, "unlock_count": 100, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p24_s5", "partner_index": 24, "skill_level": 5, "unlock_count": 250, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	# Partner 26 (index 25)
-	{"id": "p25_s1", "partner_index": 25, "skill_level": 1, "unlock_count": 10, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p25_s2", "partner_index": 25, "skill_level": 2, "unlock_count": 25, "bonus_type": "click_damage_from_partner_dps", "bonus_value": 0.007},
-	{"id": "p25_s3", "partner_index": 25, "skill_level": 3, "unlock_count": 50, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p25_s4", "partner_index": 25, "skill_level": 4, "unlock_count": 100, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p25_s5", "partner_index": 25, "skill_level": 5, "unlock_count": 250, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	# Partner 27 (index 26)
-	{"id": "p26_s1", "partner_index": 26, "skill_level": 1, "unlock_count": 10, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p26_s2", "partner_index": 26, "skill_level": 2, "unlock_count": 25, "bonus_type": "click_damage_from_partner_dps", "bonus_value": 0.007},
-	{"id": "p26_s3", "partner_index": 26, "skill_level": 3, "unlock_count": 50, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p26_s4", "partner_index": 26, "skill_level": 4, "unlock_count": 100, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p26_s5", "partner_index": 26, "skill_level": 5, "unlock_count": 250, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	# Partner 28 (index 27)
-	{"id": "p27_s1", "partner_index": 27, "skill_level": 1, "unlock_count": 10, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p27_s2", "partner_index": 27, "skill_level": 2, "unlock_count": 25, "bonus_type": "click_damage_from_partner_dps", "bonus_value": 0.007},
-	{"id": "p27_s3", "partner_index": 27, "skill_level": 3, "unlock_count": 50, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p27_s4", "partner_index": 27, "skill_level": 4, "unlock_count": 100, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
-	{"id": "p27_s5", "partner_index": 27, "skill_level": 5, "unlock_count": 250, "bonus_type": "own_partner_dps", "bonus_value": 1.0},
 ]
 
 

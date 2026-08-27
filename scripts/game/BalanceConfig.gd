@@ -53,7 +53,7 @@ const HERO_SKILL_COST_MULTIPLIERS: Array = [4, 7, 11, 17, 26]
 # (next partner gives slightly less DPS per gold than the current one, encouraging copy milestones)
 # Values exceed int64 quickly; BigNumber is used for all runtime calculations.
 # See get_partner_dps_bignum() / get_partner_cost_bignum().
-const PARTNER_COUNT: int = 28
+const PARTNER_COUNT: int = 18
 const PARTNER_DPS_BASE: int = 4
 const PARTNER_DPS_MULT: int = 23
 const PARTNER_COST_BASE: int = 35

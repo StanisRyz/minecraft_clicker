@@ -64,7 +64,7 @@ static func get_partner_cost(
 	var current_count: int = maxi(0, count)
 	var target_count: int = current_count + 1
 
-	# Resolve base cost as BigNumber (handles all 28 partners via formula).
+	# Resolve base cost as BigNumber (handles all active partners via formula).
 	var base_bn: BigNumber = BalanceConfig.get_partner_cost_bignum(partner_index)
 
 	var cost_bn: BigNumber

@@ -3,7 +3,7 @@ extends SceneTree
 # Run with: godot --headless --script res://scripts/tools/ValidatePartnerConfig.gd
 
 const CSV_PATH: String = "res://localization/game_text.csv"
-const EXPECTED_PARTNER_COUNT: int = 28
+const EXPECTED_PARTNER_COUNT: int = 18
 
 
 func _init() -> void:
@@ -17,7 +17,7 @@ func _init() -> void:
 
 	# Compact legacy arrays are intentionally shorter than PARTNER_COUNT:
 	# higher-index values overflow int64 (4*23^i at i>=14; 35*25^i at i>=13).
-	# Runtime uses get_partner_dps_bignum / get_partner_cost_bignum for all 28 partners.
+	# Runtime uses get_partner_dps_bignum / get_partner_cost_bignum for all active partners.
 	var dps_compact_size: int = BalanceConfig.PARTNER_DPS_VALUES.size()
 	var cost_compact_size: int = BalanceConfig.PARTNER_BASE_COSTS.size()
 
@@ -45,22 +45,34 @@ func _init() -> void:
 					i, BalanceConfig.PARTNER_BASE_COSTS[i], expected_cost,
 					BalanceConfig.PARTNER_COST_BASE, BalanceConfig.PARTNER_COST_MULT, i])
 
-	# --- Runtime BigNumber validation (all 28 partners via formula, no int64 overflow risk) ---
+	# --- Runtime BigNumber validation (all active partners via formula, no int64 overflow risk) ---
 	var prev_dps: BigNumber = BigNumber.zero()
 	var prev_cost: BigNumber = BigNumber.zero()
 	for i in range(EXPECTED_PARTNER_COUNT):
 		var dps_bn: BigNumber = BalanceConfig.get_partner_dps_bignum(i)
 		var cost_bn: BigNumber = BalanceConfig.get_partner_cost_bignum(i)
-		if not dps_bn.is_positive():
+		var expected_dps_bn: BigNumber = BigNumber.pow_float(float(BalanceConfig.PARTNER_DPS_MULT), i).multiply_int(BalanceConfig.PARTNER_DPS_BASE)
+		var expected_cost_bn: BigNumber = BigNumber.pow_float(float(BalanceConfig.PARTNER_COST_MULT), i).multiply_int(BalanceConfig.PARTNER_COST_BASE)
+		if dps_bn.compare_to(expected_dps_bn) != 0:
+			errors.append("get_partner_dps_bignum(%d) does not match the configured formula" % i)
+		elif not dps_bn.is_positive():
 			errors.append("get_partner_dps_bignum(%d) is not positive" % i)
 		elif i > 0 and dps_bn.compare_to(prev_dps) <= 0:
 			errors.append("get_partner_dps_bignum(%d) did not increase from partner %d" % [i, i - 1])
-		if not cost_bn.is_positive():
+		if cost_bn.compare_to(expected_cost_bn) != 0:
+			errors.append("get_partner_cost_bignum(%d) does not match the configured formula" % i)
+		elif not cost_bn.is_positive():
 			errors.append("get_partner_cost_bignum(%d) is not positive" % i)
 		elif i > 0 and cost_bn.compare_to(prev_cost) <= 0:
 			errors.append("get_partner_cost_bignum(%d) did not increase from partner %d" % [i, i - 1])
 		prev_dps = dps_bn
 		prev_cost = cost_bn
+
+	# --- Active partner skill roster ---
+	for skill: Dictionary in PartnerSkillConfig.get_all():
+		var partner_index: int = int(skill.get("partner_index", -1))
+		if partner_index < 0 or partner_index >= EXPECTED_PARTNER_COUNT:
+			errors.append("Partner skill '%s' has inactive partner_index %d" % [String(skill.get("id", "")), partner_index])
 
 	# --- ClickerState initialization ---
 	var state: ClickerState = ClickerState.new()
@@ -76,7 +88,7 @@ func _init() -> void:
 	errors.append_array(parse_errors)
 
 	if parse_errors.is_empty():
-		# --- Localization keys partner.01.name through partner.28.name ---
+		# --- Localization keys for every active partner ---
 		for i in range(1, EXPECTED_PARTNER_COUNT + 1):
 			var key: String = "partner.%02d.name" % i
 			if not csv_keys.has(key):

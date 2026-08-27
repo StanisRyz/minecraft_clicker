@@ -18,9 +18,9 @@ not a separate asset category — they reuse the 15 common enemy assets.
 
 ## 2. Other art to replace
 
-- Partner icons: `assets/images/partners/partner_NN/partner.png` (28 partners)
+- Partner icons: `assets/images/partners/partner_NN/partner.png` (18 partners)
 - Shared skill rank icons: `assets/images/partners/Skills/skillN.png`
-- Building icons: `assets/images/buildings/building_01.png` … `building_06.png`
+- Building icons: `assets/images/buildings/building_01.png` … `building_06.png` (6 buildings)
 - Ability icons: `assets/images/abilities/<ability_id>/icon.png`
 - Prestige icons: `assets/images/prestige/prestige.png`,
   `assets/images/prestige/talent_01.png` … `talent_06.png`
